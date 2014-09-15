@@ -1,0 +1,86 @@
+﻿StoredProcedure 存储过程
+SpName 存储过程名称
+connection 连接
+commandType 命令类型
+commandText 命令内容
+commandParameters 命令参数集合
+parameterValues 参数值集合
+transaction 事务
+
+ExecuteNonQuery 执行非查询命令
+command 命令
+connectionString 连接字符串
+
+ExecuteReader 获得读取器
+connectionOwnership 连接权限
+
+ExecuteScalar 执行单值查询
+
+ExecuteXmlReader 获得XML读取器
+
+ExecuteXmlReaderTypedParams 依据参数获得XML读取器
+dataRow 数据行
+
+FillDataset 填充数据集
+dataSet 数据集
+tableNames 表名称集合
+
+UpdateDataset 更新数据集
+RowUpdating 更新行
+RowUpdated 更新行完毕
+SetCommand 设置命令
+mustCloseConnection 需要关闭连接
+insertCommand 插入命令
+deleteCommand 删除命令
+updateCommand 更新命令
+tableName 表名称
+rowUpdatingHandler 更新行处理器
+rowUpdatedHandler 更新行完毕处理器
+
+CreateCommand 创建命令
+sourceColumns 源列集合
+
+ExecuteNonQueryTypedParams 依据参数执行非查询命令
+
+ExecuteDatasetTypedParams 依据参数获得数据集
+
+ExecuteReaderTypedParams 依据参数获得读取器
+
+ExecuteScalarTypedParams 依据参数执行单值查询
+
+Parameter Discovery Functions 参数发现函数
+CheckForReturnValueParameter 检验返回参数值
+AreParameterValuesIDataParameters 验证参数合法性
+iDataParameterValues 通用接口参数值集合
+GetSpParameterSet 获取存储过程参数设置
+GetSpParameterSetInternal 内部获取存储过程参数设置
+includeReturnValueParameter 返回值包含参数值
+GetCachedParameterSet 获取缓存参数设置
+GetCachedParameterSetInternal 内部获取缓存参数设置
+CacheParameterSet 缓存参数设置
+CacheParameterSetInternal 内部缓存参数设置
+DiscoverSpParameterSet 识别存储过程参数设置
+
+ADOHelperParameterCache 数据访问器缓存参数
+paramCache 缓存参数
+CloneParameters 克隆参数
+originalParameters 原始参数集合
+CacheParameterSet 缓存参数设置
+
+
+
+
+
+
+DAABSectionHandler 节点处理器
+ProviderAlias 供应者别名
+AssemblyName 程序集名称
+TypeName 类型名称
+
+
+
+
+
+size 大小
+cmd 命令
+dataAdapter 数据适配器

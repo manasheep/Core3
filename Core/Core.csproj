@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{32440EFF-EE58-41F7-BF4F-FAF5B8D14441}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Core.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Unsafe|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Unsafe\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Caches\Caches处理函数.cs" />
+    <Compile Include="Collection\Collection处理函数.cs" />
+    <Compile Include="Database\Odbc.cs" />
+    <Compile Include="Database\OleDb.cs" />
+    <Compile Include="Database\SqlServer.cs" />
+    <Compile Include="Database\数据库访问器.cs" />
+    <Compile Include="Database\节点处理器.cs" />
+    <Compile Include="Drawing\Drawing处理函数.cs" />
+    <Compile Include="Drawing\AdvancedColor.cs" />
+    <Compile Include="Environment\Environment变量.cs" />
+    <Compile Include="IO\GZip.cs" />
+    <Compile Include="IO\HashHelper.cs" />
+    <Compile Include="IO\IO枚举.cs" />
+    <Compile Include="IO\可序列化基类.cs" />
+    <Compile Include="IO\日志薄.cs" />
+    <Compile Include="IO\IO处理函数.cs" />
+    <Compile Include="Linq\Linq处理函数.cs" />
+    <Compile Include="Maths\MathEx_Base.cs" />
+    <Compile Include="Maths\Maths处理函数_Base.cs" />
+    <Compile Include="Maths\Vector2D_Base.cs" />
+    <Compile Include="Net\Net处理函数_Base.cs" />
+    <Compile Include="Net\Net处理函数.cs" />
+    <Compile Include="Net\Net枚举.cs" />
+    <Compile Include="Net\RSS.cs" />
+    <Compile Include="Net\电子邮件.cs" />
+    <Compile Include="Net\蜘蛛.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Encryption\Classes.cs" />
+    <Compile Include="Reflection\Reflection处理函数.cs" />
+    <Compile Include="RegularExpressions\RegularExpressions常量.cs" />
+    <Compile Include="Text\Text处理函数_Base.cs" />
+    <Compile Include="Text\Text处理函数.cs" />
+    <Compile Include="Text\Text常量.cs" />
+    <Compile Include="Time\Time处理函数.cs" />
+    <Compile Include="Time\Time枚举.cs" />
+    <Compile Include="Web\UBB.cs" />
+    <Compile Include="Web\Web处理函数.cs" />
+    <Compile Include="通用容器.cs" />
+    <Compile Include="通用扩展_Base.cs" />
+    <Compile Include="通用扩展.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core.ico" />
+    <Content Include="Database\翻译记录.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

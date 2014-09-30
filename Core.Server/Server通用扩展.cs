@@ -7,6 +7,8 @@ using System.IO;
 using System.Collections;
 using System.Web;
 using System.Web.Hosting;
+using System.Web.Mvc.Html;
+using System.Web.Routing;
 using System.Web.UI;
 using Core.WebSite;
 using System.Web.Mvc;
@@ -14,6 +16,25 @@ using Core.Web;
 
 public static class Server通用扩展
 {
+    /// <summary>
+    ///  将适用于Bootstarp的form元素开始标记写入响应。在用户提交窗体时，将由某个操作方法处理该请求。
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="行为名称">Action名</param>
+    /// <param name="控制器名称">Controller名</param>
+    /// <param name="路由参数对象">构建提交参数的对象</param>
+    /// <param name="提交方式">get或post方式，默认为post</param>
+    /// <param name="Html属性字典操作">可以在此为form元素增加属性</param>
+    /// <returns>form元素开始标记</returns>
+    public static MvcForm BeginFormForBootstarp(this HtmlHelper o, string 行为名称, string 控制器名称, object 路由参数对象 = null, FormMethod 提交方式 = FormMethod.Post, Action<Dictionary<string, object>> Html属性字典操作 = null)
+    {
+        var dic = new Dictionary<string, object>();
+        if (Html属性字典操作 != null) Html属性字典操作(dic);
+        dic.Add("class", "form-horizontal");
+        dic.Add("role", "form");
+        return o.BeginForm(行为名称, 控制器名称, new RouteValueDictionary(路由参数对象), 提交方式, dic);
+    }
+
     /// <summary>
     /// 同原生的Add方法，区别在于添加项后会返回自身，使得允许链式编程以连续添加项。
     /// </summary>
@@ -215,7 +236,7 @@ public static class Server通用扩展
     /// <param name="标签显示内容">标签内容，如果为空则使用名称作为标签。将在结尾处自动添加半角冒号。</param>
     /// <param name="附加属性">多个属性以空格分隔</param>
     /// <returns></returns>
-    public static MvcHtmlString SwitchForJqueryMobile(this HtmlHelper o, string 名称, bool 值, string 开状态标签, string 关状态标签, string 标签显示内容 = null,bool 使用普通下拉列表样式=false,string 附加属性=null)
+    public static MvcHtmlString SwitchForJqueryMobile(this HtmlHelper o, string 名称, bool 值, string 开状态标签, string 关状态标签, string 标签显示内容 = null, bool 使用普通下拉列表样式 = false, string 附加属性 = null)
     {
         if (标签显示内容.IsNullOrEmpty()) 标签显示内容 = 名称;
         return MvcHtmlString.Create(@"<div data-role=""fieldcontain"">

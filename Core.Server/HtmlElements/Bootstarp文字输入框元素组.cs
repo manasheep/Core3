@@ -15,7 +15,7 @@ namespace Core.HtmlElements
             添加Css类("form-group");
             控件类型 = 文字输入框控件类型.text;
             左栏占据栅格数 = 2;
-            总栅格数 = 12;
+            总占据栅格数 = 12;
         }
 
         public string 控件名 { get; set; }
@@ -30,7 +30,8 @@ namespace Core.HtmlElements
         public bool 是否只读 { get; set; }
         public bool 是否为大尺寸样式 { get; set; }
         public int 左栏占据栅格数 { get; set; }
-        public int 总栅格数 { get; set; }
+        public int 总占据栅格数 { get; set; }
+        public int 左偏移栅格数 { get; set; }
 
         public override System.Web.Mvc.TagBuilder 生成标签构造器()
         {
@@ -67,17 +68,17 @@ namespace Core.HtmlElements
                 input.添加属性("readonly", "true");
             }
 
-            if (标签显示内容.IsNullOrEmpty()) 标签显示内容 = 控件名;
-            添加子元素(
-                new 基本元素("label")
+            var label = new 基本元素("label")
                 .添加子元素(new 文本(标签显示内容))
                 .添加Css类("control-label")
                 .添加Css类("col-sm-" + 左栏占据栅格数)
-                .添加属性("for", id)
-                );
+                .添加属性("for", id);
+            if (左偏移栅格数 != 0) label.添加Css类("col-xs-offset-" + 左偏移栅格数);
+            if (标签显示内容.IsNullOrEmpty()) 标签显示内容 = 控件名;
+            添加子元素(label);
 
             var div = new 基本元素("div")
-                .添加Css类("col-sm-" + (总栅格数 - 左栏占据栅格数));
+                .添加Css类("col-sm-" + (总占据栅格数 - 左栏占据栅格数));
             if (首注.IsNullOrEmpty() && 尾注.IsNullOrEmpty())
             {
                 div.添加子元素(input);

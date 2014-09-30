@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Mvc;
 
 namespace Core.HtmlElements
 {
-    public abstract class Bootstarp表单控件元素 : 基本元素
+    public abstract class Bootstarp表单控件元素组 : 基本元素
     {
-        public Bootstarp表单控件元素(string 控件名)
+        public Bootstarp表单控件元素组(string 控件名)
             : base("div")
         {
             this.控件名 = 控件名;
@@ -16,6 +17,14 @@ namespace Core.HtmlElements
             总占据栅格数 = 12;
             栅格布局最低兼容屏幕类型 = Bootstarp布局目标屏幕类型.sm;
             _Id = "B" + Guid.NewGuid().ToString("N");
+        }
+
+        public Bootstarp表单控件元素组(ModelMetadata 模型属性元数据)
+            : base("div")
+        {
+            控件名 = 模型属性元数据.PropertyName;
+            附注 = 模型属性元数据.Description;
+            标签显示内容 = 模型属性元数据.DisplayName;
         }
 
         private string _Id;
@@ -46,7 +55,7 @@ namespace Core.HtmlElements
         {
             if (是否禁用)
             {
-                元素.添加属性("disabled", "true");
+                元素.添加属性("disabled", "disabled");
             }
         }
 
@@ -79,7 +88,7 @@ namespace Core.HtmlElements
             get { return "col-" + 栅格布局最低兼容屏幕类型 + "-" + (总占据栅格数 - 左栏占据栅格数); }
         }
 
-        public void 添加右栏占据栅格Css类类(基本元素 元素)
+        public void 添加右栏占据栅格Css类(基本元素 元素)
         {
             元素.添加Css类(右栏占据栅格Css类名);
         }

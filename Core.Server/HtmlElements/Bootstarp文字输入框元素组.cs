@@ -2,16 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Mvc;
 
 namespace Core.HtmlElements
 {
-    public class Bootstarp文字输入框元素组 : Bootstarp表单控件元素
+    public class Bootstarp文字输入框元素组 : Bootstarp表单控件元素组
     {
         public Bootstarp文字输入框元素组(string 控件名, string 值)
             : base(控件名)
         {
             this.值 = 值;
             控件类型 = 文字输入框控件类型.text;
+        }
+
+        public Bootstarp文字输入框元素组(ModelMetadata 模型属性元数据) : base(模型属性元数据)
+        {
+            值 = 模型属性元数据.Model.ToStringSafety();
+            替代文字 = 模型属性元数据.Watermark;
+            是否只读 = 模型属性元数据.IsReadOnly;
+            if (模型属性元数据.DataTypeName != null)
+            {
+                控件类型 =
+                    模型属性元数据.DataTypeName.Switch()
+                        .CaseReturn("Password", 文字输入框控件类型.password)
+                        .CaseReturn("EmailAddress", 文字输入框控件类型.email)
+                        .CaseReturn("DateTime", 文字输入框控件类型.datetime)
+                        .CaseReturn("Date", 文字输入框控件类型.date)
+                        .CaseReturn("PhoneNumber", 文字输入框控件类型.tel)
+                        .CaseReturn("Currency", 文字输入框控件类型.number)
+                        .CaseReturn("Time", 文字输入框控件类型.time)
+                        .CaseReturn("Url", 文字输入框控件类型.url)
+                        .DefaultReturn(文字输入框控件类型.text)
+                        .ReturnValue;
+            }
         }
 
         public string 值 { get; set; }
@@ -40,7 +63,7 @@ namespace Core.HtmlElements
             }
             if (是否只读)
             {
-                input.添加属性("readonly", "true");
+                input.添加属性("readonly", "readonly");
             }
             添加控件名属性(input);
             按需添加禁用属性(input);
@@ -54,7 +77,7 @@ namespace Core.HtmlElements
             添加子元素(label);
 
             var div = new 基本元素("div");
-            添加右栏占据栅格Css类类(div);
+            添加右栏占据栅格Css类(div);
             if (首注.IsNullOrEmpty() && 尾注.IsNullOrEmpty())
             {
                 div.添加子元素(input);

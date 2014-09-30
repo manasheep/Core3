@@ -7,7 +7,8 @@ namespace Core.HtmlElements
 {
     public class 文本 : 基本元素
     {
-        public 文本(string 内容) : base(null)
+        public 文本(string 内容)
+            : base(null)
         {
             this.内容 = 内容;
         }
@@ -21,7 +22,7 @@ namespace Core.HtmlElements
 
         public override string 生成代码()
         {
-            return Core.Web.Web处理函数.进行HTML转义(内容);
+            return 内容.IsNullOrEmpty() ? String.Empty : Core.Web.Web处理函数.进行HTML转义(内容);
         }
     }
 }

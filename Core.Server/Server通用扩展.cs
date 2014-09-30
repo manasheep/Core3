@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
@@ -16,6 +17,11 @@ using Core.Web;
 
 public static class Server通用扩展
 {
+    public static ModelMetadata GetModelPropertyMetadata<TModel, TValue>(this HtmlHelper<TModel> o, Expression<Func<TModel, TValue>> 属性选取表达式)
+    {
+        return ModelMetadata.FromLambdaExpression<TModel, TValue>(属性选取表达式, o.ViewData);
+    }
+
     /// <summary>
     ///  将适用于Bootstarp的form元素开始标记写入响应。在用户提交窗体时，将由某个操作方法处理该请求。
     /// </summary>

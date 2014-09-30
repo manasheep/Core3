@@ -41,8 +41,12 @@ namespace Core.HtmlElements
             }
             checkboxdiv.添加子元素(label);
 
+            var leftdiv = new 基本元素("div");
+            按需添加左偏移栅格Css类(leftdiv);
+            添加左栏占据栅格Css类(leftdiv);
+            添加子元素(leftdiv);
+
             var rounddiv = new 基本元素("div");
-            rounddiv.添加Css类("col-sm-offset-" + (左偏移栅格数 + 左栏占据栅格数));
             添加右栏占据栅格Css类(rounddiv);
             rounddiv.添加子元素(checkboxdiv);
             按需添加附注元素到子元素列表(rounddiv);

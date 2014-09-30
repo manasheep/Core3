@@ -57,6 +57,7 @@ namespace Core.HtmlElements
 
         public virtual TagBuilder 生成标签构造器()
         {
+            if (是否已进行过生成) throw new Exception("此对象无法执行多次生成代码操作。");
             var tb = new TagBuilder(标签名称);
             if (!Id.IsNullOrEmpty()) tb.GenerateId(Id);
             if (Css类列表 != null)

@@ -20,7 +20,7 @@ namespace Core.HtmlElements
         }
 
         public Bootstarp表单控件元素组(ModelMetadata 模型属性元数据)
-            : base("div")
+            : this(模型属性元数据.PropertyName)
         {
             控件名 = 模型属性元数据.PropertyName;
             附注 = 模型属性元数据.Description;
@@ -29,7 +29,7 @@ namespace Core.HtmlElements
 
         private string _Id;
 
-        public string Id
+        public virtual string Id
         {
             get { return _Id; }
         }
@@ -103,8 +103,6 @@ namespace Core.HtmlElements
 
         public override System.Web.Mvc.TagBuilder 生成标签构造器()
         {
-            if (是否已进行过生成) throw new Exception("此对象无法执行多次生成代码操作。");
-
             if (是否为大尺寸样式)
             {
                 添加Css类("form-group-lg");

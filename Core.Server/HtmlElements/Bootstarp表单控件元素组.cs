@@ -8,13 +8,17 @@ namespace Core.HtmlElements
 {
     public abstract class Bootstarp表单控件元素组 : 基本元素
     {
+        private static readonly Bootstarp表单控件元素组布局参数 默认布局参数 = new Bootstarp表单控件元素组布局参数()
+              {
+                  总占据栅格数 = 12,
+                  左栏占据栅格数 = 2
+              };
+
         public Bootstarp表单控件元素组(string 控件名)
             : base("div")
         {
             this.控件名 = 控件名;
             添加Css类("form-group");
-            左栏占据栅格数 = 2;
-            总占据栅格数 = 12;
             栅格布局最低兼容屏幕类型 = Bootstarp布局目标屏幕类型.sm;
             _Id = "B" + Guid.NewGuid().ToString("N");
         }
@@ -27,6 +31,26 @@ namespace Core.HtmlElements
             标签显示内容 = 模型属性元数据.DisplayName;
         }
 
+        public virtual Bootstarp表单控件元素组 设置布局参数(Bootstarp表单控件元素组布局参数 布局参数)
+        {
+            this.布局参数 = 布局参数;
+            return this;
+        }
+
+        protected Bootstarp表单控件元素组布局参数 布局参数
+        {
+            get
+            {
+                if (_布局参数 == null)
+                {
+                    return 默认布局参数;
+                }
+                else return _布局参数;
+            }
+            set { _布局参数 = value; }
+        }
+        private Bootstarp表单控件元素组布局参数 _布局参数;
+
         private string _Id;
 
         public virtual string Id
@@ -36,11 +60,11 @@ namespace Core.HtmlElements
 
 
         public string 控件名 { get; set; }
-        public int 左栏占据栅格数 { get; set; }
-        public int 总占据栅格数 { get; set; }
-        public int 左偏移栅格数 { get; set; }
+        public int 左栏占据栅格数 { get { return 布局参数.左栏占据栅格数; } set { 布局参数.左栏占据栅格数 = value; } }
+        public int 总占据栅格数 { get { return 布局参数.总占据栅格数; } set { 布局参数.总占据栅格数 = value; } }
+        public int 左偏移栅格数 { get { return 布局参数.左偏移栅格数; } set { 布局参数.左偏移栅格数 = value; } }
         public bool 是否禁用 { get; set; }
-        public bool 是否为大尺寸样式 { get; set; }
+        public bool 是否为大尺寸样式 { get { return 布局参数.是否为大尺寸样式; } set { 布局参数.是否为大尺寸样式 = value; } }
         public string 标签显示内容 { get; set; }
         public string 附注 { get; set; }
         public Bootstarp布局目标屏幕类型 栅格布局最低兼容屏幕类型 { get; set; }
@@ -67,7 +91,7 @@ namespace Core.HtmlElements
 
         public void 按需添加左偏移栅格Css类(基本元素 元素)
         {
-            if (左偏移栅格数!=0)
+            if (左偏移栅格数 != 0)
             {
                 元素.添加Css类(左偏移栅格Css类名);
             }

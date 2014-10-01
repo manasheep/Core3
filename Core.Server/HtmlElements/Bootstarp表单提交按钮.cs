@@ -11,18 +11,13 @@ namespace Core.HtmlElements
         public Bootstarp表单提交按钮()
             : base(String.Empty)
         {
-            按钮 = new Bootstarp按钮("提交");
+            按钮 = new Bootstarp按钮("确认提交");
             按钮.样式类型 = Bootstarp按钮样式类型.warning;
-            按钮.图标样式类型 = Bootstarp图标样式类型.glyphicon_send;
+            按钮.图标样式类型 = Bootstarp图标样式类型.glyphicon_ok_sign;
         }
 
         private Bootstarp按钮 按钮 { get; set; }
 
-        public new bool 是否为大尺寸样式
-        {
-            get { return 按钮.是否为大尺寸样式; }
-            set { 按钮.是否为大尺寸样式 = value; }
-        }
         public Bootstarp按钮样式类型? 样式类型
         {
             get { return 按钮.样式类型; }
@@ -47,6 +42,8 @@ namespace Core.HtmlElements
 
         public override TagBuilder 生成标签构造器()
         {
+            按钮.是否为大尺寸样式 = 是否为大尺寸样式;
+
             按钮.添加属性("type", "submit");
             按需添加禁用属性(按钮);
 

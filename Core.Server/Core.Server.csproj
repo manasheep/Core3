@@ -62,6 +62,7 @@
     <Compile Include="HtmlElements\Bootstarp表单控件元素组.cs" />
     <Compile Include="HtmlElements\Bootstarp布局目标屏幕类型.cs" />
     <Compile Include="HtmlElements\Bootstarp文字输入框元素组.cs" />
+    <Compile Include="HtmlElements\Bootstarp表单控件元素组布局参数.cs" />
     <Compile Include="HtmlElements\Bootstarp表单提交按钮.cs" />
     <Compile Include="HtmlElements\基本元素.cs" />
     <Compile Include="HtmlElements\文字输入框控件类型.cs" />

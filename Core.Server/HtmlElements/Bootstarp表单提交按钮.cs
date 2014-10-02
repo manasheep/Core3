@@ -39,13 +39,24 @@ namespace Core.HtmlElements
                 按钮.标签显示内容 = value;
             }
         }
+        public new bool 是否禁用
+        {
+            get
+            {
+                return 按钮.是否禁用;
+            }
+            set
+            {
+                按钮.是否禁用 = value;
+            }
+        }
+        
 
         public override TagBuilder 生成标签构造器()
         {
             按钮.是否为大尺寸样式 = 是否为大尺寸样式;
 
             按钮.添加属性("type", "submit");
-            按需添加禁用属性(按钮);
 
             var leftdiv = new 基本元素("div");
             按需添加左偏移栅格Css类(leftdiv);

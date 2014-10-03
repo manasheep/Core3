@@ -59,6 +59,7 @@
     <Compile Include="HtmlElements\Bootstarp复选框元素组.cs" />
     <Compile Include="HtmlElements\Bootstarp按钮.cs" />
     <Compile Include="HtmlElements\Bootstarp按钮样式类型.cs" />
+    <Compile Include="HtmlElements\Bootstarp文本域元素组.cs" />
     <Compile Include="HtmlElements\Bootstarp表单控件元素组.cs" />
     <Compile Include="HtmlElements\Bootstarp布局目标屏幕类型.cs" />
     <Compile Include="HtmlElements\Bootstarp文字输入框元素组.cs" />

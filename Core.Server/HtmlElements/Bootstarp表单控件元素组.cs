@@ -14,21 +14,31 @@ namespace Core.HtmlElements
                   左栏占据栅格数 = 2
               };
 
-        public Bootstarp表单控件元素组(string 控件名)
-            : base("div")
+        public Bootstarp表单控件元素组():base("div")
         {
-            this.控件名 = 控件名;
             添加Css类("form-group");
             栅格布局最低兼容屏幕类型 = Bootstarp布局目标屏幕类型.sm;
             _Id = "B" + Guid.NewGuid().ToString("N");
         }
 
+        public Bootstarp表单控件元素组(string 控件名)
+            : this()
+        {
+            this.控件名 = 控件名;
+        }
+
         public Bootstarp表单控件元素组(ModelMetadata 模型属性元数据)
             : this(模型属性元数据.PropertyName)
+        {
+            应用模型属性元数据(模型属性元数据);
+        }
+
+        public virtual Bootstarp表单控件元素组 应用模型属性元数据(ModelMetadata 模型属性元数据)
         {
             控件名 = 模型属性元数据.PropertyName;
             附注 = 模型属性元数据.Description;
             标签显示内容 = 模型属性元数据.DisplayName;
+            return this;
         }
 
         public virtual Bootstarp表单控件元素组 设置布局参数(Bootstarp表单控件元素组布局参数 布局参数)

@@ -15,12 +15,23 @@ namespace Core.HtmlElements
            this.值 = 值;
        }
 
+       public Bootstarp文本域元素组() : base()
+       {
+           
+       }
+
        public Bootstarp文本域元素组(ModelMetadata 模型属性元数据) : base(模型属性元数据)
        {
+       }
+
+       public override Bootstarp表单控件元素组 应用模型属性元数据(ModelMetadata 模型属性元数据)
+       {
+           base.应用模型属性元数据(模型属性元数据);
            默认显示行数 = 3;
            值 = 模型属性元数据.Model.ToStringSafety();
            替代文字 = 模型属性元数据.Watermark;
            是否只读 = 模型属性元数据.IsReadOnly;
+           return this;
        }
 
        public string 值 { get; set; }
@@ -40,7 +51,7 @@ namespace Core.HtmlElements
                .添加属性("rows", 默认显示行数.ToString());
            if (!值.IsNullOrEmpty())
            {
-               input.添加子元素(new 文本(值));
+               input.添加子元素(new HTML代码(值));
            }
            if (!替代文字.IsNullOrEmpty())
            {

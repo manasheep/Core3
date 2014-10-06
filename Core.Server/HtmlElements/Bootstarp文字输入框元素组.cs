@@ -8,6 +8,11 @@ namespace Core.HtmlElements
 {
     public class Bootstarp文字输入框元素组 : Bootstarp表单控件元素组
     {
+        public Bootstarp文字输入框元素组() : base()
+        {
+            
+        }
+
         public Bootstarp文字输入框元素组(string 控件名, string 值)
             : base(控件名)
         {
@@ -17,6 +22,11 @@ namespace Core.HtmlElements
 
         public Bootstarp文字输入框元素组(ModelMetadata 模型属性元数据) : base(模型属性元数据)
         {
+        }
+
+        public override Bootstarp表单控件元素组 应用模型属性元数据(ModelMetadata 模型属性元数据)
+        {
+            base.应用模型属性元数据(模型属性元数据);
             值 = 模型属性元数据.Model.ToStringSafety();
             替代文字 = 模型属性元数据.Watermark;
             是否只读 = 模型属性元数据.IsReadOnly;
@@ -35,6 +45,7 @@ namespace Core.HtmlElements
                         .DefaultReturn(文字输入框控件类型.text)
                         .ReturnValue;
             }
+            return this;
         }
 
         public string 值 { get; set; }

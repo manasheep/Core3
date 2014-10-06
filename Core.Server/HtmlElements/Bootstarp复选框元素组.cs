@@ -8,7 +8,13 @@ namespace Core.HtmlElements
 {
     public class Bootstarp复选框元素组 : Bootstarp表单控件元素组
     {
-        public Bootstarp复选框元素组(string 控件名,bool 是否已勾选) : base(控件名)
+        public Bootstarp复选框元素组():base()
+        {
+            
+        }
+
+        public Bootstarp复选框元素组(string 控件名, bool 是否已勾选)
+            : base(控件名)
         {
             this.是否已勾选 = 是否已勾选;
         }
@@ -16,14 +22,20 @@ namespace Core.HtmlElements
         public Bootstarp复选框元素组(ModelMetadata 模型属性元数据)
             : base(模型属性元数据)
         {
+        }
+
+        public override Bootstarp表单控件元素组 应用模型属性元数据(ModelMetadata 模型属性元数据)
+        {
+            base.应用模型属性元数据(模型属性元数据);
             是否已勾选 = 模型属性元数据.Model.ToStringSafety().ToLower() == "true";
+            return this;
         }
 
         public bool 是否已勾选 { get; set; }
 
         public override System.Web.Mvc.TagBuilder 生成标签构造器()
         {
-            var input = new 基本元素("input").添加属性("type", "checkbox").添加属性("value","true");
+            var input = new 基本元素("input").添加属性("type", "checkbox").添加属性("value", "true");
             添加控件名属性(input);
             按需添加禁用属性(input);
             if (是否已勾选)

@@ -27,12 +27,6 @@ namespace Core.HtmlElements
             this.控件名 = 控件名;
         }
 
-        public Bootstarp表单控件元素组(ModelMetadata 模型属性元数据)
-            : this(模型属性元数据.PropertyName)
-        {
-            应用模型属性元数据(模型属性元数据);
-        }
-
         public virtual Bootstarp表单控件元素组 应用模型属性元数据(ModelMetadata 模型属性元数据)
         {
             控件名 = 模型属性元数据.PropertyName;

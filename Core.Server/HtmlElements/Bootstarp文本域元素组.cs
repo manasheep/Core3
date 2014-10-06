@@ -20,10 +20,6 @@ namespace Core.HtmlElements
            
        }
 
-       public Bootstarp文本域元素组(ModelMetadata 模型属性元数据) : base(模型属性元数据)
-       {
-       }
-
        public override Bootstarp表单控件元素组 应用模型属性元数据(ModelMetadata 模型属性元数据)
        {
            base.应用模型属性元数据(模型属性元数据);

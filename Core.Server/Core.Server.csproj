@@ -80,6 +80,7 @@
     <Compile Include="ControlLibrary\FileManagement.cs" />
     <Compile Include="ControlLibrary\Paging.cs" />
     <Compile Include="ControlLibrary\UpLoadFile.cs" />
+    <Compile Include="HtmlElements\Bootstarp下拉菜单元素组.cs" />
     <Compile Include="HtmlElements\Bootstarp图标.cs" />
     <Compile Include="HtmlElements\Bootstarp图标样式类型.cs" />
     <Compile Include="HtmlElements\Bootstarp复选框元素组.cs" />

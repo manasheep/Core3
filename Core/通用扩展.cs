@@ -13,12 +13,44 @@ public static partial class 通用扩展
     #region 基本
 
     /// <summary>
+    /// 判断是否为数值类型。
+    /// </summary>
+    /// <param name="t">要判断的类型</param>
+    /// <returns>是否为数值类型</returns>
+    public static bool IsNumericType(this Type t)
+    {
+        var tc = Type.GetTypeCode(t);
+        return (t.IsPrimitive && t.IsValueType && !t.IsEnum && tc != TypeCode.Char && tc != TypeCode.Boolean) || tc == TypeCode.Decimal;
+    }
+
+    /// <summary>
+    /// 判断是否为可空数值类型。
+    /// </summary>
+    /// <param name="t">要判断的类型</param>
+    /// <returns>是否为可空数值类型</returns>
+    public static bool IsNumericOrNullableNumericType(this Type t)
+    {
+        return t.IsNumericType() || (t.IsNullableType() && t.GetGenericArguments()[0].IsNumericType());
+    }
+
+    /// <summary>
+    /// 判断是否为可空类型。
+    /// 注意，直接调用可空对象的.GetType()方法返回的会是其泛型值的实际类型，用其进行此判断肯定返回false。
+    /// </summary>
+    /// <param name="t">要判断的类型</param>
+    /// <returns>是否为可空类型</returns>
+    public static bool IsNullableType(this Type t)
+    {
+        return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>);
+    }
+
+    /// <summary>
     /// 通过反射获取对象的指定属性值
     /// </summary>
     /// <param name="o"></param>
     /// <param name="属性名">属性名</param>
     /// <returns>属性值</returns>
-    public static object GetPropertyValue(this object o,string 属性名)
+    public static object GetPropertyValue(this object o, string 属性名)
     {
         var t = o.GetType();
         return t.GetProperty(属性名).GetValue(o, null);
@@ -45,10 +77,10 @@ public static partial class 通用扩展
     {
         StringBuilder sb = new StringBuilder();
         var t = o.GetType();
-        sb.AppendLine(t.FullName+"类型对象");
+        sb.AppendLine(t.FullName + "类型对象");
         foreach (System.Reflection.PropertyInfo p in t.GetProperties())
         {
-            sb.AppendLine(p.Name + ":" + p.GetValue(o,null));
+            sb.AppendLine(p.Name + ":" + p.GetValue(o, null));
         }
         return sb.ToString();
     }

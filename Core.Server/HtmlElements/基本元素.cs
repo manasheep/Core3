@@ -29,13 +29,13 @@ namespace Core.HtmlElements
 
         public 基本元素 添加属性(string 属性名, string 属性值)
         {
-            if (属性字典 == null) 属性字典 = new Dictionary<string, string>();
-            if (属性字典.ContainsKey(属性名))
+            if (添加属性目标.属性字典 == null) 添加属性目标.属性字典 = new Dictionary<string, string>();
+            if (添加属性目标.属性字典.ContainsKey(属性名))
             {
-                属性字典[属性名] = 属性值;
+                添加属性目标.属性字典[属性名] = 属性值;
             }
             else {
-                属性字典.Add(属性名, 属性值);
+                添加属性目标.属性字典.Add(属性名, 属性值);
             }
             return this;
         }
@@ -54,6 +54,8 @@ namespace Core.HtmlElements
         }
 
         protected bool 是否已进行过生成 { get; set; }
+
+        public virtual 基本元素 添加属性目标 { get { return this; } }
 
         public virtual TagBuilder 生成标签构造器()
         {

@@ -10,7 +10,7 @@ namespace Core.HtmlElements
     {
         public Bootstarp文字输入框元素组() : base()
         {
-            
+            input = new 基本元素("input");
         }
 
         public Bootstarp文字输入框元素组(string 控件名, string 值)
@@ -18,6 +18,17 @@ namespace Core.HtmlElements
         {
             this.值 = 值;
             控件类型 = 文字输入框控件类型.text;
+            input = new 基本元素("input");
+        }
+
+        private 基本元素 input { get; set; }
+
+        public override 基本元素 添加属性目标
+        {
+            get
+            {
+                return input;
+            }
         }
 
         public override Bootstarp表单控件元素组 应用模型属性元数据(ModelMetadata 模型属性元数据)
@@ -51,15 +62,12 @@ namespace Core.HtmlElements
         public string 尾注 { get; set; }
         public bool 是否只读 { get; set; }
         
+        
 
         public override System.Web.Mvc.TagBuilder 生成标签构造器()
         {
-            var input = new 基本元素("input")
-            {
-                Id = Id
-            }
-            .添加Css类("form-control")
-            .添加属性("type", 控件类型.ToString());
+            input.Id = Id;
+            input.添加Css类("form-control").添加属性("type", 控件类型.ToString());
             if (!值.IsNullOrEmpty())
             {
                 input.添加属性("value", 值);

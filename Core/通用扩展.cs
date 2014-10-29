@@ -12,8 +12,21 @@ public static partial class 通用扩展
 {
     #region 基本
 
+
+    ////数值类型数组缓存
+    //private static Type[] ta = new[] { typeof(Int16), typeof(Int32), typeof(Int64), typeof(Single), typeof(Double), typeof(UInt16), typeof(UInt32), typeof(UInt64), typeof(Byte), typeof(Decimal), typeof(SByte), typeof(UIntPtr), typeof(IntPtr)};
+    ///// <summary>
+    ///// 判断是否为数值类型。目前已知不支持BigInteger。这种方法是以空间换时间的缓存策略，有大量查询时性能会更优，反之则拖慢初始化。
+    ///// </summary>
+    ///// <param name="t">要判断的类型</param>
+    ///// <returns>是否为数值类型</returns>
+    //public static bool IsNumericType(this Type t)
+    //{
+    //    return Array.IndexOf(ta, t) >= 0;
+    //}
+
     /// <summary>
-    /// 判断是否为数值类型。
+    /// 判断是否为数值类型。目前已知不支持BigInteger。
     /// </summary>
     /// <param name="t">要判断的类型</param>
     /// <returns>是否为数值类型</returns>
@@ -24,7 +37,7 @@ public static partial class 通用扩展
     }
 
     /// <summary>
-    /// 判断是否为可空数值类型。
+    /// 判断是否为可空数值类型。目前已知不支持BigInteger。
     /// </summary>
     /// <param name="t">要判断的类型</param>
     /// <returns>是否为可空数值类型</returns>

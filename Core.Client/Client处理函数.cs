@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -13,11 +14,71 @@ namespace Core
 {
     public static class Client处理函数
     {
-        [DllImport("User32.dll ")]
-        private static extern System.IntPtr FindWindowEx(System.IntPtr parent, System.IntPtr childe, string strclass, string strname);
+        public delegate bool WNDENUMPROC(IntPtr hwnd, uint lParam);
+        [DllImport("user32.dll", EntryPoint = "EnumWindows", SetLastError = true)]
+        public static extern bool EnumWindows(WNDENUMPROC lpEnumFunc, uint lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern int GetWindowText(IntPtr hWnd, StringBuilder lpText, int nCount);
+
+        [DllImport("user32.dll", EntryPoint = "GetParent", SetLastError = true)]
+        public static extern IntPtr GetParent(IntPtr hWnd);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowThreadProcessId")]
+        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, ref uint lpdwProcessId);
+
+        [DllImport("user32.dll", EntryPoint = "IsWindow")]
+        public static extern bool IsWindow(IntPtr hWnd);
+
+        [DllImport("kernel32.dll", EntryPoint = "SetLastError")]
+        public static extern void SetLastError(uint dwErrCode);
+
+        [DllImport("user32.dll", EntryPoint = "FindWindow", CharSet = CharSet.Auto)]
+        private extern static IntPtr FindWindow(string classname, string captionName);
+
+        [DllImport("user32.dll", EntryPoint = "FindWindowEx", CharSet = CharSet.Auto)]
+        private extern static IntPtr FindWindowEx(IntPtr parent, IntPtr child, string classname, string captionName);
+
+        [DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPStr)] string lParam);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("User32")]
+        static extern bool SetWindowText(IntPtr hwnd, string windowName);
+
+        public static void 将窗口显示到桌面前端(IntPtr 窗口句柄)
+        {
+            SetForegroundWindow(窗口句柄);
+        }
+
+        public static IntPtr 获取窗口句柄(Regex 窗口标题文字匹配表达式)
+        {
+            var outptr = IntPtr.Zero;
+            EnumWindows((IntPtr p, uint u) =>
+            {
+                var sb = new StringBuilder(50);
+                GetWindowText(p, sb, sb.Capacity);
+                var s = sb.ToString();
+                if (窗口标题文字匹配表达式.IsMatch(s))
+                {
+                    outptr = p;
+                }
+                return true;
+            }, 0);
+            return outptr;
+        }
+
         public static IntPtr 获取窗口句柄(string 窗口标题)
         {
             return FindWindowEx(System.IntPtr.Zero, System.IntPtr.Zero, null, 窗口标题);
+        }
+
+        public static IntPtr 获取窗口句柄(string 窗口类名, string 窗口标题)
+        {
+            return FindWindowEx(System.IntPtr.Zero, System.IntPtr.Zero, 窗口类名, 窗口标题);
         }
 
         [DllImport("user32.dll")]
@@ -112,7 +173,7 @@ namespace Core
         {
             模拟鼠标移动(x, y);
             Thread.Sleep(55);
-            模拟鼠标左键按下(x,y);
+            模拟鼠标左键按下(x, y);
             Thread.Sleep(55);
             模拟鼠标左键抬起(x, y);
         }

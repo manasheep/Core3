@@ -1,16 +1,182 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Core
 {
     public static class Client处理函数
     {
+        [DllImport("User32.dll ")]
+        private static extern System.IntPtr FindWindowEx(System.IntPtr parent, System.IntPtr childe, string strclass, string strname);
+        public static IntPtr 获取窗口句柄(string 窗口标题)
+        {
+            return FindWindowEx(System.IntPtr.Zero, System.IntPtr.Zero, null, 窗口标题);
+        }
+
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndlnsertAfter, int X, int Y, int cx, int cy, uint Flags);
+        public static void 设置窗口坐标位置(IntPtr 窗口句柄, int x, int y, bool 强制前端显示)
+        {
+            uint flags = 0x0010 | 0x0001;
+            //组合上0x0002参数将忽略x、y参数，即不改变窗口位置
+            if (强制前端显示) flags = 0x0040 | 0x0001;
+            SetWindowPos(窗口句柄, (IntPtr)(强制前端显示 ? -1 : 1), x, y, 0, 0, flags);
+        }
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;                             //最左坐标
+            public int Top;                             //最上坐标
+            public int Right;                           //最右坐标
+            public int Bottom;                        //最下坐标
+        }
+        public static RECT 获取窗口矩形(IntPtr 窗口句柄)
+        {
+            IntPtr awin = 窗口句柄;
+            RECT rect = new RECT();
+            GetWindowRect(awin, ref rect);
+            return rect;
+        }
+
+        private const int GWL_STYLE = -16;
+        private const long WS_CAPTION = 0x00C00000L;
+        private const long WS_CAPTION_2 = 0X00C0000L;
+        [DllImport("User32.dll")]
+        private static extern long GetWindowLong(IntPtr handle, int style);
+        [DllImport("User32.dll")]
+        private static extern void SetWindowLong(IntPtr handle, int oldStyle, long newStyle);
+        public static void 设为无边框窗口(IntPtr 窗口句柄)
+        {
+            long oldstyle = GetWindowLong(窗口句柄, GWL_STYLE);
+            SetWindowLong(窗口句柄, GWL_STYLE, oldstyle & (~(WS_CAPTION | WS_CAPTION_2)));
+        }
+
+        public static Bitmap 获取窗口截图(IntPtr 窗口句柄)
+        {
+            var r = 获取窗口矩形(窗口句柄);
+            //记录日志("识别游戏窗口矩形区","{0},{1} {2},{3}".FormatWith(r.Left,r.Top,r.Right-r.Left,r.Bottom-r.Top));
+            return 获取截图(r.Left, r.Top, r.Right - r.Left, r.Bottom - r.Top, PixelFormat.Format24bppRgb);
+        }
+
+        public static Bitmap 获取截图(int x, int y, int width, int height, PixelFormat 像素格式)
+        {
+            Bitmap myImage = new Bitmap(width, height, 像素格式);
+            Graphics g = Graphics.FromImage(myImage);
+            g.CopyFromScreen(new Point(x, y), new Point(0, 0), new Size(myImage.Width, myImage.Height));
+            IntPtr dc1 = g.GetHdc();
+            g.ReleaseHdc(dc1);
+            return myImage;
+        }
+
+        public static Bitmap 获取截图(Rectangle rect, PixelFormat 像素格式)
+        {
+            return 获取截图(rect.X, rect.Y, rect.Width, rect.Height, 像素格式);
+        }
+
+        /// <summary>
+        /// 鼠标控制参数
+        /// </summary>
+        const int MOUSEEVENTF_LEFTDOWN = 0x2;
+        const int MOUSEEVENTF_LEFTUP = 0x4;
+        const int MOUSEEVENTF_MIDDLEDOWN = 0x20;
+        const int MOUSEEVENTF_MIDDLEUP = 0x40;
+        const int MOUSEEVENTF_MOVE = 0x1;
+        const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        const int MOUSEEVENTF_RIGHTDOWN = 0x8;
+        const int MOUSEEVENTF_RIGHTUP = 0x10;
+        /// <summary>
+        /// 鼠标的位置
+        /// </summary>
+        private struct PONITAPI
+        {
+            public int x, y;
+        }
+        [DllImport("user32.dll")]
+        private static extern int GetCursorPos(ref PONITAPI p);
+        [DllImport("user32.dll")]
+        private static extern int SetCursorPos(int x, int y);
+        [DllImport("user32.dll")]
+        private static extern int mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        public static void 模拟鼠标单击(int x, int y)
+        {
+            鼠标移动(x, y);
+            Thread.Sleep(45);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+            Thread.Sleep(55);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTUP, x, y, 0, 0);
+        }
+
+        public static void 模拟鼠标右键单击(int x, int y)
+        {
+            鼠标移动(x, y);
+            Thread.Sleep(45);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
+            Thread.Sleep(55);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
+        }
+
+        public static void 模拟鼠标拖拽(int x, int y, int x2, int y2)
+        {
+            鼠标移动(x, y);
+            Thread.Sleep(45);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+            Thread.Sleep(55);
+            鼠标移动(x2, y2);
+            Thread.Sleep(55);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTUP, x2, y2, 0, 0);
+        }
+
+        public static void 鼠标移动(int x, int y)
+        {
+            SetCursorPos(x, y);
+        }
+
+        //注册热键的api
+        [DllImport("user32")]
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint control, Keys vk);
+        //解除注册热键的api
+        [DllImport("user32")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+        /// <summary>
+        /// 注册系统热键
+        /// </summary>
+        /// <param name="窗口句柄">本程序的窗口句柄，用于接收热键，通过窗体重写WndProc(ref Message m)方法实现接收热键事件，判断当m.Msg为0x0312时触发热键行为，热键编号通过m.WParam获得</param>
+        /// <param name="编号">热键独立编号</param>
+        /// <param name="辅助键">None = 0,   Alt = 1,  crtl= 2,  Shift = 4,   Windows = 8，多个辅助键用与运算组合</param>
+        /// <param name="按键">按键</param>
+        public static void 注册系统热键(IntPtr 窗口句柄, int 编号, uint 辅助键, Keys 按键)
+        {
+            RegisterHotKey(窗口句柄, 编号, 辅助键, 按键);
+        }
+        public static void 注销系统按键(IntPtr 窗口句柄, int 编号)
+        {
+            UnregisterHotKey(窗口句柄, 编号);
+        }
+        /// <summary>
+        /// 获取触发热键编号，如果没有触发则返回-1
+        /// </summary>
+        /// <param name="消息">窗体重写WndProc(ref Message m)方法中得到的参数</param>
+        /// <returns>触发热键编号，如果没有触发则返回-1</returns>
+        public static int 获取触发热键编号(Message 消息)
+        {
+            if (消息.Msg == 0x0312)
+            {
+                return (int)消息.WParam;
+            }
+            else return -1;
+        }
+
         /// <summary>
         /// 使用资源管理器浏览并选定文件
         /// </summary>

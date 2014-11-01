@@ -48,9 +48,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
@@ -64,6 +67,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Environment\ClientEnvironment变量.cs" />
+    <Compile Include="WFActivity\整数笛卡尔坐标输入.xaml.cs">
+      <DependentUpon>整数笛卡尔坐标输入.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WFActivity\模拟鼠标右键单击.cs" />
+    <Compile Include="WFActivity\模拟鼠标右键抬起.cs" />
+    <Compile Include="WFActivity\模拟鼠标右键按下.cs" />
+    <Compile Include="WFActivity\模拟鼠标左键单击.cs" />
+    <Compile Include="WFActivity\模拟鼠标左键抬起.cs" />
+    <Compile Include="WFActivity\模拟鼠标左键按下.cs" />
+    <Compile Include="WFActivity\模拟鼠标移动.cs" />
     <Compile Include="WinForm\WinForm处理函数.cs" />
     <Compile Include="WPF\WPF处理函数.cs" />
     <Compile Include="Client处理函数.cs" />
@@ -80,6 +93,12 @@
       <Project>{32440EFF-EE58-41F7-BF4F-FAF5B8D14441}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WFActivity\整数笛卡尔坐标输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

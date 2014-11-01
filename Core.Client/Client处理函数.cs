@@ -110,34 +110,51 @@ namespace Core
         private static extern int mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
         public static void 模拟鼠标单击(int x, int y)
         {
-            鼠标移动(x, y);
-            Thread.Sleep(45);
-            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+            模拟鼠标移动(x, y);
             Thread.Sleep(55);
+            模拟鼠标左键按下(x,y);
+            Thread.Sleep(55);
+            模拟鼠标左键抬起(x, y);
+        }
+
+        public static void 模拟鼠标左键按下(int x, int y)
+        {
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+        }
+        public static void 模拟鼠标左键抬起(int x, int y)
+        {
             mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTUP, x, y, 0, 0);
+        }
+        public static void 模拟鼠标右键按下(int x, int y)
+        {
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
+        }
+        public static void 模拟鼠标右键抬起(int x, int y)
+        {
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
         }
 
         public static void 模拟鼠标右键单击(int x, int y)
         {
-            鼠标移动(x, y);
-            Thread.Sleep(45);
-            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
+            模拟鼠标移动(x, y);
             Thread.Sleep(55);
-            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
+            模拟鼠标右键按下(x, y);
+            Thread.Sleep(55);
+            模拟鼠标右键抬起(x, y);
         }
 
         public static void 模拟鼠标拖拽(int x, int y, int x2, int y2)
         {
-            鼠标移动(x, y);
-            Thread.Sleep(45);
-            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+            模拟鼠标移动(x, y);
             Thread.Sleep(55);
-            鼠标移动(x2, y2);
+            模拟鼠标左键按下(x, y);
             Thread.Sleep(55);
-            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTUP, x2, y2, 0, 0);
+            模拟鼠标移动(x2, y2);
+            Thread.Sleep(55);
+            模拟鼠标左键抬起(x, y);
         }
 
-        public static void 鼠标移动(int x, int y)
+        public static void 模拟鼠标移动(int x, int y)
         {
             SetCursorPos(x, y);
         }

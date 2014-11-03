@@ -130,6 +130,41 @@ namespace Core
             return 获取截图(r.Left, r.Top, r.Right - r.Left, r.Bottom - r.Top, PixelFormat.Format24bppRgb);
         }
 
+        public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key down flag
+        public const int KEYEVENTF_KEYUP = 0x0002; //Key up flag
+        [DllImport("user32.dll")]
+        private static extern void keybd_event(byte bVk, byte bSCan, int dwFlags, int dwExtraInfo);
+        [DllImport("user32.dll")]
+        private static extern byte MapVirtualKey(byte wCode, int wMap);
+
+        public static void 模拟按下按键(VirtualKeyCode 虚拟按键代码)
+        {
+            var code = (byte)虚拟按键代码;
+            keybd_event(code, 0, KEYEVENTF_EXTENDEDKEY, 0);
+        }
+
+        public static void 模拟弹起按键(VirtualKeyCode 虚拟按键代码)
+        {
+            var code = (byte) 虚拟按键代码;
+            keybd_event(code, 0, KEYEVENTF_KEYUP, 0);
+        }
+
+        public static void 模拟单击按键(VirtualKeyCode 虚拟按键代码)
+        {
+            var code = (byte)虚拟按键代码;
+            keybd_event(code, 0, 0, 0);
+        }
+
+        /// <summary>
+        /// 模拟键盘按键输入，具体指令参看：http://www.cnblogs.com/sydeveloper/archive/2013/02/25/2932571.html
+        /// 注意：此功能在后台线程中好像不能正常工作
+        /// </summary>
+        /// <param name="按键输入内容">输入内容</param>
+        public static void 模拟键盘输入(string 按键输入内容)
+        {
+            SendKeys.Send(按键输入内容);
+        }
+
         public static Bitmap 获取截图(int x, int y, int width, int height, PixelFormat 像素格式)
         {
             Bitmap myImage = new Bitmap(width, height, 像素格式);

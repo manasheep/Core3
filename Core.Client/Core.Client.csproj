@@ -67,6 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Environment\ClientEnvironment变量.cs" />
+    <Compile Include="VirtualKeyCode.cs" />
+    <Compile Include="WFActivity\内容输入.xaml.cs">
+      <DependentUpon>内容输入.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WFActivity\名称输入.xaml.cs">
       <DependentUpon>名称输入.xaml</DependentUpon>
     </Compile>
@@ -74,6 +78,10 @@
     <Compile Include="WFActivity\整数笛卡尔坐标输入.xaml.cs">
       <DependentUpon>整数笛卡尔坐标输入.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WFActivity\模拟单击按键.cs" />
+    <Compile Include="WFActivity\模拟弹起按键.cs" />
+    <Compile Include="WFActivity\模拟按下按键.cs" />
+    <Compile Include="WFActivity\模拟键盘输入.cs" />
     <Compile Include="WFActivity\模拟鼠标右键单击.cs" />
     <Compile Include="WFActivity\模拟鼠标右键抬起.cs" />
     <Compile Include="WFActivity\模拟鼠标右键按下.cs" />
@@ -87,9 +95,13 @@
     <Compile Include="WFActivity\窗口句柄输入.xaml.cs">
       <DependentUpon>窗口句柄输入.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WFActivity\虚拟按键代码输入.xaml.cs">
+      <DependentUpon>虚拟按键代码输入.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WFActivity\通过标题名获取窗口句柄.cs" />
     <Compile Include="WFActivity\通过正则表达式获取窗口句柄.cs" />
     <Compile Include="WFActivity\通过类名获取窗口句柄.cs" />
+    <Compile Include="WF\SynchronousSynchronizationContext.cs" />
     <Compile Include="WinForm\WinForm处理函数.cs" />
     <Compile Include="WPF\WPF处理函数.cs" />
     <Compile Include="Client处理函数.cs" />
@@ -108,6 +120,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="WFActivity\内容输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WFActivity\名称输入.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WFActivity\窗口句柄输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WFActivity\虚拟按键代码输入.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

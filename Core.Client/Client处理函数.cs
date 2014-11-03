@@ -157,12 +157,12 @@ namespace Core
 
         /// <summary>
         /// 模拟键盘按键输入，具体指令参看：http://www.cnblogs.com/sydeveloper/archive/2013/02/25/2932571.html
-        /// 注意：此功能在后台线程中好像不能正常工作
+        /// 注意：此功能在某些情况下不能正常工作，建议使用调用WindowsAPI版本的方法
         /// </summary>
         /// <param name="按键输入内容">输入内容</param>
         public static void 模拟键盘输入(string 按键输入内容)
         {
-            SendKeys.Send(按键输入内容);
+            SendKeys.SendWait(按键输入内容);
         }
 
         public static Bitmap 获取截图(int x, int y, int width, int height, PixelFormat 像素格式)

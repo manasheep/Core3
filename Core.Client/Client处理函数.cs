@@ -130,7 +130,7 @@ namespace Core
             return 获取截图(r.Left, r.Top, r.Right - r.Left, r.Bottom - r.Top, PixelFormat.Format24bppRgb);
         }
 
-        public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key down flag
+        public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key click flag
         public const int KEYEVENTF_KEYUP = 0x0002; //Key up flag
         [DllImport("user32.dll")]
         private static extern void keybd_event(byte bVk, byte bSCan, int dwFlags, int dwExtraInfo);
@@ -140,7 +140,7 @@ namespace Core
         public static void 模拟按下按键(VirtualKeyCode 虚拟按键代码)
         {
             var code = (byte)虚拟按键代码;
-            keybd_event(code, 0, KEYEVENTF_EXTENDEDKEY, 0);
+            keybd_event(code, 0, 0, 0);
         }
 
         public static void 模拟弹起按键(VirtualKeyCode 虚拟按键代码)
@@ -152,7 +152,7 @@ namespace Core
         public static void 模拟单击按键(VirtualKeyCode 虚拟按键代码)
         {
             var code = (byte)虚拟按键代码;
-            keybd_event(code, 0, 0, 0);
+            keybd_event(code, 0, KEYEVENTF_EXTENDEDKEY, 0);
         }
 
         /// <summary>

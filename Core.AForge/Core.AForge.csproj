@@ -45,6 +45,7 @@
     <Reference Include="System.Activities" />
     <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,7 +59,9 @@
     <Compile Include="WFActivity\HSL色彩保留滤镜参数输入.xaml.cs">
       <DependentUpon>HSL色彩保留滤镜参数输入.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WFActivity\应用滤镜到图像.cs" />
     <Compile Include="WFActivity\构建HSL色彩保留滤镜.cs" />
+    <Compile Include="WFActivity\构建滤镜序列.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

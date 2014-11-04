@@ -12,9 +12,65 @@
             <converters:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
         </ResourceDictionary>
     </sap:ActivityDesigner.Resources>
-    <StackPanel MaxWidth="480">
+    <StackPanel MaxWidth="230">
 
-        <Label Content="*最低色相："/>        <sapv:ExpressionTextBox      Expression="{Binding Path=ModelItem.最低色相, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"      OwnerActivity="{Binding Path=ModelItem}"      ExpressionType="system:Int32"      UseLocationExpression="False" />        <Label Content="*最高色相："/>        <sapv:ExpressionTextBox      Expression="{Binding Path=ModelItem.最高色相, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"      OwnerActivity="{Binding Path=ModelItem}"      ExpressionType="system:Int32"      UseLocationExpression="False" />        <Label Content="*最低饱和度："/>        <sapv:ExpressionTextBox      Expression="{Binding Path=ModelItem.最低饱和度, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"      OwnerActivity="{Binding Path=ModelItem}"      ExpressionType="system:Single"      UseLocationExpression="False" />        <Label Content="*最高饱和度："/>        <sapv:ExpressionTextBox      Expression="{Binding Path=ModelItem.最高饱和度, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"      OwnerActivity="{Binding Path=ModelItem}"      ExpressionType="system:Single"      UseLocationExpression="False" />        <Label Content="*最低亮度："/>        <sapv:ExpressionTextBox      Expression="{Binding Path=ModelItem.最低亮度, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"      OwnerActivity="{Binding Path=ModelItem}"      ExpressionType="system:Single"      UseLocationExpression="False" />        <Label Content="*最高亮度："/>        <sapv:ExpressionTextBox      Expression="{Binding Path=ModelItem.最高亮度, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"      OwnerActivity="{Binding Path=ModelItem}"      ExpressionType="system:Single"      UseLocationExpression="False" />        <Label Content="填充颜色："/>        <sapv:ExpressionTextBox      Expression="{Binding Path=ModelItem.填充颜色, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"      OwnerActivity="{Binding Path=ModelItem}"      ExpressionType="imaging:HSL"      UseLocationExpression="False" />        <!--<Label Content="*构建的滤镜："/>        <sapv:ExpressionTextBox      Expression="{Binding Path=ModelItem.构建的滤镜, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=Out }"      OwnerActivity="{Binding Path=ModelItem}"      ExpressionType="filters:HSLFiltering"      UseLocationExpression="False" />-->
+
+        <Label Content="*最低色相："/>
+        <sapv:ExpressionTextBox
+      Expression="{Binding Path=ModelItem.最低色相, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+      OwnerActivity="{Binding Path=ModelItem}"
+      ExpressionType="system:Int32"
+      UseLocationExpression="False" />
+
+        <Label Content="*最高色相："/>
+        <sapv:ExpressionTextBox
+      Expression="{Binding Path=ModelItem.最高色相, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+      OwnerActivity="{Binding Path=ModelItem}"
+      ExpressionType="system:Int32"
+      UseLocationExpression="False" />
+
+        <Label Content="*最低饱和度："/>
+        <sapv:ExpressionTextBox
+      Expression="{Binding Path=ModelItem.最低饱和度, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+      OwnerActivity="{Binding Path=ModelItem}"
+      ExpressionType="system:Single"
+      UseLocationExpression="False" />
+
+        <Label Content="*最高饱和度："/>
+        <sapv:ExpressionTextBox
+      Expression="{Binding Path=ModelItem.最高饱和度, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+      OwnerActivity="{Binding Path=ModelItem}"
+      ExpressionType="system:Single"
+      UseLocationExpression="False" />
+
+        <Label Content="*最低亮度："/>
+        <sapv:ExpressionTextBox
+      Expression="{Binding Path=ModelItem.最低亮度, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+      OwnerActivity="{Binding Path=ModelItem}"
+      ExpressionType="system:Single"
+      UseLocationExpression="False" />
+
+        <Label Content="*最高亮度："/>
+        <sapv:ExpressionTextBox
+      Expression="{Binding Path=ModelItem.最高亮度, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+      OwnerActivity="{Binding Path=ModelItem}"
+      ExpressionType="system:Single"
+      UseLocationExpression="False" />
+
+        <!--<Label Content="填充颜色："/>
+        <sapv:ExpressionTextBox
+      Expression="{Binding Path=ModelItem.填充颜色, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In }"
+      OwnerActivity="{Binding Path=ModelItem}"
+      ExpressionType="imaging:HSL"
+      UseLocationExpression="False" />-->
+
+        <!--<Label Content="*输出目标："/>
+        <sapv:ExpressionTextBox
+      Expression="{Binding Path=ModelItem.输出目标, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=Out }"
+      OwnerActivity="{Binding Path=ModelItem}"
+      ExpressionType="filters:HSLFiltering"
+      UseLocationExpression="False" />-->
+
 
     </StackPanel>
 </sap:ActivityDesigner>

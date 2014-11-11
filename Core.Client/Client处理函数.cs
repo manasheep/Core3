@@ -426,5 +426,10 @@ namespace Core
                 return null;
             }
         }
+
+        public static void 设置剪贴板文字(string 内容)
+        {
+            Clipboard.SetText(内容, TextDataFormat.UnicodeText);
+        }
     }
 }

@@ -28,17 +28,24 @@ namespace Core.AForge.WFActivity
 
         public InArgument<HSL> 填充颜色 { get; set; }
 
-        [RequiredArgument]
+        public InOutArgument<FiltersSequence> 添加到目标滤镜序列 { get; set; }
+
         public OutArgument<HSLFiltering> 输出目标 { get; set; }
 
         // 如果活动返回值，则从 CodeActivity<TResult>
         // 派生并从 Execute 方法返回该值。
         protected override void Execute(CodeActivityContext context)
         {
-            var hslf = new HSLFiltering(new IntRange(context.GetValue(最低色相), context.GetValue(最高色相)), new Range(context.GetValue(最低饱和度), context.GetValue(最高饱和度)), new Range(context.GetValue(最低亮度), context.GetValue(最高亮度)));
+            var f = new HSLFiltering(new IntRange(context.GetValue(最低色相), context.GetValue(最高色相)), new Range(context.GetValue(最低饱和度), context.GetValue(最高饱和度)), new Range(context.GetValue(最低亮度), context.GetValue(最高亮度)));
             var color = context.GetValue(填充颜色);
-            if (color != null) hslf.FillColor = color;
-            context.SetValue(输出目标, hslf);
+            if (color != null) f.FillColor = color;
+            context.SetValue(输出目标, f);
+            var fs = context.GetValue(添加到目标滤镜序列);
+            if (fs != null)
+            {
+                fs.Add(f);
+                context.SetValue(添加到目标滤镜序列, fs);
+            }
         }
     }
 }

@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Environment\ClientEnvironment变量.cs" />
     <Compile Include="VirtualKeyCode.cs" />
+    <Compile Include="WFActivity\关闭输入法.cs" />
     <Compile Include="WFActivity\内容输入.xaml.cs">
       <DependentUpon>内容输入.xaml</DependentUpon>
     </Compile>

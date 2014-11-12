@@ -49,6 +49,41 @@ namespace Core
         [DllImport("User32")]
         static extern bool SetWindowText(IntPtr hwnd, string windowName);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern IntPtr GetForegroundWindow();//获取当前激活窗口
+
+        [DllImport("kernel32")]
+        public static extern IntPtr GetCurrentThreadId();
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetWindowThreadProcessId(IntPtr hWnd, IntPtr ProcessId);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr AttachThreadInput(IntPtr idAttach, IntPtr idAttachTo, int fAttach);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
+        internal static extern IntPtr GetFocus();
+
+        public static IntPtr 获取当前线程ID()
+        {
+            return GetCurrentThreadId();
+        }
+
+        public static IntPtr 获取目标窗口线程ID(IntPtr 窗口句柄)
+        {
+            return GetWindowThreadProcessId(窗口句柄,IntPtr.Zero);
+        }
+
+        public static void 设置线程联接状态(IntPtr 目标线程ID, IntPtr 联接到线程ID, bool 联接状态)
+        {
+            AttachThreadInput(目标线程ID, 联接到线程ID, 联接状态 ? 1 : 0);
+        }
+
+        public static void 设置线程联接状态(IntPtr 目标线程ID, bool 联接状态)
+        {
+            设置线程联接状态(目标线程ID, 获取当前线程ID(), 联接状态);
+        }
+
         public static void 将窗口显示到桌面前端(IntPtr 窗口句柄)
         {
             SetForegroundWindow(窗口句柄);
@@ -69,6 +104,20 @@ namespace Core
                 return true;
             }, 0);
             return outptr;
+        }
+
+        /// <summary>
+        /// 唯有对目标线程建立联接后才能执行此方法
+        /// </summary>
+        /// <returns>当前激活控件句柄</returns>
+        public static IntPtr 获取当前激活控件句柄()
+        {
+            return GetFocus();
+        }
+
+        public static IntPtr 获取当前激活窗口句柄()
+        {
+            return GetForegroundWindow();
         }
 
         public static IntPtr 获取窗口句柄(string 窗口标题)

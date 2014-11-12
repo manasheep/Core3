@@ -160,6 +160,32 @@ namespace Core.Drawing
         }
 
         /// <summary>
+        /// 将多个图像排列拼接成一个大图
+        /// </summary>
+        /// <param name="最终宽度">输出图宽度</param>
+        /// <param name="最终高度">输出图高度</param>
+        /// <param name="是否为横向拼接">否则为纵向</param>
+        /// <param name="待拼接图像文件路径">待拼接图像文件数组</param>
+        /// <returns>大图</returns>
+        public static Bitmap 拼接图像(int 最终宽度, int 最终高度, bool 是否为横向拼接, params string[] 待拼接图像文件路径)
+        {
+            Bitmap bmp = new Bitmap(最终宽度, 最终高度);
+            Graphics g = Graphics.FromImage(bmp);
+            var x = 0;
+            var y = 0;
+            foreach (var f in 待拼接图像文件路径)
+            {
+                using (var img = Image.FromFile(f))
+                {
+                    g.DrawImage(img, x, y, img.Width, img.Height);
+                    if (是否为横向拼接) x += img.Width;
+                    else y += img.Height;
+                }
+            }
+            return bmp;
+        }
+
+        /// <summary>
         /// 从图像中剪裁出指定区域为新的图像
         /// </summary>
         /// <param name="图像">源图像</param>
@@ -221,7 +247,7 @@ namespace Core.Drawing
         /// <returns>剪裁后的图像</returns>
         public static Bitmap 剪裁图像为邻近的符合比例的尺寸(this Image 图像, int 横向最大比值, int 纵向最大比值, int 最大比值积)
         {
-            return 剪裁图像(图像, 计算邻近的符合比例的尺寸(图像.Width, 图像.Height,  横向最大比值,  纵向最大比值,  最大比值积));
+            return 剪裁图像(图像, 计算邻近的符合比例的尺寸(图像.Width, 图像.Height, 横向最大比值, 纵向最大比值, 最大比值积));
         }
 
         /// <summary>
@@ -746,7 +772,7 @@ namespace Core.Drawing
             return o;
         }
 
-        public static bool 验证矩形区域是否包含坐标点(this Rectangle 矩形,Point 坐标点)
+        public static bool 验证矩形区域是否包含坐标点(this Rectangle 矩形, Point 坐标点)
         {
             return 坐标点.X >= 矩形.Left && 坐标点.X <= 矩形.Right && 坐标点.Y >= 矩形.Top && 坐标点.Y <= 矩形.Bottom;
         }
@@ -873,7 +899,7 @@ namespace Core.Drawing
         /// <param name="纵向最大比值">最大的比例值</param>
         /// <param name="最大比值积">纵横比例值的最大乘积</param>
         /// <returns>邻近比例尺寸</returns>
-        public static Size 计算邻近的符合比例的尺寸(int 宽度, int 高度, int 横向最大比值,int 纵向最大比值,int 最大比值积)
+        public static Size 计算邻近的符合比例的尺寸(int 宽度, int 高度, int 横向最大比值, int 纵向最大比值, int 最大比值积)
         {
             int offset = Int32.MaxValue;
             int ow = 0;

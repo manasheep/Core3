@@ -57,6 +57,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -68,10 +69,12 @@
   <ItemGroup>
     <Compile Include="Environment\ClientEnvironment变量.cs" />
     <Compile Include="VirtualKeyCode.cs" />
+    <Compile Include="WFActivity\以字符串形式读取Http数据.cs" />
     <Compile Include="WFActivity\关闭输入法.cs" />
     <Compile Include="WFActivity\内容输入.xaml.cs">
       <DependentUpon>内容输入.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WFActivity\发起HttpGet请求.cs" />
     <Compile Include="WFActivity\名称输入.xaml.cs">
       <DependentUpon>名称输入.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,9 @@
     </Compile>
     <Compile Include="WFActivity\窗口句柄输入.xaml.cs">
       <DependentUpon>窗口句柄输入.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WFActivity\网址输入.xaml.cs">
+      <DependentUpon>网址输入.xaml</DependentUpon>
     </Compile>
     <Compile Include="WFActivity\获取窗口截图.cs" />
     <Compile Include="WFActivity\虚拟按键代码输入.xaml.cs">
@@ -142,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WFActivity\窗口句柄输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WFActivity\网址输入.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

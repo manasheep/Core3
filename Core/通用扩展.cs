@@ -6,12 +6,46 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Collections;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Core.Encryption;
 
 public static partial class 通用扩展
 {
     #region 基本
 
+    /// <summary>
+    /// 转换为异步编程模型（Asynchronous Programming Model），用于WF的AsyncCodeActivity中的BeginExecute方法中使用，如果不进行此转换，通常就会因不包含AsyncState属性而引发InvalidOperationException
+    /// 代码源自：http://tweetycodingxp.blogspot.jp/2013/06/using-task-based-asynchronous-pattern.html
+    /// </summary>
+    /// <typeparam name="TResult">返回值类型</typeparam>
+    /// <param name="task">原Task对象</param>
+    /// <param name="callback">BeginExecute方法中的callback参数</param>
+    /// <param name="state">BeginExecute方法中的state参数</param>
+    /// <returns>异步编程模型形式的Task</returns>
+    public static Task<TResult> ToApm<TResult>(this Task<TResult> task, AsyncCallback callback, object state)
+    {
+        if (task.AsyncState == state)
+        {
+            if (callback != null)
+            {
+                task.ContinueWith(delegate { callback(task); },
+                                  CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+            }
+            return task;
+        }
+
+        var tcs = new TaskCompletionSource<TResult>(state);
+        task.ContinueWith(obj =>
+        {
+            if (task.IsFaulted) tcs.TrySetException(task.Exception.InnerExceptions);
+            else if (task.IsCanceled) tcs.TrySetCanceled();
+            else tcs.TrySetResult(task.Result);
+
+            if (callback != null) callback(tcs.Task);
+        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+        return tcs.Task;
+    }
 
     ////数值类型数组缓存
     //private static Type[] ta = new[] { typeof(Int16), typeof(Int32), typeof(Int64), typeof(Single), typeof(Double), typeof(UInt16), typeof(UInt32), typeof(UInt64), typeof(Byte), typeof(Decimal), typeof(SByte), typeof(UIntPtr), typeof(IntPtr)};

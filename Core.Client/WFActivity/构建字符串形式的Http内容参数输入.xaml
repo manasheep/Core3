@@ -1,0 +1,47 @@
+﻿<sap:ActivityDesigner x:Class="Core.WFActivity.构建字符串形式的Http内容参数输入"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+    xmlns:converters="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:net="clr-namespace:Core.Net;assembly=Core">
+    <sap:ActivityDesigner.Resources>
+        <ResourceDictionary>
+            <converters:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+        </ResourceDictionary>
+    </sap:ActivityDesigner.Resources>
+    <StackPanel MaxWidth="230">
+
+
+        <Label Content="*内容："/>
+        <sapv:ExpressionTextBox 
+            OwnerActivity="{Binding Path=ModelItem}"
+            ExpressionType="system:String"
+            UseLocationExpression="False">
+            <sapv:ExpressionTextBox.Expression>
+                <Binding 
+                    Path="ModelItem.内容" 
+                    Mode="TwoWay" 
+                    Converter="{StaticResource ArgumentToExpressionConverter}"
+                    ConverterParameter="In" />
+            </sapv:ExpressionTextBox.Expression>
+        </sapv:ExpressionTextBox>
+
+        <Label Content="*MIME类型："/>
+        <sapv:ExpressionTextBox 
+            OwnerActivity="{Binding Path=ModelItem}"
+            ExpressionType="net:文件对应MIME类型"
+            UseLocationExpression="False">
+            <sapv:ExpressionTextBox.Expression>
+                <Binding 
+                    Path="ModelItem.MIME类型" 
+                    Mode="TwoWay" 
+                    Converter="{StaticResource ArgumentToExpressionConverter}"
+                    ConverterParameter="In" />
+            </sapv:ExpressionTextBox.Expression>
+        </sapv:ExpressionTextBox>
+
+
+    </StackPanel>
+</sap:ActivityDesigner>

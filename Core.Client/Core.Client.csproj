@@ -75,6 +75,7 @@
       <DependentUpon>内容输入.xaml</DependentUpon>
     </Compile>
     <Compile Include="WFActivity\发起HttpGet请求.cs" />
+    <Compile Include="WFActivity\发起HttpPost请求.cs" />
     <Compile Include="WFActivity\名称输入.xaml.cs">
       <DependentUpon>名称输入.xaml</DependentUpon>
     </Compile>
@@ -83,6 +84,10 @@
       <DependentUpon>整数笛卡尔坐标输入.xaml</DependentUpon>
     </Compile>
     <Compile Include="WFActivity\显示提示对话框.cs" />
+    <Compile Include="WFActivity\构建字符串形式的Http内容.cs" />
+    <Compile Include="WFActivity\构建字符串形式的Http内容参数输入.xaml.cs">
+      <DependentUpon>构建字符串形式的Http内容参数输入.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WFActivity\模拟单击按键.cs" />
     <Compile Include="WFActivity\模拟弹起按键.cs" />
     <Compile Include="WFActivity\模拟按下按键.cs" />
@@ -99,6 +104,9 @@
     </Compile>
     <Compile Include="WFActivity\窗口句柄输入.xaml.cs">
       <DependentUpon>窗口句柄输入.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WFActivity\网址及Http内容输入.xaml.cs">
+      <DependentUpon>网址及Http内容输入.xaml</DependentUpon>
     </Compile>
     <Compile Include="WFActivity\网址输入.xaml.cs">
       <DependentUpon>网址输入.xaml</DependentUpon>
@@ -147,11 +155,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WFActivity\构建字符串形式的Http内容参数输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WFActivity\正则表达式输入.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WFActivity\窗口句柄输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WFActivity\网址及Http内容输入.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

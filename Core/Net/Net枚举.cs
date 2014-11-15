@@ -1,2445 +1,2407 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace Core.Net
 {
     /// <summary>
-    /// 文件类型枚举，可以通过GetRemark扩展方法获取其对应的MIME类型。如存在多个MIME类型，则以逗号分隔。
+    /// 文件类型枚举，可以通过GetDescription扩展方法获取其对应的MIME类型。
     /// </summary>
-    public enum 文件类型
+    public enum 文件对应MIME类型
     {
 
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/3gpp
+        /// 扩展名.323的文件，对应ContentType(MIME)类型：text/h323
         /// </summary>
-        [Remark("video/3gpp")]
+        [Description("text/h323")]
+        _323,
+        /// <summary>
+        /// 扩展名.3gp的文件，对应ContentType(MIME)类型：video/3gpp
+        /// </summary>
+        [Description("video/3gpp")]
         _3gp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-authoware-bin
+        /// 扩展名.aab的文件，对应ContentType(MIME)类型：application/x-authoware-bin
         /// </summary>
-        [Remark("application/x-authoware-bin")]
+        [Description("application/x-authoware-bin")]
         _aab,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-authoware-map
+        /// 扩展名.aam的文件，对应ContentType(MIME)类型：application/x-authoware-map
         /// </summary>
-        [Remark("application/x-authoware-map")]
+        [Description("application/x-authoware-map")]
         _aam,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-authoware-seg
+        /// 扩展名.aas的文件，对应ContentType(MIME)类型：application/x-authoware-seg
         /// </summary>
-        [Remark("application/x-authoware-seg")]
+        [Description("application/x-authoware-seg")]
         _aas,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/postscript
+        /// 扩展名.acx的文件，对应ContentType(MIME)类型：application/internet-property-stream
         /// </summary>
-        [Remark("application/postscript")]
+        [Description("application/internet-property-stream")]
+        _acx,
+        /// <summary>
+        /// 扩展名.ai的文件，对应ContentType(MIME)类型：application/postscript
+        /// </summary>
+        [Description("application/postscript")]
         _ai,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-aiff
+        /// 扩展名.aif的文件，对应ContentType(MIME)类型：audio/x-aiff
         /// </summary>
-        [Remark("audio/x-aiff")]
+        [Description("audio/x-aiff")]
         _aif,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-aiff
+        /// 扩展名.aifc的文件，对应ContentType(MIME)类型：audio/x-aiff
         /// </summary>
-        [Remark("audio/x-aiff")]
+        [Description("audio/x-aiff")]
         _aifc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-aiff
+        /// 扩展名.aiff的文件，对应ContentType(MIME)类型：audio/x-aiff
         /// </summary>
-        [Remark("audio/x-aiff")]
+        [Description("audio/x-aiff")]
         _aiff,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/X-Alpha5
+        /// 扩展名.als的文件，对应ContentType(MIME)类型：audio/X-Alpha5
         /// </summary>
-        [Remark("audio/X-Alpha5")]
+        [Description("audio/X-Alpha5")]
         _als,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mpeg
+        /// 扩展名.amc的文件，对应ContentType(MIME)类型：application/x-mpeg
         /// </summary>
-        [Remark("application/x-mpeg")]
+        [Description("application/x-mpeg")]
         _amc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.ani的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _ani,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/plain
+        /// 扩展名.apk的文件，对应ContentType(MIME)类型：application/vnd.android.package-archive
         /// </summary>
-        [Remark("text/plain")]
+        [Description("application/vnd.android.package-archive")]
+        _apk,
+        /// <summary>
+        /// 扩展名.asc的文件，对应ContentType(MIME)类型：text/plain
+        /// </summary>
+        [Description("text/plain")]
         _asc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/astound
+        /// 扩展名.asd的文件，对应ContentType(MIME)类型：application/astound
         /// </summary>
-        [Remark("application/astound")]
+        [Description("application/astound")]
         _asd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-ms-asf
+        /// 扩展名.asf的文件，对应ContentType(MIME)类型：video/x-ms-asf
         /// </summary>
-        [Remark("video/x-ms-asf")]
+        [Description("video/x-ms-asf")]
         _asf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/astound
+        /// 扩展名.asn的文件，对应ContentType(MIME)类型：application/astound
         /// </summary>
-        [Remark("application/astound")]
+        [Description("application/astound")]
         _asn,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-asap
+        /// 扩展名.asp的文件，对应ContentType(MIME)类型：application/x-asap
         /// </summary>
-        [Remark("application/x-asap")]
+        [Description("application/x-asap")]
         _asp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-ms-asf
+        /// 扩展名.asr的文件，对应ContentType(MIME)类型：video/x-ms-asf
         /// </summary>
-        [Remark("video/x-ms-asf")]
+        [Description("video/x-ms-asf")]
+        _asr,
+        /// <summary>
+        /// 扩展名.asx的文件，对应ContentType(MIME)类型：video/x-ms-asf
+        /// </summary>
+        [Description("video/x-ms-asf")]
         _asx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/basic
+        /// 扩展名.au的文件，对应ContentType(MIME)类型：audio/basic
         /// </summary>
-        [Remark("audio/basic")]
+        [Description("audio/basic")]
         _au,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.avb的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _avb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-msvideo
+        /// 扩展名.avi的文件，对应ContentType(MIME)类型：video/x-msvideo
         /// </summary>
-        [Remark("video/x-msvideo")]
+        [Description("video/x-msvideo")]
         _avi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/amr-wb
+        /// 扩展名.awb的文件，对应ContentType(MIME)类型：audio/amr-wb
         /// </summary>
-        [Remark("audio/amr-wb")]
+        [Description("audio/amr-wb")]
         _awb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-bcpio
+        /// 扩展名.axs的文件，对应ContentType(MIME)类型：application/olescript
         /// </summary>
-        [Remark("application/x-bcpio")]
+        [Description("application/olescript")]
+        _axs,
+        /// <summary>
+        /// 扩展名.bas的文件，对应ContentType(MIME)类型：text/plain
+        /// </summary>
+        [Description("text/plain")]
+        _bas,
+        /// <summary>
+        /// 扩展名.bcpio的文件，对应ContentType(MIME)类型：application/x-bcpio
+        /// </summary>
+        [Description("application/x-bcpio")]
         _bcpio,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.bld的文件，对应ContentType(MIME)类型：application/bld
         /// </summary>
-        [Remark("application/octet-stream")]
-        _bin,
-
-        /// <summary>
-        /// 对应ContentType(MIME)类型：application/bld
-        /// </summary>
-        [Remark("application/bld")]
+        [Description("application/bld")]
         _bld,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/bld2
+        /// 扩展名.bld2的文件，对应ContentType(MIME)类型：application/bld2
         /// </summary>
-        [Remark("application/bld2")]
+        [Description("application/bld2")]
         _bld2,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-MS-bmp
+        /// 扩展名.bmp的文件，对应ContentType(MIME)类型：image/bmp
         /// </summary>
-        [Remark("application/x-MS-bmp")]
+        [Description("image/bmp")]
         _bmp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.bpk的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _bpk,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-bzip2
+        /// 扩展名.bz2的文件，对应ContentType(MIME)类型：application/x-bzip2
         /// </summary>
-        [Remark("application/x-bzip2")]
+        [Description("application/x-bzip2")]
         _bz2,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-cals
+        /// 扩展名.c的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("image/x-cals")]
+        [Description("text/plain")]
+        _c,
+        /// <summary>
+        /// 扩展名.cal的文件，对应ContentType(MIME)类型：image/x-cals
+        /// </summary>
+        [Description("image/x-cals")]
         _cal,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-cnc
+        /// 扩展名.cat的文件，对应ContentType(MIME)类型：application/vnd.ms-pkiseccat
         /// </summary>
-        [Remark("application/x-cnc")]
+        [Description("application/vnd.ms-pkiseccat")]
+        _cat,
+        /// <summary>
+        /// 扩展名.ccn的文件，对应ContentType(MIME)类型：application/x-cnc
+        /// </summary>
+        [Description("application/x-cnc")]
         _ccn,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-cocoa
+        /// 扩展名.cco的文件，对应ContentType(MIME)类型：application/x-cocoa
         /// </summary>
-        [Remark("application/x-cocoa")]
+        [Description("application/x-cocoa")]
         _cco,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-netcdf
+        /// 扩展名.cdf的文件，对应ContentType(MIME)类型：application/x-cdf
         /// </summary>
-        [Remark("application/x-netcdf")]
+        [Description("application/x-cdf")]
         _cdf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：magnus-internal/cgi
+        /// 扩展名.cer的文件，对应ContentType(MIME)类型：application/x-x509-ca-cert
         /// </summary>
-        [Remark("magnus-internal/cgi")]
+        [Description("application/x-x509-ca-cert")]
+        _cer,
+        /// <summary>
+        /// 扩展名.cgi的文件，对应ContentType(MIME)类型：magnus-internal/cgi
+        /// </summary>
+        [Description("magnus-internal/cgi")]
         _cgi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-chat
+        /// 扩展名.chat的文件，对应ContentType(MIME)类型：application/x-chat
         /// </summary>
-        [Remark("application/x-chat")]
+        [Description("application/x-chat")]
         _chat,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.class的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _class,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-msclip
+        /// 扩展名.clp的文件，对应ContentType(MIME)类型：application/x-msclip
         /// </summary>
-        [Remark("application/x-msclip")]
+        [Description("application/x-msclip")]
         _clp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-cmx
+        /// 扩展名.cmx的文件，对应ContentType(MIME)类型：image/x-cmx
         /// </summary>
-        [Remark("application/x-cmx")]
+        [Description("image/x-cmx")]
         _cmx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-cult3d-object
+        /// 扩展名.co的文件，对应ContentType(MIME)类型：application/x-cult3d-object
         /// </summary>
-        [Remark("application/x-cult3d-object")]
+        [Description("application/x-cult3d-object")]
         _co,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/cis-cod
+        /// 扩展名.cod的文件，对应ContentType(MIME)类型：image/cis-cod
         /// </summary>
-        [Remark("image/cis-cod")]
+        [Description("image/cis-cod")]
         _cod,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-cpio
+        /// 扩展名.conf的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("application/x-cpio")]
+        [Description("text/plain")]
+        _conf,
+        /// <summary>
+        /// 扩展名.cpio的文件，对应ContentType(MIME)类型：application/x-cpio
+        /// </summary>
+        [Description("application/x-cpio")]
         _cpio,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/mac-compactpro
+        /// 扩展名.cpp的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("application/mac-compactpro")]
+        [Description("text/plain")]
+        _cpp,
+        /// <summary>
+        /// 扩展名.cpt的文件，对应ContentType(MIME)类型：application/mac-compactpro
+        /// </summary>
+        [Description("application/mac-compactpro")]
         _cpt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mscardfile
+        /// 扩展名.crd的文件，对应ContentType(MIME)类型：application/x-mscardfile
         /// </summary>
-        [Remark("application/x-mscardfile")]
+        [Description("application/x-mscardfile")]
         _crd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-csh
+        /// 扩展名.crl的文件，对应ContentType(MIME)类型：application/pkix-crl
         /// </summary>
-        [Remark("application/x-csh")]
+        [Description("application/pkix-crl")]
+        _crl,
+        /// <summary>
+        /// 扩展名.crt的文件，对应ContentType(MIME)类型：application/x-x509-ca-cert
+        /// </summary>
+        [Description("application/x-x509-ca-cert")]
+        _crt,
+        /// <summary>
+        /// 扩展名.csh的文件，对应ContentType(MIME)类型：application/x-csh
+        /// </summary>
+        [Description("application/x-csh")]
         _csh,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-csml
+        /// 扩展名.csm的文件，对应ContentType(MIME)类型：chemical/x-csml
         /// </summary>
-        [Remark("chemical/x-csml")]
+        [Description("chemical/x-csml")]
         _csm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-csml
+        /// 扩展名.csml的文件，对应ContentType(MIME)类型：chemical/x-csml
         /// </summary>
-        [Remark("chemical/x-csml")]
+        [Description("chemical/x-csml")]
         _csml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/css
+        /// 扩展名.css的文件，对应ContentType(MIME)类型：text/css
         /// </summary>
-        [Remark("text/css")]
+        [Description("text/css")]
         _css,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.cur的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _cur,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-evm
+        /// 扩展名.dcm的文件，对应ContentType(MIME)类型：x-lml/x-evm
         /// </summary>
-        [Remark("x-lml/x-evm")]
+        [Description("x-lml/x-evm")]
         _dcm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-director
+        /// 扩展名.dcr的文件，对应ContentType(MIME)类型：application/x-director
         /// </summary>
-        [Remark("application/x-director")]
+        [Description("application/x-director")]
         _dcr,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-dcx
+        /// 扩展名.dcx的文件，对应ContentType(MIME)类型：image/x-dcx
         /// </summary>
-        [Remark("image/x-dcx")]
+        [Description("image/x-dcx")]
         _dcx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/html
+        /// 扩展名.der的文件，对应ContentType(MIME)类型：application/x-x509-ca-cert
         /// </summary>
-        [Remark("text/html")]
+        [Description("application/x-x509-ca-cert")]
+        _der,
+        /// <summary>
+        /// 扩展名.dhtml的文件，对应ContentType(MIME)类型：text/html
+        /// </summary>
+        [Description("text/html")]
         _dhtml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-director
+        /// 扩展名.dir的文件，对应ContentType(MIME)类型：application/x-director
         /// </summary>
-        [Remark("application/x-director")]
+        [Description("application/x-director")]
         _dir,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.dll的文件，对应ContentType(MIME)类型：application/x-msdownload
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/x-msdownload")]
         _dll,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.dmg的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _dmg,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.dms的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _dms,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/msword
+        /// 扩展名.doc的文件，对应ContentType(MIME)类型：application/msword
         /// </summary>
-        [Remark("application/msword")]
+        [Description("application/msword")]
         _doc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-dot
+        /// 扩展名.docx的文件，对应ContentType(MIME)类型：application/vnd.openxmlformats-officedocument.wordprocessingml.document
         /// </summary>
-        [Remark("application/x-dot")]
+        [Description("application/vnd.openxmlformats-officedocument.wordprocessingml.document")]
+        _docx,
+        /// <summary>
+        /// 扩展名.dot的文件，对应ContentType(MIME)类型：application/msword
+        /// </summary>
+        [Description("application/msword")]
         _dot,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-dvi
+        /// 扩展名.dvi的文件，对应ContentType(MIME)类型：application/x-dvi
         /// </summary>
-        [Remark("application/x-dvi")]
+        [Description("application/x-dvi")]
         _dvi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：drawing/x-dwf
+        /// 扩展名.dwf的文件，对应ContentType(MIME)类型：drawing/x-dwf
         /// </summary>
-        [Remark("drawing/x-dwf")]
+        [Description("drawing/x-dwf")]
         _dwf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-autocad
+        /// 扩展名.dwg的文件，对应ContentType(MIME)类型：application/x-autocad
         /// </summary>
-        [Remark("application/x-autocad")]
+        [Description("application/x-autocad")]
         _dwg,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-autocad
+        /// 扩展名.dxf的文件，对应ContentType(MIME)类型：application/x-autocad
         /// </summary>
-        [Remark("application/x-autocad")]
+        [Description("application/x-autocad")]
         _dxf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-director
+        /// 扩展名.dxr的文件，对应ContentType(MIME)类型：application/x-director
         /// </summary>
-        [Remark("application/x-director")]
+        [Description("application/x-director")]
         _dxr,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-expandedbook
+        /// 扩展名.ebk的文件，对应ContentType(MIME)类型：application/x-expandedbook
         /// </summary>
-        [Remark("application/x-expandedbook")]
+        [Description("application/x-expandedbook")]
         _ebk,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-embl-dl-nucleotide
+        /// 扩展名.emb的文件，对应ContentType(MIME)类型：chemical/x-embl-dl-nucleotide
         /// </summary>
-        [Remark("chemical/x-embl-dl-nucleotide")]
+        [Description("chemical/x-embl-dl-nucleotide")]
         _emb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-embl-dl-nucleotide
+        /// 扩展名.embl的文件，对应ContentType(MIME)类型：chemical/x-embl-dl-nucleotide
         /// </summary>
-        [Remark("chemical/x-embl-dl-nucleotide")]
+        [Description("chemical/x-embl-dl-nucleotide")]
         _embl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/postscript
+        /// 扩展名.eps的文件，对应ContentType(MIME)类型：application/postscript
         /// </summary>
-        [Remark("application/postscript")]
+        [Description("application/postscript")]
         _eps,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-eri
+        /// 扩展名.epub的文件，对应ContentType(MIME)类型：application/epub+zip
         /// </summary>
-        [Remark("image/x-eri")]
+        [Description("application/epub+zip")]
+        _epub,
+        /// <summary>
+        /// 扩展名.eri的文件，对应ContentType(MIME)类型：image/x-eri
+        /// </summary>
+        [Description("image/x-eri")]
         _eri,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/echospeech
+        /// 扩展名.es的文件，对应ContentType(MIME)类型：audio/echospeech
         /// </summary>
-        [Remark("audio/echospeech")]
+        [Description("audio/echospeech")]
         _es,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/echospeech
+        /// 扩展名.esl的文件，对应ContentType(MIME)类型：audio/echospeech
         /// </summary>
-        [Remark("audio/echospeech")]
+        [Description("audio/echospeech")]
         _esl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-earthtime
+        /// 扩展名.etc的文件，对应ContentType(MIME)类型：application/x-earthtime
         /// </summary>
-        [Remark("application/x-earthtime")]
+        [Description("application/x-earthtime")]
         _etc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-setext
+        /// 扩展名.etx的文件，对应ContentType(MIME)类型：text/x-setext
         /// </summary>
-        [Remark("text/x-setext")]
+        [Description("text/x-setext")]
         _etx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-evm
+        /// 扩展名.evm的文件，对应ContentType(MIME)类型：x-lml/x-evm
         /// </summary>
-        [Remark("x-lml/x-evm")]
+        [Description("x-lml/x-evm")]
         _evm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-envoy
+        /// 扩展名.evy的文件，对应ContentType(MIME)类型：application/envoy
         /// </summary>
-        [Remark("application/x-envoy")]
+        [Description("application/envoy")]
         _evy,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.exe的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _exe,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-freehand
+        /// 扩展名.fh4的文件，对应ContentType(MIME)类型：image/x-freehand
         /// </summary>
-        [Remark("image/x-freehand")]
+        [Description("image/x-freehand")]
         _fh4,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-freehand
+        /// 扩展名.fh5的文件，对应ContentType(MIME)类型：image/x-freehand
         /// </summary>
-        [Remark("image/x-freehand")]
+        [Description("image/x-freehand")]
         _fh5,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-freehand
+        /// 扩展名.fhc的文件，对应ContentType(MIME)类型：image/x-freehand
         /// </summary>
-        [Remark("image/x-freehand")]
+        [Description("image/x-freehand")]
         _fhc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/fif
+        /// 扩展名.fif的文件，对应ContentType(MIME)类型：application/fractals
         /// </summary>
-        [Remark("image/fif")]
+        [Description("application/fractals")]
         _fif,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-maker
+        /// 扩展名.flr的文件，对应ContentType(MIME)类型：x-world/x-vrml
         /// </summary>
-        [Remark("application/x-maker")]
+        [Description("x-world/x-vrml")]
+        _flr,
+        /// <summary>
+        /// 扩展名.flv的文件，对应ContentType(MIME)类型：flv-application/octet-stream
+        /// </summary>
+        [Description("flv-application/octet-stream")]
+        _flv,
+        /// <summary>
+        /// 扩展名.fm的文件，对应ContentType(MIME)类型：application/x-maker
+        /// </summary>
+        [Description("application/x-maker")]
         _fm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-fpx
+        /// 扩展名.fpx的文件，对应ContentType(MIME)类型：image/x-fpx
         /// </summary>
-        [Remark("image/x-fpx")]
+        [Description("image/x-fpx")]
         _fpx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/isivideo
+        /// 扩展名.fvi的文件，对应ContentType(MIME)类型：video/isivideo
         /// </summary>
-        [Remark("video/isivideo")]
+        [Description("video/isivideo")]
         _fvi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-gaussian-input
+        /// 扩展名.gau的文件，对应ContentType(MIME)类型：chemical/x-gaussian-input
         /// </summary>
-        [Remark("chemical/x-gaussian-input")]
+        [Description("chemical/x-gaussian-input")]
         _gau,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-gca-compressed
+        /// 扩展名.gca的文件，对应ContentType(MIME)类型：application/x-gca-compressed
         /// </summary>
-        [Remark("application/x-gca-compressed")]
+        [Description("application/x-gca-compressed")]
         _gca,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-gdb
+        /// 扩展名.gdb的文件，对应ContentType(MIME)类型：x-lml/x-gdb
         /// </summary>
-        [Remark("x-lml/x-gdb")]
+        [Description("x-lml/x-gdb")]
         _gdb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/gif
+        /// 扩展名.gif的文件，对应ContentType(MIME)类型：image/gif
         /// </summary>
-        [Remark("image/gif")]
+        [Description("image/gif")]
         _gif,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-gps
+        /// 扩展名.gps的文件，对应ContentType(MIME)类型：application/x-gps
         /// </summary>
-        [Remark("application/x-gps")]
+        [Description("application/x-gps")]
         _gps,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-gtar
+        /// 扩展名.gtar的文件，对应ContentType(MIME)类型：application/x-gtar
         /// </summary>
-        [Remark("application/x-gtar")]
+        [Description("application/x-gtar")]
         _gtar,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-gzip
+        /// 扩展名.gz的文件，对应ContentType(MIME)类型：application/x-gzip
         /// </summary>
-        [Remark("application/x-gzip")]
+        [Description("application/x-gzip")]
         _gz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-hdf
+        /// 扩展名.h的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("application/x-hdf")]
+        [Description("text/plain")]
+        _h,
+        /// <summary>
+        /// 扩展名.hdf的文件，对应ContentType(MIME)类型：application/x-hdf
+        /// </summary>
+        [Description("application/x-hdf")]
         _hdf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-hdml
+        /// 扩展名.hdm的文件，对应ContentType(MIME)类型：text/x-hdml
         /// </summary>
-        [Remark("text/x-hdml")]
+        [Description("text/x-hdml")]
         _hdm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-hdml
+        /// 扩展名.hdml的文件，对应ContentType(MIME)类型：text/x-hdml
         /// </summary>
-        [Remark("text/x-hdml")]
+        [Description("text/x-hdml")]
         _hdml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/winhlp
+        /// 扩展名.hlp的文件，对应ContentType(MIME)类型：application/winhlp
         /// </summary>
-        [Remark("application/winhlp")]
+        [Description("application/winhlp")]
         _hlp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/mac-binhex40
+        /// 扩展名.hqx的文件，对应ContentType(MIME)类型：application/mac-binhex40
         /// </summary>
-        [Remark("application/mac-binhex40")]
+        [Description("application/mac-binhex40")]
         _hqx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/html
+        /// 扩展名.hta的文件，对应ContentType(MIME)类型：application/hta
         /// </summary>
-        [Remark("text/html")]
+        [Description("application/hta")]
+        _hta,
+        /// <summary>
+        /// 扩展名.htc的文件，对应ContentType(MIME)类型：text/x-component
+        /// </summary>
+        [Description("text/x-component")]
+        _htc,
+        /// <summary>
+        /// 扩展名.htm的文件，对应ContentType(MIME)类型：text/html
+        /// </summary>
+        [Description("text/html")]
         _htm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/html
+        /// 扩展名.html的文件，对应ContentType(MIME)类型：text/html
         /// </summary>
-        [Remark("text/html")]
+        [Description("text/html")]
         _html,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/html
+        /// 扩展名.hts的文件，对应ContentType(MIME)类型：text/html
         /// </summary>
-        [Remark("text/html")]
+        [Description("text/html")]
         _hts,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-conference/x-cooltalk
+        /// 扩展名.htt的文件，对应ContentType(MIME)类型：text/webviewhtml
         /// </summary>
-        [Remark("x-conference/x-cooltalk")]
+        [Description("text/webviewhtml")]
+        _htt,
+        /// <summary>
+        /// 扩展名.ice的文件，对应ContentType(MIME)类型：x-conference/x-cooltalk
+        /// </summary>
+        [Description("x-conference/x-cooltalk")]
         _ice,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.ico的文件，对应ContentType(MIME)类型：image/x-icon
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("image/x-icon")]
         _ico,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/ief
+        /// 扩展名.ief的文件，对应ContentType(MIME)类型：image/ief
         /// </summary>
-        [Remark("image/ief")]
+        [Description("image/ief")]
         _ief,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/gif
+        /// 扩展名.ifm的文件，对应ContentType(MIME)类型：image/gif
         /// </summary>
-        [Remark("image/gif")]
+        [Description("image/gif")]
         _ifm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/ifs
+        /// 扩展名.ifs的文件，对应ContentType(MIME)类型：image/ifs
         /// </summary>
-        [Remark("image/ifs")]
+        [Description("image/ifs")]
         _ifs,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/melody
+        /// 扩展名.iii的文件，对应ContentType(MIME)类型：application/x-iphone
         /// </summary>
-        [Remark("audio/melody")]
+        [Description("application/x-iphone")]
+        _iii,
+        /// <summary>
+        /// 扩展名.imy的文件，对应ContentType(MIME)类型：audio/melody
+        /// </summary>
+        [Description("audio/melody")]
         _imy,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-NET-Install
+        /// 扩展名.ins的文件，对应ContentType(MIME)类型：application/x-internet-signup
         /// </summary>
-        [Remark("application/x-NET-Install")]
+        [Description("application/x-internet-signup")]
         _ins,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-ipscript
+        /// 扩展名.ips的文件，对应ContentType(MIME)类型：application/x-ipscript
         /// </summary>
-        [Remark("application/x-ipscript")]
+        [Description("application/x-ipscript")]
         _ips,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-ipix
+        /// 扩展名.ipx的文件，对应ContentType(MIME)类型：application/x-ipix
         /// </summary>
-        [Remark("application/x-ipix")]
+        [Description("application/x-ipix")]
         _ipx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.isp的文件，对应ContentType(MIME)类型：application/x-internet-signup
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("application/x-internet-signup")]
+        _isp,
+        /// <summary>
+        /// 扩展名.it的文件，对应ContentType(MIME)类型：audio/x-mod
+        /// </summary>
+        [Description("audio/x-mod")]
         _it,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.itz的文件，对应ContentType(MIME)类型：audio/x-mod
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("audio/x-mod")]
         _itz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：i-world/i-vrml
+        /// 扩展名.ivr的文件，对应ContentType(MIME)类型：i-world/i-vrml
         /// </summary>
-        [Remark("i-world/i-vrml")]
+        [Description("i-world/i-vrml")]
         _ivr,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/j2k
+        /// 扩展名.j2k的文件，对应ContentType(MIME)类型：image/j2k
         /// </summary>
-        [Remark("image/j2k")]
+        [Description("image/j2k")]
         _j2k,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/vnd.sun.j2me.app-descriptor
+        /// 扩展名.jad的文件，对应ContentType(MIME)类型：text/vnd.sun.j2me.app-descriptor
         /// </summary>
-        [Remark("text/vnd.sun.j2me.app-descriptor")]
+        [Description("text/vnd.sun.j2me.app-descriptor")]
         _jad,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-jam
+        /// 扩展名.jam的文件，对应ContentType(MIME)类型：application/x-jam
         /// </summary>
-        [Remark("application/x-jam")]
+        [Description("application/x-jam")]
         _jam,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/java-archive
+        /// 扩展名.jar的文件，对应ContentType(MIME)类型：application/java-archive
         /// </summary>
-        [Remark("application/java-archive")]
+        [Description("application/java-archive")]
         _jar,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-java-jnlp-file
+        /// 扩展名.java的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("application/x-java-jnlp-file")]
+        [Description("text/plain")]
+        _java,
+        /// <summary>
+        /// 扩展名.jfif的文件，对应ContentType(MIME)类型：image/pipeg
+        /// </summary>
+        [Description("image/pipeg")]
+        _jfif,
+        /// <summary>
+        /// 扩展名.jnlp的文件，对应ContentType(MIME)类型：application/x-java-jnlp-file
+        /// </summary>
+        [Description("application/x-java-jnlp-file")]
         _jnlp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/jpeg
+        /// 扩展名.jpe的文件，对应ContentType(MIME)类型：image/jpeg
         /// </summary>
-        [Remark("image/jpeg")]
+        [Description("image/jpeg")]
         _jpe,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/jpeg
+        /// 扩展名.jpeg的文件，对应ContentType(MIME)类型：image/jpeg
         /// </summary>
-        [Remark("image/jpeg")]
+        [Description("image/jpeg")]
         _jpeg,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/jpeg
+        /// 扩展名.jpg的文件，对应ContentType(MIME)类型：image/jpeg
         /// </summary>
-        [Remark("image/jpeg")]
+        [Description("image/jpeg")]
         _jpg,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/jpeg
+        /// 扩展名.jpz的文件，对应ContentType(MIME)类型：image/jpeg
         /// </summary>
-        [Remark("image/jpeg")]
+        [Description("image/jpeg")]
         _jpz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-javascript
+        /// 扩展名.js的文件，对应ContentType(MIME)类型：application/x-javascript
         /// </summary>
-        [Remark("application/x-javascript")]
+        [Description("application/x-javascript")]
         _js,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/jwc
+        /// 扩展名.jwc的文件，对应ContentType(MIME)类型：application/jwc
         /// </summary>
-        [Remark("application/jwc")]
+        [Description("application/jwc")]
         _jwc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-kjx
+        /// 扩展名.kjx的文件，对应ContentType(MIME)类型：application/x-kjx
         /// </summary>
-        [Remark("application/x-kjx")]
+        [Description("application/x-kjx")]
         _kjx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-lak
+        /// 扩展名.lak的文件，对应ContentType(MIME)类型：x-lml/x-lak
         /// </summary>
-        [Remark("x-lml/x-lak")]
+        [Description("x-lml/x-lak")]
         _lak,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-latex
+        /// 扩展名.latex的文件，对应ContentType(MIME)类型：application/x-latex
         /// </summary>
-        [Remark("application/x-latex")]
+        [Description("application/x-latex")]
         _latex,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/fastman
+        /// 扩展名.lcc的文件，对应ContentType(MIME)类型：application/fastman
         /// </summary>
-        [Remark("application/fastman")]
+        [Description("application/fastman")]
         _lcc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-digitalloca
+        /// 扩展名.lcl的文件，对应ContentType(MIME)类型：application/x-digitalloca
         /// </summary>
-        [Remark("application/x-digitalloca")]
+        [Description("application/x-digitalloca")]
         _lcl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-digitalloca
+        /// 扩展名.lcr的文件，对应ContentType(MIME)类型：application/x-digitalloca
         /// </summary>
-        [Remark("application/x-digitalloca")]
+        [Description("application/x-digitalloca")]
         _lcr,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/lgh
+        /// 扩展名.lgh的文件，对应ContentType(MIME)类型：application/lgh
         /// </summary>
-        [Remark("application/lgh")]
+        [Description("application/lgh")]
         _lgh,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.lha的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _lha,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-lml
+        /// 扩展名.lml的文件，对应ContentType(MIME)类型：x-lml/x-lml
         /// </summary>
-        [Remark("x-lml/x-lml")]
+        [Description("x-lml/x-lml")]
         _lml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-lmlpack
+        /// 扩展名.lmlpack的文件，对应ContentType(MIME)类型：x-lml/x-lmlpack
         /// </summary>
-        [Remark("x-lml/x-lmlpack")]
+        [Description("x-lml/x-lmlpack")]
         _lmlpack,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-ms-asf
+        /// 扩展名.log的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("video/x-ms-asf")]
+        [Description("text/plain")]
+        _log,
+        /// <summary>
+        /// 扩展名.lsf的文件，对应ContentType(MIME)类型：video/x-la-asf
+        /// </summary>
+        [Description("video/x-la-asf")]
         _lsf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-ms-asf
+        /// 扩展名.lsx的文件，对应ContentType(MIME)类型：video/x-la-asf
         /// </summary>
-        [Remark("video/x-ms-asf")]
+        [Description("video/x-la-asf")]
         _lsx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-lzh
+        /// 扩展名.lzh的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/x-lzh")]
+        [Description("application/octet-stream")]
         _lzh,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-msmediaview
+        /// 扩展名.m13的文件，对应ContentType(MIME)类型：application/x-msmediaview
         /// </summary>
-        [Remark("application/x-msmediaview")]
+        [Description("application/x-msmediaview")]
         _m13,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-msmediaview
+        /// 扩展名.m14的文件，对应ContentType(MIME)类型：application/x-msmediaview
         /// </summary>
-        [Remark("application/x-msmediaview")]
+        [Description("application/x-msmediaview")]
         _m14,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.m15的文件，对应ContentType(MIME)类型：audio/x-mod
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("audio/x-mod")]
         _m15,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mpegurl
+        /// 扩展名.m3u的文件，对应ContentType(MIME)类型：audio/x-mpegurl
         /// </summary>
-        [Remark("audio/x-mpegurl")]
+        [Description("audio/x-mpegurl")]
         _m3u,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mpegurl
+        /// 扩展名.m3url的文件，对应ContentType(MIME)类型：audio/x-mpegurl
         /// </summary>
-        [Remark("audio/x-mpegurl")]
+        [Description("audio/x-mpegurl")]
         _m3url,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/ma1
+        /// 扩展名.m4a的文件，对应ContentType(MIME)类型：audio/mp4a-latm
         /// </summary>
-        [Remark("audio/ma1")]
+        [Description("audio/mp4a-latm")]
+        _m4a,
+        /// <summary>
+        /// 扩展名.m4b的文件，对应ContentType(MIME)类型：audio/mp4a-latm
+        /// </summary>
+        [Description("audio/mp4a-latm")]
+        _m4b,
+        /// <summary>
+        /// 扩展名.m4p的文件，对应ContentType(MIME)类型：audio/mp4a-latm
+        /// </summary>
+        [Description("audio/mp4a-latm")]
+        _m4p,
+        /// <summary>
+        /// 扩展名.m4u的文件，对应ContentType(MIME)类型：video/vnd.mpegurl
+        /// </summary>
+        [Description("video/vnd.mpegurl")]
+        _m4u,
+        /// <summary>
+        /// 扩展名.m4v的文件，对应ContentType(MIME)类型：video/x-m4v
+        /// </summary>
+        [Description("video/x-m4v")]
+        _m4v,
+        /// <summary>
+        /// 扩展名.ma1的文件，对应ContentType(MIME)类型：audio/ma1
+        /// </summary>
+        [Description("audio/ma1")]
         _ma1,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/ma2
+        /// 扩展名.ma2的文件，对应ContentType(MIME)类型：audio/ma2
         /// </summary>
-        [Remark("audio/ma2")]
+        [Description("audio/ma2")]
         _ma2,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/ma3
+        /// 扩展名.ma3的文件，对应ContentType(MIME)类型：audio/ma3
         /// </summary>
-        [Remark("audio/ma3")]
+        [Description("audio/ma3")]
         _ma3,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/ma5
+        /// 扩展名.ma5的文件，对应ContentType(MIME)类型：audio/ma5
         /// </summary>
-        [Remark("audio/ma5")]
+        [Description("audio/ma5")]
         _ma5,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-troff-man
+        /// 扩展名.man的文件，对应ContentType(MIME)类型：application/x-troff-man
         /// </summary>
-        [Remark("application/x-troff-man")]
+        [Description("application/x-troff-man")]
         _man,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：magnus-internal/imagemap
+        /// 扩展名.map的文件，对应ContentType(MIME)类型：magnus-internal/imagemap
         /// </summary>
-        [Remark("magnus-internal/imagemap")]
+        [Description("magnus-internal/imagemap")]
         _map,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/mbedlet
+        /// 扩展名.mbd的文件，对应ContentType(MIME)类型：application/mbedlet
         /// </summary>
-        [Remark("application/mbedlet")]
+        [Description("application/mbedlet")]
         _mbd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mascot
+        /// 扩展名.mct的文件，对应ContentType(MIME)类型：application/x-mascot
         /// </summary>
-        [Remark("application/x-mascot")]
+        [Description("application/x-mascot")]
         _mct,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-msaccess
+        /// 扩展名.mdb的文件，对应ContentType(MIME)类型：application/x-msaccess
         /// </summary>
-        [Remark("application/x-msaccess")]
+        [Description("application/x-msaccess")]
         _mdb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.mdz的文件，对应ContentType(MIME)类型：audio/x-mod
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("audio/x-mod")]
         _mdz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-troff-me
+        /// 扩展名.me的文件，对应ContentType(MIME)类型：application/x-troff-me
         /// </summary>
-        [Remark("application/x-troff-me")]
+        [Description("application/x-troff-me")]
         _me,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-vmel
+        /// 扩展名.mel的文件，对应ContentType(MIME)类型：text/x-vmel
         /// </summary>
-        [Remark("text/x-vmel")]
+        [Description("text/x-vmel")]
         _mel,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mif
+        /// 扩展名.mht的文件，对应ContentType(MIME)类型：message/rfc822
         /// </summary>
-        [Remark("application/x-mif")]
+        [Description("message/rfc822")]
+        _mht,
+        /// <summary>
+        /// 扩展名.mhtml的文件，对应ContentType(MIME)类型：message/rfc822
+        /// </summary>
+        [Description("message/rfc822")]
+        _mhtml,
+        /// <summary>
+        /// 扩展名.mi的文件，对应ContentType(MIME)类型：application/x-mif
+        /// </summary>
+        [Description("application/x-mif")]
         _mi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/midi
+        /// 扩展名.mid的文件，对应ContentType(MIME)类型：audio/mid
         /// </summary>
-        [Remark("audio/midi")]
+        [Description("audio/mid")]
         _mid,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/midi
+        /// 扩展名.midi的文件，对应ContentType(MIME)类型：audio/midi
         /// </summary>
-        [Remark("audio/midi")]
+        [Description("audio/midi")]
         _midi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mif
+        /// 扩展名.mif的文件，对应ContentType(MIME)类型：application/x-mif
         /// </summary>
-        [Remark("application/x-mif")]
+        [Description("application/x-mif")]
         _mif,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-cals
+        /// 扩展名.mil的文件，对应ContentType(MIME)类型：image/x-cals
         /// </summary>
-        [Remark("image/x-cals")]
+        [Description("image/x-cals")]
         _mil,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mio
+        /// 扩展名.mio的文件，对应ContentType(MIME)类型：audio/x-mio
         /// </summary>
-        [Remark("audio/x-mio")]
+        [Description("audio/x-mio")]
         _mio,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-skt-lbs
+        /// 扩展名.mmf的文件，对应ContentType(MIME)类型：application/x-skt-lbs
         /// </summary>
-        [Remark("application/x-skt-lbs")]
+        [Description("application/x-skt-lbs")]
         _mmf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-mng
+        /// 扩展名.mng的文件，对应ContentType(MIME)类型：video/x-mng
         /// </summary>
-        [Remark("video/x-mng")]
+        [Description("video/x-mng")]
         _mng,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-msmoney
+        /// 扩展名.mny的文件，对应ContentType(MIME)类型：application/x-msmoney
         /// </summary>
-        [Remark("application/x-msmoney")]
+        [Description("application/x-msmoney")]
         _mny,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mocha
+        /// 扩展名.moc的文件，对应ContentType(MIME)类型：application/x-mocha
         /// </summary>
-        [Remark("application/x-mocha")]
+        [Description("application/x-mocha")]
         _moc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mocha
+        /// 扩展名.mocha的文件，对应ContentType(MIME)类型：application/x-mocha
         /// </summary>
-        [Remark("application/x-mocha")]
+        [Description("application/x-mocha")]
         _mocha,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.mod的文件，对应ContentType(MIME)类型：audio/x-mod
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("audio/x-mod")]
         _mod,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-yumekara
+        /// 扩展名.mof的文件，对应ContentType(MIME)类型：application/x-yumekara
         /// </summary>
-        [Remark("application/x-yumekara")]
+        [Description("application/x-yumekara")]
         _mof,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-mdl-molfile
+        /// 扩展名.mol的文件，对应ContentType(MIME)类型：chemical/x-mdl-molfile
         /// </summary>
-        [Remark("chemical/x-mdl-molfile")]
+        [Description("chemical/x-mdl-molfile")]
         _mol,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-mopac-input
+        /// 扩展名.mop的文件，对应ContentType(MIME)类型：chemical/x-mopac-input
         /// </summary>
-        [Remark("chemical/x-mopac-input")]
+        [Description("chemical/x-mopac-input")]
         _mop,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/quicktime
+        /// 扩展名.mov的文件，对应ContentType(MIME)类型：video/quicktime
         /// </summary>
-        [Remark("video/quicktime")]
+        [Description("video/quicktime")]
         _mov,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-sgi-movie
+        /// 扩展名.movie的文件，对应ContentType(MIME)类型：video/x-sgi-movie
         /// </summary>
-        [Remark("video/x-sgi-movie")]
+        [Description("video/x-sgi-movie")]
         _movie,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mpeg
+        /// 扩展名.mp2的文件，对应ContentType(MIME)类型：video/mpeg
         /// </summary>
-        [Remark("audio/x-mpeg")]
+        [Description("video/mpeg")]
         _mp2,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mpeg
+        /// 扩展名.mp3的文件，对应ContentType(MIME)类型：audio/mpeg
         /// </summary>
-        [Remark("audio/x-mpeg")]
+        [Description("audio/mpeg")]
         _mp3,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/mp4
+        /// 扩展名.mp4的文件，对应ContentType(MIME)类型：video/mp4
         /// </summary>
-        [Remark("video/mp4")]
+        [Description("video/mp4")]
         _mp4,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.mpohun.certificate
+        /// 扩展名.mpa的文件，对应ContentType(MIME)类型：video/mpeg
         /// </summary>
-        [Remark("application/vnd.mpohun.certificate")]
+        [Description("video/mpeg")]
+        _mpa,
+        /// <summary>
+        /// 扩展名.mpc的文件，对应ContentType(MIME)类型：application/vnd.mpohun.certificate
+        /// </summary>
+        [Description("application/vnd.mpohun.certificate")]
         _mpc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/mpeg
+        /// 扩展名.mpe的文件，对应ContentType(MIME)类型：video/mpeg
         /// </summary>
-        [Remark("video/mpeg")]
+        [Description("video/mpeg")]
         _mpe,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/mpeg
+        /// 扩展名.mpeg的文件，对应ContentType(MIME)类型：video/mpeg
         /// </summary>
-        [Remark("video/mpeg")]
+        [Description("video/mpeg")]
         _mpeg,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/mpeg
+        /// 扩展名.mpg的文件，对应ContentType(MIME)类型：video/mpeg
         /// </summary>
-        [Remark("video/mpeg")]
+        [Description("video/mpeg")]
         _mpg,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/mp4
+        /// 扩展名.mpg4的文件，对应ContentType(MIME)类型：video/mp4
         /// </summary>
-        [Remark("video/mp4")]
+        [Description("video/mp4")]
         _mpg4,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/mpeg
+        /// 扩展名.mpga的文件，对应ContentType(MIME)类型：audio/mpeg
         /// </summary>
-        [Remark("audio/mpeg")]
+        [Description("audio/mpeg")]
         _mpga,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.mophun.application
+        /// 扩展名.mpn的文件，对应ContentType(MIME)类型：application/vnd.mophun.application
         /// </summary>
-        [Remark("application/vnd.mophun.application")]
+        [Description("application/vnd.mophun.application")]
         _mpn,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-project
+        /// 扩展名.mpp的文件，对应ContentType(MIME)类型：application/vnd.ms-project
         /// </summary>
-        [Remark("application/vnd.ms-project")]
+        [Description("application/vnd.ms-project")]
         _mpp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mapserver
+        /// 扩展名.mps的文件，对应ContentType(MIME)类型：application/x-mapserver
         /// </summary>
-        [Remark("application/x-mapserver")]
+        [Description("application/x-mapserver")]
         _mps,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-mrml
+        /// 扩展名.mpv2的文件，对应ContentType(MIME)类型：video/mpeg
         /// </summary>
-        [Remark("text/x-mrml")]
+        [Description("video/mpeg")]
+        _mpv2,
+        /// <summary>
+        /// 扩展名.mrl的文件，对应ContentType(MIME)类型：text/x-mrml
+        /// </summary>
+        [Description("text/x-mrml")]
         _mrl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mrm
+        /// 扩展名.mrm的文件，对应ContentType(MIME)类型：application/x-mrm
         /// </summary>
-        [Remark("application/x-mrm")]
+        [Description("application/x-mrm")]
         _mrm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-troff-ms
+        /// 扩展名.ms的文件，对应ContentType(MIME)类型：application/x-troff-ms
         /// </summary>
-        [Remark("application/x-troff-ms")]
+        [Description("application/x-troff-ms")]
         _ms,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/metastream
+        /// 扩展名.msg的文件，对应ContentType(MIME)类型：application/vnd.ms-outlook
         /// </summary>
-        [Remark("application/metastream")]
+        [Description("application/vnd.ms-outlook")]
+        _msg,
+        /// <summary>
+        /// 扩展名.mts的文件，对应ContentType(MIME)类型：application/metastream
+        /// </summary>
+        [Description("application/metastream")]
         _mts,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/metastream
+        /// 扩展名.mtx的文件，对应ContentType(MIME)类型：application/metastream
         /// </summary>
-        [Remark("application/metastream")]
+        [Description("application/metastream")]
         _mtx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/metastream
+        /// 扩展名.mtz的文件，对应ContentType(MIME)类型：application/metastream
         /// </summary>
-        [Remark("application/metastream")]
+        [Description("application/metastream")]
         _mtz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/metastream
+        /// 扩展名.mvb的文件，对应ContentType(MIME)类型：application/x-msmediaview
         /// </summary>
-        [Remark("application/metastream")]
+        [Description("application/x-msmediaview")]
+        _mvb,
+        /// <summary>
+        /// 扩展名.mzv的文件，对应ContentType(MIME)类型：application/metastream
+        /// </summary>
+        [Description("application/metastream")]
         _mzv,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/zip
+        /// 扩展名.nar的文件，对应ContentType(MIME)类型：application/zip
         /// </summary>
-        [Remark("application/zip")]
+        [Description("application/zip")]
         _nar,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/nbmp
+        /// 扩展名.nbmp的文件，对应ContentType(MIME)类型：image/nbmp
         /// </summary>
-        [Remark("image/nbmp")]
+        [Description("image/nbmp")]
         _nbmp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-netcdf
+        /// 扩展名.nc的文件，对应ContentType(MIME)类型：application/x-netcdf
         /// </summary>
-        [Remark("application/x-netcdf")]
+        [Description("application/x-netcdf")]
         _nc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-ndb
+        /// 扩展名.ndb的文件，对应ContentType(MIME)类型：x-lml/x-ndb
         /// </summary>
-        [Remark("x-lml/x-ndb")]
+        [Description("x-lml/x-ndb")]
         _ndb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/ndwn
+        /// 扩展名.ndwn的文件，对应ContentType(MIME)类型：application/ndwn
         /// </summary>
-        [Remark("application/ndwn")]
+        [Description("application/ndwn")]
         _ndwn,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-nif
+        /// 扩展名.nif的文件，对应ContentType(MIME)类型：application/x-nif
         /// </summary>
-        [Remark("application/x-nif")]
+        [Description("application/x-nif")]
         _nif,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-scream
+        /// 扩展名.nmz的文件，对应ContentType(MIME)类型：application/x-scream
         /// </summary>
-        [Remark("application/x-scream")]
+        [Description("application/x-scream")]
         _nmz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-netfpx
+        /// 扩展名.npx的文件，对应ContentType(MIME)类型：application/x-netfpx
         /// </summary>
-        [Remark("application/x-netfpx")]
+        [Description("application/x-netfpx")]
         _npx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/nsnd
+        /// 扩展名.nsnd的文件，对应ContentType(MIME)类型：audio/nsnd
         /// </summary>
-        [Remark("audio/nsnd")]
+        [Description("audio/nsnd")]
         _nsnd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-neva1
+        /// 扩展名.nva的文件，对应ContentType(MIME)类型：application/x-neva1
         /// </summary>
-        [Remark("application/x-neva1")]
+        [Description("application/x-neva1")]
         _nva,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/oda
+        /// 扩展名.nws的文件，对应ContentType(MIME)类型：message/rfc822
         /// </summary>
-        [Remark("application/oda")]
+        [Description("message/rfc822")]
+        _nws,
+        /// <summary>
+        /// 扩展名.oda的文件，对应ContentType(MIME)类型：application/oda
+        /// </summary>
+        [Description("application/oda")]
         _oda,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-AtlasMate-Plugin
+        /// 扩展名.ogg的文件，对应ContentType(MIME)类型：audio/ogg
         /// </summary>
-        [Remark("application/x-AtlasMate-Plugin")]
+        [Description("audio/ogg")]
+        _ogg,
+        /// <summary>
+        /// 扩展名.oom的文件，对应ContentType(MIME)类型：application/x-AtlasMate-Plugin
+        /// </summary>
+        [Description("application/x-AtlasMate-Plugin")]
         _oom,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-pac
+        /// 扩展名.p10的文件，对应ContentType(MIME)类型：application/pkcs10
         /// </summary>
-        [Remark("audio/x-pac")]
+        [Description("application/pkcs10")]
+        _p10,
+        /// <summary>
+        /// 扩展名.p12的文件，对应ContentType(MIME)类型：application/x-pkcs12
+        /// </summary>
+        [Description("application/x-pkcs12")]
+        _p12,
+        /// <summary>
+        /// 扩展名.p7b的文件，对应ContentType(MIME)类型：application/x-pkcs7-certificates
+        /// </summary>
+        [Description("application/x-pkcs7-certificates")]
+        _p7b,
+        /// <summary>
+        /// 扩展名.p7c的文件，对应ContentType(MIME)类型：application/x-pkcs7-mime
+        /// </summary>
+        [Description("application/x-pkcs7-mime")]
+        _p7c,
+        /// <summary>
+        /// 扩展名.p7m的文件，对应ContentType(MIME)类型：application/x-pkcs7-mime
+        /// </summary>
+        [Description("application/x-pkcs7-mime")]
+        _p7m,
+        /// <summary>
+        /// 扩展名.p7r的文件，对应ContentType(MIME)类型：application/x-pkcs7-certreqresp
+        /// </summary>
+        [Description("application/x-pkcs7-certreqresp")]
+        _p7r,
+        /// <summary>
+        /// 扩展名.p7s的文件，对应ContentType(MIME)类型：application/x-pkcs7-signature
+        /// </summary>
+        [Description("application/x-pkcs7-signature")]
+        _p7s,
+        /// <summary>
+        /// 扩展名.pac的文件，对应ContentType(MIME)类型：audio/x-pac
+        /// </summary>
+        [Description("audio/x-pac")]
         _pac,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-epac
+        /// 扩展名.pae的文件，对应ContentType(MIME)类型：audio/x-epac
         /// </summary>
-        [Remark("audio/x-epac")]
+        [Description("audio/x-epac")]
         _pae,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-pan
+        /// 扩展名.pan的文件，对应ContentType(MIME)类型：application/x-pan
         /// </summary>
-        [Remark("application/x-pan")]
+        [Description("application/x-pan")]
         _pan,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-portable-bitmap
+        /// 扩展名.pbm的文件，对应ContentType(MIME)类型：image/x-portable-bitmap
         /// </summary>
-        [Remark("image/x-portable-bitmap")]
+        [Description("image/x-portable-bitmap")]
         _pbm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-pcx
+        /// 扩展名.pcx的文件，对应ContentType(MIME)类型：image/x-pcx
         /// </summary>
-        [Remark("image/x-pcx")]
+        [Description("image/x-pcx")]
         _pcx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-pda
+        /// 扩展名.pda的文件，对应ContentType(MIME)类型：image/x-pda
         /// </summary>
-        [Remark("image/x-pda")]
+        [Description("image/x-pda")]
         _pda,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-pdb
+        /// 扩展名.pdb的文件，对应ContentType(MIME)类型：chemical/x-pdb
         /// </summary>
-        [Remark("chemical/x-pdb")]
+        [Description("chemical/x-pdb")]
         _pdb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/pdf
+        /// 扩展名.pdf的文件，对应ContentType(MIME)类型：application/pdf
         /// </summary>
-        [Remark("application/pdf")]
+        [Description("application/pdf")]
         _pdf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/font-tdpfr
+        /// 扩展名.pfr的文件，对应ContentType(MIME)类型：application/font-tdpfr
         /// </summary>
-        [Remark("application/font-tdpfr")]
+        [Description("application/font-tdpfr")]
         _pfr,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-portable-graymap
+        /// 扩展名.pfx的文件，对应ContentType(MIME)类型：application/x-pkcs12
         /// </summary>
-        [Remark("image/x-portable-graymap")]
+        [Description("application/x-pkcs12")]
+        _pfx,
+        /// <summary>
+        /// 扩展名.pgm的文件，对应ContentType(MIME)类型：image/x-portable-graymap
+        /// </summary>
+        [Description("image/x-portable-graymap")]
         _pgm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-pict
+        /// 扩展名.pict的文件，对应ContentType(MIME)类型：image/x-pict
         /// </summary>
-        [Remark("image/x-pict")]
+        [Description("image/x-pict")]
         _pict,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-perl
+        /// 扩展名.pko的文件，对应ContentType(MIME)类型：application/ynd.ms-pkipko
         /// </summary>
-        [Remark("application/x-perl")]
+        [Description("application/ynd.ms-pkipko")]
+        _pko,
+        /// <summary>
+        /// 扩展名.pm的文件，对应ContentType(MIME)类型：application/x-perl
+        /// </summary>
+        [Description("application/x-perl")]
         _pm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-pmd
+        /// 扩展名.pma的文件，对应ContentType(MIME)类型：application/x-perfmon
         /// </summary>
-        [Remark("application/x-pmd")]
+        [Description("application/x-perfmon")]
+        _pma,
+        /// <summary>
+        /// 扩展名.pmc的文件，对应ContentType(MIME)类型：application/x-perfmon
+        /// </summary>
+        [Description("application/x-perfmon")]
+        _pmc,
+        /// <summary>
+        /// 扩展名.pmd的文件，对应ContentType(MIME)类型：application/x-pmd
+        /// </summary>
+        [Description("application/x-pmd")]
         _pmd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/png
+        /// 扩展名.pml的文件，对应ContentType(MIME)类型：application/x-perfmon
         /// </summary>
-        [Remark("image/png")]
+        [Description("application/x-perfmon")]
+        _pml,
+        /// <summary>
+        /// 扩展名.pmr的文件，对应ContentType(MIME)类型：application/x-perfmon
+        /// </summary>
+        [Description("application/x-perfmon")]
+        _pmr,
+        /// <summary>
+        /// 扩展名.pmw的文件，对应ContentType(MIME)类型：application/x-perfmon
+        /// </summary>
+        [Description("application/x-perfmon")]
+        _pmw,
+        /// <summary>
+        /// 扩展名.png的文件，对应ContentType(MIME)类型：image/png
+        /// </summary>
+        [Description("image/png")]
         _png,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-portable-anymap
+        /// 扩展名.pnm的文件，对应ContentType(MIME)类型：image/x-portable-anymap
         /// </summary>
-        [Remark("image/x-portable-anymap")]
+        [Description("image/x-portable-anymap")]
         _pnm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/png
+        /// 扩展名.pnz的文件，对应ContentType(MIME)类型：image/png
         /// </summary>
-        [Remark("image/png")]
+        [Description("image/png")]
         _pnz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-powerpoint
+        /// 扩展名.ppm的文件，对应ContentType(MIME)类型：image/x-portable-pixmap
         /// </summary>
-        [Remark("application/vnd.ms-powerpoint")]
-        _pot,
-
-        /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-portable-pixmap
-        /// </summary>
-        [Remark("image/x-portable-pixmap")]
+        [Description("image/x-portable-pixmap")]
         _ppm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-powerpoint
+        /// 扩展名.pps的文件，对应ContentType(MIME)类型：application/vnd.ms-powerpoint
         /// </summary>
-        [Remark("application/vnd.ms-powerpoint")]
+        [Description("application/vnd.ms-powerpoint")]
         _pps,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-powerpoint
+        /// 扩展名.ppt的文件，对应ContentType(MIME)类型：application/vnd.ms-powerpoint
         /// </summary>
-        [Remark("application/vnd.ms-powerpoint")]
+        [Description("application/vnd.ms-powerpoint")]
         _ppt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-cprplayer
+        /// 扩展名.pptx的文件，对应ContentType(MIME)类型：application/vnd.openxmlformats-officedocument.presentationml.presentation
         /// </summary>
-        [Remark("application/x-cprplayer")]
+        [Description("application/vnd.openxmlformats-officedocument.presentationml.presentation")]
+        _pptx,
+        /// <summary>
+        /// 扩展名.pqf的文件，对应ContentType(MIME)类型：application/x-cprplayer
+        /// </summary>
+        [Description("application/x-cprplayer")]
         _pqf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/cprplayer
+        /// 扩展名.pqi的文件，对应ContentType(MIME)类型：application/cprplayer
         /// </summary>
-        [Remark("application/cprplayer")]
+        [Description("application/cprplayer")]
         _pqi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-prc
+        /// 扩展名.prc的文件，对应ContentType(MIME)类型：application/x-prc
         /// </summary>
-        [Remark("application/x-prc")]
+        [Description("application/x-prc")]
         _prc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-ns-proxy-autoconfig
+        /// 扩展名.prf的文件，对应ContentType(MIME)类型：application/pics-rules
         /// </summary>
-        [Remark("application/x-ns-proxy-autoconfig")]
+        [Description("application/pics-rules")]
+        _prf,
+        /// <summary>
+        /// 扩展名.prop的文件，对应ContentType(MIME)类型：text/plain
+        /// </summary>
+        [Description("text/plain")]
+        _prop,
+        /// <summary>
+        /// 扩展名.proxy的文件，对应ContentType(MIME)类型：application/x-ns-proxy-autoconfig
+        /// </summary>
+        [Description("application/x-ns-proxy-autoconfig")]
         _proxy,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/postscript
+        /// 扩展名.ps的文件，对应ContentType(MIME)类型：application/postscript
         /// </summary>
-        [Remark("application/postscript")]
+        [Description("application/postscript")]
         _ps,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/listenup
+        /// 扩展名.ptlk的文件，对应ContentType(MIME)类型：application/listenup
         /// </summary>
-        [Remark("application/listenup")]
+        [Description("application/listenup")]
         _ptlk,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mspublisher
+        /// 扩展名.pub的文件，对应ContentType(MIME)类型：application/x-mspublisher
         /// </summary>
-        [Remark("application/x-mspublisher")]
+        [Description("application/x-mspublisher")]
         _pub,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-pv-pvx
+        /// 扩展名.pvx的文件，对应ContentType(MIME)类型：video/x-pv-pvx
         /// </summary>
-        [Remark("video/x-pv-pvx")]
+        [Description("video/x-pv-pvx")]
         _pvx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/vnd.qcelp
+        /// 扩展名.qcp的文件，对应ContentType(MIME)类型：audio/vnd.qcelp
         /// </summary>
-        [Remark("audio/vnd.qcelp")]
+        [Description("audio/vnd.qcelp")]
         _qcp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/quicktime
+        /// 扩展名.qt的文件，对应ContentType(MIME)类型：video/quicktime
         /// </summary>
-        [Remark("video/quicktime")]
+        [Description("video/quicktime")]
         _qt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-quicktime
+        /// 扩展名.qti的文件，对应ContentType(MIME)类型：image/x-quicktime
         /// </summary>
-        [Remark("image/x-quicktime")]
+        [Description("image/x-quicktime")]
         _qti,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-quicktime
+        /// 扩展名.qtif的文件，对应ContentType(MIME)类型：image/x-quicktime
         /// </summary>
-        [Remark("image/x-quicktime")]
+        [Description("image/x-quicktime")]
         _qtif,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/vnd.rn-realtext3d
+        /// 扩展名.r3t的文件，对应ContentType(MIME)类型：text/vnd.rn-realtext3d
         /// </summary>
-        [Remark("text/vnd.rn-realtext3d")]
+        [Description("text/vnd.rn-realtext3d")]
         _r3t,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-pn-realaudio
+        /// 扩展名.ra的文件，对应ContentType(MIME)类型：audio/x-pn-realaudio
         /// </summary>
-        [Remark("audio/x-pn-realaudio")]
+        [Description("audio/x-pn-realaudio")]
         _ra,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-pn-realaudio
+        /// 扩展名.ram的文件，对应ContentType(MIME)类型：audio/x-pn-realaudio
         /// </summary>
-        [Remark("audio/x-pn-realaudio")]
+        [Description("audio/x-pn-realaudio")]
         _ram,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-rar-compressed
+        /// 扩展名.rar的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/x-rar-compressed")]
+        [Description("application/octet-stream")]
         _rar,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-cmu-raster
+        /// 扩展名.ras的文件，对应ContentType(MIME)类型：image/x-cmu-raster
         /// </summary>
-        [Remark("image/x-cmu-raster")]
+        [Description("image/x-cmu-raster")]
         _ras,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/rdf+xml
+        /// 扩展名.rc的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("application/rdf+xml")]
+        [Description("text/plain")]
+        _rc,
+        /// <summary>
+        /// 扩展名.rdf的文件，对应ContentType(MIME)类型：application/rdf+xml
+        /// </summary>
+        [Description("application/rdf+xml")]
         _rdf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/vnd.rn-realflash
+        /// 扩展名.rf的文件，对应ContentType(MIME)类型：image/vnd.rn-realflash
         /// </summary>
-        [Remark("image/vnd.rn-realflash")]
+        [Description("image/vnd.rn-realflash")]
         _rf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-rgb
+        /// 扩展名.rgb的文件，对应ContentType(MIME)类型：image/x-rgb
         /// </summary>
-        [Remark("image/x-rgb")]
+        [Description("image/x-rgb")]
         _rgb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-richlink
+        /// 扩展名.rlf的文件，对应ContentType(MIME)类型：application/x-richlink
         /// </summary>
-        [Remark("application/x-richlink")]
+        [Description("application/x-richlink")]
         _rlf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-pn-realaudio
+        /// 扩展名.rm的文件，对应ContentType(MIME)类型：audio/x-pn-realaudio
         /// </summary>
-        [Remark("audio/x-pn-realaudio")]
+        [Description("audio/x-pn-realaudio")]
         _rm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-rmf
+        /// 扩展名.rmf的文件，对应ContentType(MIME)类型：audio/x-rmf
         /// </summary>
-        [Remark("audio/x-rmf")]
+        [Description("audio/x-rmf")]
         _rmf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-pn-realaudio
+        /// 扩展名.rmi的文件，对应ContentType(MIME)类型：audio/mid
         /// </summary>
-        [Remark("audio/x-pn-realaudio")]
+        [Description("audio/mid")]
+        _rmi,
+        /// <summary>
+        /// 扩展名.rmm的文件，对应ContentType(MIME)类型：audio/x-pn-realaudio
+        /// </summary>
+        [Description("audio/x-pn-realaudio")]
         _rmm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-pn-realaudio
+        /// 扩展名.rmvb的文件，对应ContentType(MIME)类型：audio/x-pn-realaudio
         /// </summary>
-        [Remark("audio/x-pn-realaudio")]
+        [Description("audio/x-pn-realaudio")]
         _rmvb,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.rn-realplayer
+        /// 扩展名.rnx的文件，对应ContentType(MIME)类型：application/vnd.rn-realplayer
         /// </summary>
-        [Remark("application/vnd.rn-realplayer")]
+        [Description("application/vnd.rn-realplayer")]
         _rnx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-troff
+        /// 扩展名.roff的文件，对应ContentType(MIME)类型：application/x-troff
         /// </summary>
-        [Remark("application/x-troff")]
+        [Description("application/x-troff")]
         _roff,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/vnd.rn-realpix
+        /// 扩展名.rp的文件，对应ContentType(MIME)类型：image/vnd.rn-realpix
         /// </summary>
-        [Remark("image/vnd.rn-realpix")]
+        [Description("image/vnd.rn-realpix")]
         _rp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-pn-realaudio-plugin
+        /// 扩展名.rpm的文件，对应ContentType(MIME)类型：audio/x-pn-realaudio-plugin
         /// </summary>
-        [Remark("audio/x-pn-realaudio-plugin")]
+        [Description("audio/x-pn-realaudio-plugin")]
         _rpm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/vnd.rn-realtext
+        /// 扩展名.rt的文件，对应ContentType(MIME)类型：text/vnd.rn-realtext
         /// </summary>
-        [Remark("text/vnd.rn-realtext")]
+        [Description("text/vnd.rn-realtext")]
         _rt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-gps
+        /// 扩展名.rte的文件，对应ContentType(MIME)类型：x-lml/x-gps
         /// </summary>
-        [Remark("x-lml/x-gps")]
+        [Description("x-lml/x-gps")]
         _rte,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/rtf
+        /// 扩展名.rtf的文件，对应ContentType(MIME)类型：application/rtf
         /// </summary>
-        [Remark("application/rtf")]
+        [Description("application/rtf")]
         _rtf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/metastream
+        /// 扩展名.rtg的文件，对应ContentType(MIME)类型：application/metastream
         /// </summary>
-        [Remark("application/metastream")]
+        [Description("application/metastream")]
         _rtg,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/richtext
+        /// 扩展名.rtx的文件，对应ContentType(MIME)类型：text/richtext
         /// </summary>
-        [Remark("text/richtext")]
+        [Description("text/richtext")]
         _rtx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/vnd.rn-realvideo
+        /// 扩展名.rv的文件，对应ContentType(MIME)类型：video/vnd.rn-realvideo
         /// </summary>
-        [Remark("video/vnd.rn-realvideo")]
+        [Description("video/vnd.rn-realvideo")]
         _rv,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-rogerwilco
+        /// 扩展名.rwc的文件，对应ContentType(MIME)类型：application/x-rogerwilco
         /// </summary>
-        [Remark("application/x-rogerwilco")]
+        [Description("application/x-rogerwilco")]
         _rwc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.s3m的文件，对应ContentType(MIME)类型：audio/x-mod
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("audio/x-mod")]
         _s3m,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.s3z的文件，对应ContentType(MIME)类型：audio/x-mod
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("audio/x-mod")]
         _s3z,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-supercard
+        /// 扩展名.sca的文件，对应ContentType(MIME)类型：application/x-supercard
         /// </summary>
-        [Remark("application/x-supercard")]
+        [Description("application/x-supercard")]
         _sca,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-msschedule
+        /// 扩展名.scd的文件，对应ContentType(MIME)类型：application/x-msschedule
         /// </summary>
-        [Remark("application/x-msschedule")]
+        [Description("application/x-msschedule")]
         _scd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/e-score
+        /// 扩展名.sct的文件，对应ContentType(MIME)类型：text/scriptlet
         /// </summary>
-        [Remark("application/e-score")]
+        [Description("text/scriptlet")]
+        _sct,
+        /// <summary>
+        /// 扩展名.sdf的文件，对应ContentType(MIME)类型：application/e-score
+        /// </summary>
+        [Description("application/e-score")]
         _sdf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-stuffit
+        /// 扩展名.sea的文件，对应ContentType(MIME)类型：application/x-stuffit
         /// </summary>
-        [Remark("application/x-stuffit")]
+        [Description("application/x-stuffit")]
         _sea,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-sgml
+        /// 扩展名.setpay的文件，对应ContentType(MIME)类型：application/set-payment-initiation
         /// </summary>
-        [Remark("text/x-sgml")]
+        [Description("application/set-payment-initiation")]
+        _setpay,
+        /// <summary>
+        /// 扩展名.setreg的文件，对应ContentType(MIME)类型：application/set-registration-initiation
+        /// </summary>
+        [Description("application/set-registration-initiation")]
+        _setreg,
+        /// <summary>
+        /// 扩展名.sgm的文件，对应ContentType(MIME)类型：text/x-sgml
+        /// </summary>
+        [Description("text/x-sgml")]
         _sgm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-sgml
+        /// 扩展名.sgml的文件，对应ContentType(MIME)类型：text/x-sgml
         /// </summary>
-        [Remark("text/x-sgml")]
+        [Description("text/x-sgml")]
         _sgml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-sh
+        /// 扩展名.sh的文件，对应ContentType(MIME)类型：application/x-sh
         /// </summary>
-        [Remark("application/x-sh")]
+        [Description("application/x-sh")]
         _sh,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-shar
+        /// 扩展名.shar的文件，对应ContentType(MIME)类型：application/x-shar
         /// </summary>
-        [Remark("application/x-shar")]
+        [Description("application/x-shar")]
         _shar,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：magnus-internal/parsed-html
+        /// 扩展名.shtml的文件，对应ContentType(MIME)类型：magnus-internal/parsed-html
         /// </summary>
-        [Remark("magnus-internal/parsed-html")]
+        [Description("magnus-internal/parsed-html")]
         _shtml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/presentations
+        /// 扩展名.shw的文件，对应ContentType(MIME)类型：application/presentations
         /// </summary>
-        [Remark("application/presentations")]
+        [Description("application/presentations")]
         _shw,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/si6
+        /// 扩展名.si6的文件，对应ContentType(MIME)类型：image/si6
         /// </summary>
-        [Remark("image/si6")]
+        [Description("image/si6")]
         _si6,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/vnd.stiwap.sis
+        /// 扩展名.si7的文件，对应ContentType(MIME)类型：image/vnd.stiwap.sis
         /// </summary>
-        [Remark("image/vnd.stiwap.sis")]
+        [Description("image/vnd.stiwap.sis")]
         _si7,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/vnd.lgtwap.sis
+        /// 扩展名.si9的文件，对应ContentType(MIME)类型：image/vnd.lgtwap.sis
         /// </summary>
-        [Remark("image/vnd.lgtwap.sis")]
+        [Description("image/vnd.lgtwap.sis")]
         _si9,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.symbian.install
+        /// 扩展名.sis的文件，对应ContentType(MIME)类型：application/vnd.symbian.install
         /// </summary>
-        [Remark("application/vnd.symbian.install")]
+        [Description("application/vnd.symbian.install")]
         _sis,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-stuffit
+        /// 扩展名.sit的文件，对应ContentType(MIME)类型：application/x-stuffit
         /// </summary>
-        [Remark("application/x-stuffit")]
+        [Description("application/x-stuffit")]
         _sit,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-Koan
+        /// 扩展名.skd的文件，对应ContentType(MIME)类型：application/x-Koan
         /// </summary>
-        [Remark("application/x-Koan")]
+        [Description("application/x-Koan")]
         _skd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-Koan
+        /// 扩展名.skm的文件，对应ContentType(MIME)类型：application/x-Koan
         /// </summary>
-        [Remark("application/x-Koan")]
+        [Description("application/x-Koan")]
         _skm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-Koan
+        /// 扩展名.skp的文件，对应ContentType(MIME)类型：application/x-Koan
         /// </summary>
-        [Remark("application/x-Koan")]
+        [Description("application/x-Koan")]
         _skp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-Koan
+        /// 扩展名.skt的文件，对应ContentType(MIME)类型：application/x-Koan
         /// </summary>
-        [Remark("application/x-Koan")]
+        [Description("application/x-Koan")]
         _skt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-salsa
+        /// 扩展名.slc的文件，对应ContentType(MIME)类型：application/x-salsa
         /// </summary>
-        [Remark("application/x-salsa")]
+        [Description("application/x-salsa")]
         _slc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-smd
+        /// 扩展名.smd的文件，对应ContentType(MIME)类型：audio/x-smd
         /// </summary>
-        [Remark("audio/x-smd")]
+        [Description("audio/x-smd")]
         _smd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/smil
+        /// 扩展名.smi的文件，对应ContentType(MIME)类型：application/smil
         /// </summary>
-        [Remark("application/smil")]
+        [Description("application/smil")]
         _smi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/smil
+        /// 扩展名.smil的文件，对应ContentType(MIME)类型：application/smil
         /// </summary>
-        [Remark("application/smil")]
+        [Description("application/smil")]
         _smil,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/studiom
+        /// 扩展名.smp的文件，对应ContentType(MIME)类型：application/studiom
         /// </summary>
-        [Remark("application/studiom")]
+        [Description("application/studiom")]
         _smp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-smd
+        /// 扩展名.smz的文件，对应ContentType(MIME)类型：audio/x-smd
         /// </summary>
-        [Remark("audio/x-smd")]
+        [Description("audio/x-smd")]
         _smz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/basic
+        /// 扩展名.snd的文件，对应ContentType(MIME)类型：audio/basic
         /// </summary>
-        [Remark("audio/basic")]
+        [Description("audio/basic")]
         _snd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-speech
+        /// 扩展名.spc的文件，对应ContentType(MIME)类型：application/x-pkcs7-certificates
         /// </summary>
-        [Remark("text/x-speech")]
+        [Description("application/x-pkcs7-certificates")]
         _spc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/futuresplash
+        /// 扩展名.spl的文件，对应ContentType(MIME)类型：application/futuresplash
         /// </summary>
-        [Remark("application/futuresplash")]
+        [Description("application/futuresplash")]
         _spl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-sprite
+        /// 扩展名.spr的文件，对应ContentType(MIME)类型：application/x-sprite
         /// </summary>
-        [Remark("application/x-sprite")]
+        [Description("application/x-sprite")]
         _spr,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-sprite
+        /// 扩展名.sprite的文件，对应ContentType(MIME)类型：application/x-sprite
         /// </summary>
-        [Remark("application/x-sprite")]
+        [Description("application/x-sprite")]
         _sprite,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-spt
+        /// 扩展名.sdp的文件，对应ContentType(MIME)类型：application/sdp
         /// </summary>
-        [Remark("application/x-spt")]
+        [Description("application/sdp")]
+        _sdp,
+        /// <summary>
+        /// 扩展名.spt的文件，对应ContentType(MIME)类型：application/x-spt
+        /// </summary>
+        [Description("application/x-spt")]
         _spt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-wais-source
+        /// 扩展名.src的文件，对应ContentType(MIME)类型：application/x-wais-source
         /// </summary>
-        [Remark("application/x-wais-source")]
+        [Description("application/x-wais-source")]
         _src,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/hyperstudio
+        /// 扩展名.sst的文件，对应ContentType(MIME)类型：application/vnd.ms-pkicertstore
         /// </summary>
-        [Remark("application/hyperstudio")]
+        [Description("application/vnd.ms-pkicertstore")]
+        _sst,
+        /// <summary>
+        /// 扩展名.stk的文件，对应ContentType(MIME)类型：application/hyperstudio
+        /// </summary>
+        [Description("application/hyperstudio")]
         _stk,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.stl的文件，对应ContentType(MIME)类型：application/vnd.ms-pkistl
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("application/vnd.ms-pkistl")]
+        _stl,
+        /// <summary>
+        /// 扩展名.stm的文件，对应ContentType(MIME)类型：text/html
+        /// </summary>
+        [Description("text/html")]
         _stm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-sv4cpio
+        /// 扩展名.svg的文件，对应ContentType(MIME)类型：image/svg+xml
         /// </summary>
-        [Remark("application/x-sv4cpio")]
-        _sv4cpio,
-
-        /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-sv4crc
-        /// </summary>
-        [Remark("application/x-sv4crc")]
-        _sv4crc,
-
-        /// <summary>
-        /// 对应ContentType(MIME)类型：image/vnd
-        /// </summary>
-        [Remark("image/vnd")]
-        _svf,
-
-        /// <summary>
-        /// 对应ContentType(MIME)类型：image/svg-xml
-        /// </summary>
-        [Remark("image/svg-xml")]
+        [Description("image/svg+xml")]
         _svg,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/svh
+        /// 扩展名.sv4cpio的文件，对应ContentType(MIME)类型：application/x-sv4cpio
         /// </summary>
-        [Remark("image/svh")]
+        [Description("application/x-sv4cpio")]
+        _sv4cpio,
+        /// <summary>
+        /// 扩展名.sv4crc的文件，对应ContentType(MIME)类型：application/x-sv4crc
+        /// </summary>
+        [Description("application/x-sv4crc")]
+        _sv4crc,
+        /// <summary>
+        /// 扩展名.svf的文件，对应ContentType(MIME)类型：image/vnd
+        /// </summary>
+        [Description("image/vnd")]
+        _svf,
+        ///// <summary>
+        ///// 扩展名.svg的文件，对应ContentType(MIME)类型：image/svg+xml
+        ///// </summary>
+        //[Description("image/svg+xml")]
+        //_svg,
+        /// <summary>
+        /// 扩展名.svh的文件，对应ContentType(MIME)类型：image/svh
+        /// </summary>
+        [Description("image/svh")]
         _svh,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-world/x-svr
+        /// 扩展名.svr的文件，对应ContentType(MIME)类型：x-world/x-svr
         /// </summary>
-        [Remark("x-world/x-svr")]
+        [Description("x-world/x-svr")]
         _svr,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-shockwave-flash
+        /// 扩展名.swf的文件，对应ContentType(MIME)类型：application/x-shockwave-flash
         /// </summary>
-        [Remark("application/x-shockwave-flash")]
+        [Description("application/x-shockwave-flash")]
         _swf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-shockwave-flash
+        /// 扩展名.swfl的文件，对应ContentType(MIME)类型：application/x-shockwave-flash
         /// </summary>
-        [Remark("application/x-shockwave-flash")]
+        [Description("application/x-shockwave-flash")]
         _swfl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-troff
+        /// 扩展名.t的文件，对应ContentType(MIME)类型：application/x-troff
         /// </summary>
-        [Remark("application/x-troff")]
+        [Description("application/x-troff")]
         _t,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.tad的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _tad,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-speech
+        /// 扩展名.talk的文件，对应ContentType(MIME)类型：text/x-speech
         /// </summary>
-        [Remark("text/x-speech")]
+        [Description("text/x-speech")]
         _talk,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-tar
+        /// 扩展名.tar的文件，对应ContentType(MIME)类型：application/x-tar
         /// </summary>
-        [Remark("application/x-tar")]
+        [Description("application/x-tar")]
         _tar,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-tar
+        /// 扩展名.taz的文件，对应ContentType(MIME)类型：application/x-tar
         /// </summary>
-        [Remark("application/x-tar")]
+        [Description("application/x-tar")]
         _taz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-timbuktu
+        /// 扩展名.tbp的文件，对应ContentType(MIME)类型：application/x-timbuktu
         /// </summary>
-        [Remark("application/x-timbuktu")]
+        [Description("application/x-timbuktu")]
         _tbp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-timbuktu
+        /// 扩展名.tbt的文件，对应ContentType(MIME)类型：application/x-timbuktu
         /// </summary>
-        [Remark("application/x-timbuktu")]
+        [Description("application/x-timbuktu")]
         _tbt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-tcl
+        /// 扩展名.tcl的文件，对应ContentType(MIME)类型：application/x-tcl
         /// </summary>
-        [Remark("application/x-tcl")]
+        [Description("application/x-tcl")]
         _tcl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-tex
+        /// 扩展名.tex的文件，对应ContentType(MIME)类型：application/x-tex
         /// </summary>
-        [Remark("application/x-tex")]
+        [Description("application/x-tex")]
         _tex,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-texinfo
+        /// 扩展名.texi的文件，对应ContentType(MIME)类型：application/x-texinfo
         /// </summary>
-        [Remark("application/x-texinfo")]
+        [Description("application/x-texinfo")]
         _texi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-texinfo
+        /// 扩展名.texinfo的文件，对应ContentType(MIME)类型：application/x-texinfo
         /// </summary>
-        [Remark("application/x-texinfo")]
+        [Description("application/x-texinfo")]
         _texinfo,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-tar
+        /// 扩展名.tgz的文件，对应ContentType(MIME)类型：application/x-compressed
         /// </summary>
-        [Remark("application/x-tar")]
+        [Description("application/x-compressed")]
         _tgz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.eri.thm
+        /// 扩展名.thm的文件，对应ContentType(MIME)类型：application/vnd.eri.thm
         /// </summary>
-        [Remark("application/vnd.eri.thm")]
+        [Description("application/vnd.eri.thm")]
         _thm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/tiff
+        /// 扩展名.tif的文件，对应ContentType(MIME)类型：image/tiff
         /// </summary>
-        [Remark("image/tiff")]
+        [Description("image/tiff")]
         _tif,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/tiff
+        /// 扩展名.tiff的文件，对应ContentType(MIME)类型：image/tiff
         /// </summary>
-        [Remark("image/tiff")]
+        [Description("image/tiff")]
         _tiff,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-tkined
+        /// 扩展名.tki的文件，对应ContentType(MIME)类型：application/x-tkined
         /// </summary>
-        [Remark("application/x-tkined")]
+        [Description("application/x-tkined")]
         _tki,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-tkined
+        /// 扩展名.tkined的文件，对应ContentType(MIME)类型：application/x-tkined
         /// </summary>
-        [Remark("application/x-tkined")]
+        [Description("application/x-tkined")]
         _tkined,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/toc
+        /// 扩展名.toc的文件，对应ContentType(MIME)类型：application/toc
         /// </summary>
-        [Remark("application/toc")]
+        [Description("application/toc")]
         _toc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/toy
+        /// 扩展名.toy的文件，对应ContentType(MIME)类型：image/toy
         /// </summary>
-        [Remark("image/toy")]
+        [Description("image/toy")]
         _toy,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-troff
+        /// 扩展名.tr的文件，对应ContentType(MIME)类型：application/x-troff
         /// </summary>
-        [Remark("application/x-troff")]
+        [Description("application/x-troff")]
         _tr,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-gps
+        /// 扩展名.trk的文件，对应ContentType(MIME)类型：x-lml/x-gps
         /// </summary>
-        [Remark("x-lml/x-gps")]
+        [Description("x-lml/x-gps")]
         _trk,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-msterminal
+        /// 扩展名.trm的文件，对应ContentType(MIME)类型：application/x-msterminal
         /// </summary>
-        [Remark("application/x-msterminal")]
+        [Description("application/x-msterminal")]
         _trm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/tsplayer
+        /// 扩展名.tsi的文件，对应ContentType(MIME)类型：audio/tsplayer
         /// </summary>
-        [Remark("audio/tsplayer")]
+        [Description("audio/tsplayer")]
         _tsi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/dsptype
+        /// 扩展名.tsp的文件，对应ContentType(MIME)类型：application/dsptype
         /// </summary>
-        [Remark("application/dsptype")]
+        [Description("application/dsptype")]
         _tsp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/tab-separated-values
+        /// 扩展名.tsv的文件，对应ContentType(MIME)类型：text/tab-separated-values
         /// </summary>
-        [Remark("text/tab-separated-values")]
+        [Description("text/tab-separated-values")]
         _tsv,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/octet-stream
+        /// 扩展名.ttf的文件，对应ContentType(MIME)类型：application/octet-stream
         /// </summary>
-        [Remark("application/octet-stream")]
+        [Description("application/octet-stream")]
         _ttf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/t-time
+        /// 扩展名.ttz的文件，对应ContentType(MIME)类型：application/t-time
         /// </summary>
-        [Remark("application/t-time")]
+        [Description("application/t-time")]
         _ttz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/plain
+        /// 扩展名.txt的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("text/plain")]
+        [Description("text/plain")]
         _txt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.uls的文件，对应ContentType(MIME)类型：text/iuls
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("text/iuls")]
+        _uls,
+        /// <summary>
+        /// 扩展名.ult的文件，对应ContentType(MIME)类型：audio/x-mod
+        /// </summary>
+        [Description("audio/x-mod")]
         _ult,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-ustar
+        /// 扩展名.ustar的文件，对应ContentType(MIME)类型：application/x-ustar
         /// </summary>
-        [Remark("application/x-ustar")]
+        [Description("application/x-ustar")]
         _ustar,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-uuencode
+        /// 扩展名.uu的文件，对应ContentType(MIME)类型：application/x-uuencode
         /// </summary>
-        [Remark("application/x-uuencode")]
+        [Description("application/x-uuencode")]
         _uu,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-uuencode
+        /// 扩展名.uue的文件，对应ContentType(MIME)类型：application/x-uuencode
         /// </summary>
-        [Remark("application/x-uuencode")]
+        [Description("application/x-uuencode")]
         _uue,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-cdlink
+        /// 扩展名.vcd的文件，对应ContentType(MIME)类型：application/x-cdlink
         /// </summary>
-        [Remark("application/x-cdlink")]
+        [Description("application/x-cdlink")]
         _vcd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/x-vcard
+        /// 扩展名.vcf的文件，对应ContentType(MIME)类型：text/x-vcard
         /// </summary>
-        [Remark("text/x-vcard")]
+        [Description("text/x-vcard")]
         _vcf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/vdo
+        /// 扩展名.vdo的文件，对应ContentType(MIME)类型：video/vdo
         /// </summary>
-        [Remark("video/vdo")]
+        [Description("video/vdo")]
         _vdo,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/vib
+        /// 扩展名.vib的文件，对应ContentType(MIME)类型：audio/vib
         /// </summary>
-        [Remark("audio/vib")]
+        [Description("audio/vib")]
         _vib,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/vivo
+        /// 扩展名.viv的文件，对应ContentType(MIME)类型：video/vivo
         /// </summary>
-        [Remark("video/vivo")]
+        [Description("video/vivo")]
         _viv,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/vivo
+        /// 扩展名.vivo的文件，对应ContentType(MIME)类型：video/vivo
         /// </summary>
-        [Remark("video/vivo")]
+        [Description("video/vivo")]
         _vivo,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vocaltec-media-desc
+        /// 扩展名.vmd的文件，对应ContentType(MIME)类型：application/vocaltec-media-desc
         /// </summary>
-        [Remark("application/vocaltec-media-desc")]
+        [Description("application/vocaltec-media-desc")]
         _vmd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vocaltec-media-file
+        /// 扩展名.vmf的文件，对应ContentType(MIME)类型：application/vocaltec-media-file
         /// </summary>
-        [Remark("application/vocaltec-media-file")]
+        [Description("application/vocaltec-media-file")]
         _vmf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-dreamcast-vms-info
+        /// 扩展名.vmi的文件，对应ContentType(MIME)类型：application/x-dreamcast-vms-info
         /// </summary>
-        [Remark("application/x-dreamcast-vms-info")]
+        [Description("application/x-dreamcast-vms-info")]
         _vmi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-dreamcast-vms
+        /// 扩展名.vms的文件，对应ContentType(MIME)类型：application/x-dreamcast-vms
         /// </summary>
-        [Remark("application/x-dreamcast-vms")]
+        [Description("application/x-dreamcast-vms")]
         _vms,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/voxware
+        /// 扩展名.vox的文件，对应ContentType(MIME)类型：audio/voxware
         /// </summary>
-        [Remark("audio/voxware")]
+        [Description("audio/voxware")]
         _vox,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-twinvq-plugin
+        /// 扩展名.vqe的文件，对应ContentType(MIME)类型：audio/x-twinvq-plugin
         /// </summary>
-        [Remark("audio/x-twinvq-plugin")]
+        [Description("audio/x-twinvq-plugin")]
         _vqe,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-twinvq
+        /// 扩展名.vqf的文件，对应ContentType(MIME)类型：audio/x-twinvq
         /// </summary>
-        [Remark("audio/x-twinvq")]
+        [Description("audio/x-twinvq")]
         _vqf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-twinvq
+        /// 扩展名.vql的文件，对应ContentType(MIME)类型：audio/x-twinvq
         /// </summary>
-        [Remark("audio/x-twinvq")]
+        [Description("audio/x-twinvq")]
         _vql,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-world/x-vream
+        /// 扩展名.vre的文件，对应ContentType(MIME)类型：x-world/x-vream
         /// </summary>
-        [Remark("x-world/x-vream")]
+        [Description("x-world/x-vream")]
         _vre,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-world/x-vrml
+        /// 扩展名.vrml的文件，对应ContentType(MIME)类型：x-world/x-vrml
         /// </summary>
-        [Remark("x-world/x-vrml")]
+        [Description("x-world/x-vrml")]
         _vrml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-world/x-vrt
+        /// 扩展名.vrt的文件，对应ContentType(MIME)类型：x-world/x-vrt
         /// </summary>
-        [Remark("x-world/x-vrt")]
+        [Description("x-world/x-vrt")]
         _vrt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-world/x-vream
+        /// 扩展名.vrw的文件，对应ContentType(MIME)类型：x-world/x-vream
         /// </summary>
-        [Remark("x-world/x-vream")]
+        [Description("x-world/x-vream")]
         _vrw,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：workbook/formulaone
+        /// 扩展名.vts的文件，对应ContentType(MIME)类型：workbook/formulaone
         /// </summary>
-        [Remark("workbook/formulaone")]
+        [Description("workbook/formulaone")]
         _vts,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-wav
+        /// 扩展名.wav的文件，对应ContentType(MIME)类型：audio/x-wav
         /// </summary>
-        [Remark("audio/x-wav")]
+        [Description("audio/x-wav")]
         _wav,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-ms-wax
+        /// 扩展名.wax的文件，对应ContentType(MIME)类型：audio/x-ms-wax
         /// </summary>
-        [Remark("audio/x-ms-wax")]
+        [Description("audio/x-ms-wax")]
         _wax,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/vnd.wap.wbmp
+        /// 扩展名.wbmp的文件，对应ContentType(MIME)类型：image/vnd.wap.wbmp
         /// </summary>
-        [Remark("image/vnd.wap.wbmp")]
+        [Description("image/vnd.wap.wbmp")]
         _wbmp,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.xara
+        /// 扩展名.wcm的文件，对应ContentType(MIME)类型：application/vnd.ms-works
         /// </summary>
-        [Remark("application/vnd.xara")]
+        [Description("application/vnd.ms-works")]
+        _wcm,
+        /// <summary>
+        /// 扩展名.wdb的文件，对应ContentType(MIME)类型：application/vnd.ms-works
+        /// </summary>
+        [Description("application/vnd.ms-works")]
+        _wdb,
+        /// <summary>
+        /// 扩展名.web的文件，对应ContentType(MIME)类型：application/vnd.xara
+        /// </summary>
+        [Description("application/vnd.xara")]
         _web,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/wavelet
+        /// 扩展名.wi的文件，对应ContentType(MIME)类型：image/wavelet
         /// </summary>
-        [Remark("image/wavelet")]
+        [Description("image/wavelet")]
         _wi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-InstallShield
+        /// 扩展名.wis的文件，对应ContentType(MIME)类型：application/x-InstallShield
         /// </summary>
-        [Remark("application/x-InstallShield")]
+        [Description("application/x-InstallShield")]
         _wis,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-ms-wm
+        /// 扩展名.wks的文件，对应ContentType(MIME)类型：application/vnd.ms-works
         /// </summary>
-        [Remark("video/x-ms-wm")]
+        [Description("application/vnd.ms-works")]
+        _wks,
+        /// <summary>
+        /// 扩展名.wm的文件，对应ContentType(MIME)类型：video/x-ms-wm
+        /// </summary>
+        [Description("video/x-ms-wm")]
         _wm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-ms-wma
+        /// 扩展名.wma的文件，对应ContentType(MIME)类型：audio/x-ms-wma
         /// </summary>
-        [Remark("audio/x-ms-wma")]
+        [Description("audio/x-ms-wma")]
         _wma,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-ms-wmd
+        /// 扩展名.wmd的文件，对应ContentType(MIME)类型：application/x-ms-wmd
         /// </summary>
-        [Remark("application/x-ms-wmd")]
+        [Description("application/x-ms-wmd")]
         _wmd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-msmetafile
+        /// 扩展名.wmf的文件，对应ContentType(MIME)类型：application/x-msmetafile
         /// </summary>
-        [Remark("application/x-msmetafile")]
+        [Description("application/x-msmetafile")]
         _wmf,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/vnd.wap.wml
+        /// 扩展名.wml的文件，对应ContentType(MIME)类型：text/vnd.wap.wml
         /// </summary>
-        [Remark("text/vnd.wap.wml")]
+        [Description("text/vnd.wap.wml")]
         _wml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.wap.wmlc
+        /// 扩展名.wmlc的文件，对应ContentType(MIME)类型：application/vnd.wap.wmlc
         /// </summary>
-        [Remark("application/vnd.wap.wmlc")]
+        [Description("application/vnd.wap.wmlc")]
         _wmlc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/vnd.wap.wmlscript
+        /// 扩展名.wmls的文件，对应ContentType(MIME)类型：text/vnd.wap.wmlscript
         /// </summary>
-        [Remark("text/vnd.wap.wmlscript")]
+        [Description("text/vnd.wap.wmlscript")]
         _wmls,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.wap.wmlscriptc
+        /// 扩展名.wmlsc的文件，对应ContentType(MIME)类型：application/vnd.wap.wmlscriptc
         /// </summary>
-        [Remark("application/vnd.wap.wmlscriptc")]
+        [Description("application/vnd.wap.wmlscriptc")]
         _wmlsc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/vnd.wap.wmlscript
+        /// 扩展名.wmlscript的文件，对应ContentType(MIME)类型：text/vnd.wap.wmlscript
         /// </summary>
-        [Remark("text/vnd.wap.wmlscript")]
+        [Description("text/vnd.wap.wmlscript")]
         _wmlscript,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-ms-wmv
+        /// 扩展名.wmv的文件，对应ContentType(MIME)类型：audio/x-ms-wmv
         /// </summary>
-        [Remark("audio/x-ms-wmv")]
+        [Description("audio/x-ms-wmv")]
         _wmv,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-ms-wmx
+        /// 扩展名.wmx的文件，对应ContentType(MIME)类型：video/x-ms-wmx
         /// </summary>
-        [Remark("video/x-ms-wmx")]
+        [Description("video/x-ms-wmx")]
         _wmx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-ms-wmz
+        /// 扩展名.wmz的文件，对应ContentType(MIME)类型：application/x-ms-wmz
         /// </summary>
-        [Remark("application/x-ms-wmz")]
+        [Description("application/x-ms-wmz")]
         _wmz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-up-wpng
+        /// 扩展名.wpng的文件，对应ContentType(MIME)类型：image/x-up-wpng
         /// </summary>
-        [Remark("image/x-up-wpng")]
+        [Description("image/x-up-wpng")]
         _wpng,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-lml/x-gps
+        /// 扩展名.wps的文件，对应ContentType(MIME)类型：application/vnd.ms-works
         /// </summary>
-        [Remark("x-lml/x-gps")]
+        [Description("application/vnd.ms-works")]
+        _wps,
+        /// <summary>
+        /// 扩展名.wpt的文件，对应ContentType(MIME)类型：x-lml/x-gps
+        /// </summary>
+        [Description("x-lml/x-gps")]
         _wpt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-mswrite
+        /// 扩展名.wri的文件，对应ContentType(MIME)类型：application/x-mswrite
         /// </summary>
-        [Remark("application/x-mswrite")]
+        [Description("application/x-mswrite")]
         _wri,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-world/x-vrml
+        /// 扩展名.wrl的文件，对应ContentType(MIME)类型：x-world/x-vrml
         /// </summary>
-        [Remark("x-world/x-vrml")]
+        [Description("x-world/x-vrml")]
         _wrl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：x-world/x-vrml
+        /// 扩展名.wrz的文件，对应ContentType(MIME)类型：x-world/x-vrml
         /// </summary>
-        [Remark("x-world/x-vrml")]
+        [Description("x-world/x-vrml")]
         _wrz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/vnd.wap.wmlscript
+        /// 扩展名.ws的文件，对应ContentType(MIME)类型：text/vnd.wap.wmlscript
         /// </summary>
-        [Remark("text/vnd.wap.wmlscript")]
+        [Description("text/vnd.wap.wmlscript")]
         _ws,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.wap.wmlscriptc
+        /// 扩展名.wsc的文件，对应ContentType(MIME)类型：application/vnd.wap.wmlscriptc
         /// </summary>
-        [Remark("application/vnd.wap.wmlscriptc")]
+        [Description("application/vnd.wap.wmlscriptc")]
         _wsc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/wavelet
+        /// 扩展名.wv的文件，对应ContentType(MIME)类型：video/wavelet
         /// </summary>
-        [Remark("video/wavelet")]
+        [Description("video/wavelet")]
         _wv,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：video/x-ms-wvx
+        /// 扩展名.wvx的文件，对应ContentType(MIME)类型：video/x-ms-wvx
         /// </summary>
-        [Remark("video/x-ms-wvx")]
+        [Description("video/x-ms-wvx")]
         _wvx,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-wxl
+        /// 扩展名.wxl的文件，对应ContentType(MIME)类型：application/x-wxl
         /// </summary>
-        [Remark("application/x-wxl")]
+        [Description("application/x-wxl")]
         _wxl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.xara
+        /// 扩展名.xaf的文件，对应ContentType(MIME)类型：x-world/x-vrml
         /// </summary>
-        [Remark("application/vnd.xara")]
+        [Description("x-world/x-vrml")]
+        _xaf,
+        /// <summary>
+        /// 扩展名.xar的文件，对应ContentType(MIME)类型：application/vnd.xara
+        /// </summary>
+        [Description("application/vnd.xara")]
         _xar,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-xbitmap
+        /// 扩展名.xbm的文件，对应ContentType(MIME)类型：image/x-xbitmap
         /// </summary>
-        [Remark("image/x-xbitmap")]
+        [Description("image/x-xbitmap")]
         _xbm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-xdma
+        /// 扩展名.xdm的文件，对应ContentType(MIME)类型：application/x-xdma
         /// </summary>
-        [Remark("application/x-xdma")]
+        [Description("application/x-xdma")]
         _xdm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-xdma
+        /// 扩展名.xdma的文件，对应ContentType(MIME)类型：application/x-xdma
         /// </summary>
-        [Remark("application/x-xdma")]
+        [Description("application/x-xdma")]
         _xdma,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.fujixerox.docuworks
+        /// 扩展名.xdw的文件，对应ContentType(MIME)类型：application/vnd.fujixerox.docuworks
         /// </summary>
-        [Remark("application/vnd.fujixerox.docuworks")]
+        [Description("application/vnd.fujixerox.docuworks")]
         _xdw,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/xhtml+xml
+        /// 扩展名.xht的文件，对应ContentType(MIME)类型：application/xhtml+xml
         /// </summary>
-        [Remark("application/xhtml+xml")]
+        [Description("application/xhtml+xml")]
         _xht,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/xhtml+xml
+        /// 扩展名.xhtm的文件，对应ContentType(MIME)类型：application/xhtml+xml
         /// </summary>
-        [Remark("application/xhtml+xml")]
+        [Description("application/xhtml+xml")]
         _xhtm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/xhtml+xml
+        /// 扩展名.xhtml的文件，对应ContentType(MIME)类型：application/xhtml+xml
         /// </summary>
-        [Remark("application/xhtml+xml")]
+        [Description("application/xhtml+xml")]
         _xhtml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-excel
+        /// 扩展名.xla的文件，对应ContentType(MIME)类型：application/vnd.ms-excel
         /// </summary>
-        [Remark("application/vnd.ms-excel")]
+        [Description("application/vnd.ms-excel")]
         _xla,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-excel
+        /// 扩展名.xlc的文件，对应ContentType(MIME)类型：application/vnd.ms-excel
         /// </summary>
-        [Remark("application/vnd.ms-excel")]
+        [Description("application/vnd.ms-excel")]
         _xlc,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-excel
+        /// 扩展名.xll的文件，对应ContentType(MIME)类型：application/x-excel
         /// </summary>
-        [Remark("application/x-excel")]
+        [Description("application/x-excel")]
         _xll,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-excel
+        /// 扩展名.xlm的文件，对应ContentType(MIME)类型：application/vnd.ms-excel
         /// </summary>
-        [Remark("application/vnd.ms-excel")]
+        [Description("application/vnd.ms-excel")]
         _xlm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-excel
+        /// 扩展名.xls的文件，对应ContentType(MIME)类型：application/vnd.ms-excel
         /// </summary>
-        [Remark("application/vnd.ms-excel")]
+        [Description("application/vnd.ms-excel")]
         _xls,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-excel
+        /// 扩展名.xlsx的文件，对应ContentType(MIME)类型：application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
         /// </summary>
-        [Remark("application/vnd.ms-excel")]
+        [Description("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")]
+        _xlsx,
+        /// <summary>
+        /// 扩展名.xlt的文件，对应ContentType(MIME)类型：application/vnd.ms-excel
+        /// </summary>
+        [Description("application/vnd.ms-excel")]
         _xlt,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/vnd.ms-excel
+        /// 扩展名.xlw的文件，对应ContentType(MIME)类型：application/vnd.ms-excel
         /// </summary>
-        [Remark("application/vnd.ms-excel")]
+        [Description("application/vnd.ms-excel")]
         _xlw,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.xm的文件，对应ContentType(MIME)类型：audio/x-mod
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("audio/x-mod")]
         _xm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/xml,text/xml
+        /// 扩展名.xml的文件，对应ContentType(MIME)类型：text/plain
         /// </summary>
-        [Remark("application/xml,text/xml")]
+        [Description("text/plain")]
         _xml,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：audio/x-mod
+        /// 扩展名.xmz的文件，对应ContentType(MIME)类型：audio/x-mod
         /// </summary>
-        [Remark("audio/x-mod")]
+        [Description("audio/x-mod")]
         _xmz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-xpinstall
+        /// 扩展名.xof的文件，对应ContentType(MIME)类型：x-world/x-vrml
         /// </summary>
-        [Remark("application/x-xpinstall")]
+        [Description("x-world/x-vrml")]
+        _xof,
+        /// <summary>
+        /// 扩展名.xpi的文件，对应ContentType(MIME)类型：application/x-xpinstall
+        /// </summary>
+        [Description("application/x-xpinstall")]
         _xpi,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-xpixmap
+        /// 扩展名.xpm的文件，对应ContentType(MIME)类型：image/x-xpixmap
         /// </summary>
-        [Remark("image/x-xpixmap")]
+        [Description("image/x-xpixmap")]
         _xpm,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/xml
+        /// 扩展名.xsit的文件，对应ContentType(MIME)类型：text/xml
         /// </summary>
-        [Remark("text/xml")]
+        [Description("text/xml")]
         _xsit,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/xml
+        /// 扩展名.xsl的文件，对应ContentType(MIME)类型：text/xml
         /// </summary>
-        [Remark("text/xml")]
+        [Description("text/xml")]
         _xsl,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：text/xul
+        /// 扩展名.xul的文件，对应ContentType(MIME)类型：text/xul
         /// </summary>
-        [Remark("text/xul")]
+        [Description("text/xul")]
         _xul,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：image/x-xwindowdump
+        /// 扩展名.xwd的文件，对应ContentType(MIME)类型：image/x-xwindowdump
         /// </summary>
-        [Remark("image/x-xwindowdump")]
+        [Description("image/x-xwindowdump")]
         _xwd,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：chemical/x-pdb
+        /// 扩展名.xyz的文件，对应ContentType(MIME)类型：chemical/x-pdb
         /// </summary>
-        [Remark("chemical/x-pdb")]
+        [Description("chemical/x-pdb")]
         _xyz,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-yz1
+        /// 扩展名.yz1的文件，对应ContentType(MIME)类型：application/x-yz1
         /// </summary>
-        [Remark("application/x-yz1")]
+        [Description("application/x-yz1")]
         _yz1,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-compress
+        /// 扩展名.z的文件，对应ContentType(MIME)类型：application/x-compress
         /// </summary>
-        [Remark("application/x-compress")]
+        [Description("application/x-compress")]
         _z,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/x-zaurus-zac
+        /// 扩展名.zac的文件，对应ContentType(MIME)类型：application/x-zaurus-zac
         /// </summary>
-        [Remark("application/x-zaurus-zac")]
+        [Description("application/x-zaurus-zac")]
         _zac,
-
         /// <summary>
-        /// 对应ContentType(MIME)类型：application/zip
+        /// 扩展名.zip的文件，对应ContentType(MIME)类型：application/zip
         /// </summary>
-        [Remark("application/zip")]
+        [Description("application/zip")]
         _zip,
+        /// <summary>
+        /// 扩展名.json的文件，对应ContentType(MIME)类型：application/json
+        /// </summary>
+        [Description("application/json")]
+        _json
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,6 +14,29 @@ using Core.Encryption;
 public static partial class 通用扩展
 {
     #region 基本
+
+    /// <summary>
+    /// 获取枚举的注释特性（DescriptionAttribute）值
+    /// </summary>
+    /// <param name="o">枚举值</param>
+    /// <returns>注释</returns>
+    public static string GetDescription(this Enum o)
+    {
+        var enumType = o.GetType();
+        var name = Enum.GetName(enumType, Convert.ToInt32(o));
+        if (name == null)
+            return string.Empty;
+        object[] objs = enumType.GetField(name).GetCustomAttributes(typeof(DescriptionAttribute), false);
+        if (objs.Length == 0)
+        {
+            return string.Empty;
+        }
+        else
+        {
+            var attr = objs[0] as DescriptionAttribute;
+            return attr.Description;
+        }
+    }
 
     /// <summary>
     /// 转换为异步编程模型（Asynchronous Programming Model），用于WF的AsyncCodeActivity中的BeginExecute方法中使用，如果不进行此转换，通常就会因不包含AsyncState属性而引发InvalidOperationException

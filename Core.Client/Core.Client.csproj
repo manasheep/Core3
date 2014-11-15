@@ -107,6 +107,10 @@
     <Compile Include="WFActivity\虚拟按键代码输入.xaml.cs">
       <DependentUpon>虚拟按键代码输入.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WFActivity\设置Http响应内容类型.cs" />
+    <Compile Include="WFActivity\设置Http响应内容类型参数输入.xaml.cs">
+      <DependentUpon>设置Http响应内容类型参数输入.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WFActivity\设置剪贴板文字.cs" />
     <Compile Include="WFActivity\调试输出.cs" />
     <Compile Include="WFActivity\通过标题名获取窗口句柄.cs" />
@@ -156,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WFActivity\虚拟按键代码输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WFActivity\设置Http响应内容类型参数输入.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

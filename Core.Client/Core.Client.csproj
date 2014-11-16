@@ -74,6 +74,7 @@
     <Compile Include="WFActivity\内容输入.xaml.cs">
       <DependentUpon>内容输入.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WFActivity\删除文件.cs" />
     <Compile Include="WFActivity\发起HttpGet请求.cs" />
     <Compile Include="WFActivity\发起HttpPost请求.cs" />
     <Compile Include="WFActivity\名称输入.xaml.cs">
@@ -82,6 +83,9 @@
     <Compile Include="WFActivity\将窗口显示到桌面前端.cs" />
     <Compile Include="WFActivity\整数笛卡尔坐标输入.xaml.cs">
       <DependentUpon>整数笛卡尔坐标输入.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WFActivity\文件路径输入.xaml.cs">
+      <DependentUpon>文件路径输入.xaml</DependentUpon>
     </Compile>
     <Compile Include="WFActivity\显示提示对话框.cs" />
     <Compile Include="WFActivity\构建字符串形式的Http内容.cs" />
@@ -151,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WFActivity\整数笛卡尔坐标输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WFActivity\文件路径输入.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

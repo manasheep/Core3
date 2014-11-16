@@ -49,27 +49,27 @@ public static class MongoDb扩展
     }
 
     /// <summary>
-    /// 以Linq形式执行的Where查询单个数据
+    /// 以Lambda表达式形式执行的Where查询单个数据
     /// </summary>
     /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
     /// <param name="mc">数据集合</param>
     /// <param name="predicate">查询条件数组</param>
     /// <returns>第一个匹配的数据</returns>
-    public static IQueryable<TDefaultDocument> Find<TDefaultDocument>(this MongoCollection<TDefaultDocument> mc, Expression<Func<TDefaultDocument, bool>> predicate)
+    public static MongoCursor<TDefaultDocument> Find<TDefaultDocument>(this MongoCollection<TDefaultDocument> mc, Expression<Func<TDefaultDocument, bool>> predicate)
     {
-        return mc.AsQueryable().Where(predicate);
+        return mc.Find(Query<TDefaultDocument>.Where(predicate));
     }
 
     /// <summary>
-    /// 以Linq形式执行的Where查询
+    /// 以Lambda表达式形式执行的Where查询
     /// </summary>
     /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
     /// <param name="mc">数据集合</param>
     /// <param name="predicate">查询条件数组</param>
-    /// <returns>IQueryable数据集合</returns>
+    /// <returns>数据结果集游标</returns>
     public static TDefaultDocument FindOne<TDefaultDocument>(this MongoCollection<TDefaultDocument> mc, Expression<Func<TDefaultDocument, bool>> predicate)
     {
-        return mc.AsQueryable().Where(predicate).First();
+        return mc.FindOne(Query<TDefaultDocument>.Where(predicate));
     }
 
     /// <summary>
@@ -97,27 +97,27 @@ public static class MongoDb扩展
     }
 
     /// <summary>
-    /// 以Linq形式执行的Where查询单个数据
+    /// 以Lambda表达式形式执行的Where查询单个数据
     /// </summary>
     /// <typeparam name="TDocument">数据类型</typeparam>
     /// <param name="mc">数据集合</param>
     /// <param name="predicate">查询条件数组</param>
     /// <returns>第一个匹配的数据</returns>
-    public static IQueryable<TDocument> FindAs<TDocument>(this MongoCollection mc, Expression<Func<TDocument, bool>> predicate)
+    public static MongoCursor<TDocument> FindAs<TDocument>(this MongoCollection mc, Expression<Func<TDocument, bool>> predicate)
     {
-        return mc.AsQueryable<TDocument>().Where(predicate);
+        return mc.FindAs<TDocument>(Query<TDocument>.Where(predicate));
     }
 
     /// <summary>
-    /// 以Linq形式执行的Where查询
+    /// 以Lambda表达式形式执行的Where查询
     /// </summary>
     /// <typeparam name="TDocument">数据类型</typeparam>
     /// <param name="mc">数据集合</param>
     /// <param name="predicate">查询条件数组</param>
-    /// <returns>IQueryable数据集合</returns>
+    /// <returns>数据结果集游标</returns>
     public static TDocument FindOneAs<TDocument>(this MongoCollection mc, Expression<Func<TDocument, bool>> predicate)
     {
-        return mc.AsQueryable<TDocument>().Where(predicate).First();
+        return mc.FindOneAs<TDocument>(Query<TDocument>.Where(predicate));
     }
 
     /// <summary>
@@ -150,5 +150,15 @@ public static class MongoDb扩展
     public static void DeleteFileById(this MongoDatabase db, BsonValue id)
     {
         db.GridFS.DeleteById(id);
+    }
+
+    public static WriteConcernResult UpdateSet<TDocument,TMember>(this MongoCollection<TDocument> mc,IMongoQuery query, Expression<Func<TDocument, TMember>> memberExpression,TMember value)
+    {
+        return mc.Update(query, Update<TDocument>.Set(memberExpression, value));
+    }
+
+    public static WriteConcernResult UpdateSet<TDocument, TMember>(this MongoCollection<TDocument> mc, Expression<Func<TDocument, bool>> expression, Expression<Func<TDocument, TMember>> memberExpression, TMember value)
+    {
+        return UpdateSet(mc, Query<TDocument>.Where(expression), memberExpression, value);
     }
 }

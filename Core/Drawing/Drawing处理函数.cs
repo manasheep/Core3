@@ -9,6 +9,7 @@ using System.Drawing.Imaging;
 
 namespace Core.Drawing
 {
+
     /// <summary>
     /// 缩放图片时所使用的缩放方式
     /// </summary>
@@ -28,6 +29,19 @@ namespace Core.Drawing
 
     public static class Drawing处理函数
     {
+        /// <summary>
+        /// 使用文件流的方式读取图像，不会持续占用文件，原文件可被删改
+        /// </summary>
+        /// <param name="文件路径">图像文件路径</param>
+        /// <returns>图像</returns>
+        public static Image 读取图像自文件(string 文件路径)
+        {
+            using (var fs=new FileStream(文件路径, FileMode.Open, FileAccess.Read))
+            {
+                return Image.FromStream(fs);
+            } 
+        }
+
         /// <summary>
         /// 回调
         /// </summary>
@@ -175,7 +189,7 @@ namespace Core.Drawing
             var y = 0;
             foreach (var f in 待拼接图像文件路径)
             {
-                using (var img = Image.FromFile(f))
+                using (var img = 读取图像自文件(f))
                 {
                     g.DrawImage(img, x, y, img.Width, img.Height);
                     if (是否为横向拼接) x += img.Width;
@@ -312,7 +326,7 @@ namespace Core.Drawing
         /// <returns>添加了水印的图片</returns>
         public static Bitmap 添加水印(this Image 图像, string 水印图像文件路径, 对齐方位 水印方位, int 水平边距, int 垂直边距)
         {
-            return 添加水印(图像, Image.FromFile(水印图像文件路径), 水印方位, 水平边距, 垂直边距);
+            return 添加水印(图像, 读取图像自文件(水印图像文件路径), 水印方位, 水平边距, 垂直边距);
         }
 
         /// <summary>
@@ -565,8 +579,6 @@ namespace Core.Drawing
         /// <param name="字号">水印图片的透明度，范围为1-10，数值越小则透明度越高</param>
         public static void 添加文字水印(Image 图像, string 文件保存路径, int 水印位置, int 质量, string 水印文字, string 字体, int 字号)
         {
-            //System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
-            //	.FromFile(filename);
             Graphics g = Graphics.FromImage(图像);
             Font drawFont = new Font(字体, 字号, FontStyle.Regular, GraphicsUnit.Pixel);
             SizeF crSize;
@@ -787,7 +799,7 @@ namespace Core.Drawing
         /// <param name="mode">生成缩略图的方式</param>    
         public static void 创建缩略图(string originalImagePath, string thumbnailPath, int width, int height, string mode)
         {
-            System.Drawing.Image originalImage = System.Drawing.Image.FromFile(originalImagePath);
+            System.Drawing.Image originalImage = 读取图像自文件(originalImagePath);
 
             int towidth = width;
             int toheight = height;

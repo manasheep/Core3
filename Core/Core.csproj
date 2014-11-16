@@ -101,6 +101,7 @@
     <Compile Include="Time\Time枚举.cs" />
     <Compile Include="Web\UBB.cs" />
     <Compile Include="Web\Web处理函数.cs" />
+    <Compile Include="WF\SynchronousSynchronizationContext.cs" />
     <Compile Include="通用容器.cs" />
     <Compile Include="通用扩展_Base.cs" />
     <Compile Include="通用扩展.cs" />

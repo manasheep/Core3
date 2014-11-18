@@ -152,13 +152,166 @@ public static class MongoDb扩展
         db.GridFS.DeleteById(id);
     }
 
-    public static WriteConcernResult UpdateSet<TDocument,TMember>(this MongoCollection<TDocument> mc,IMongoQuery query, Expression<Func<TDocument, TMember>> memberExpression,TMember value)
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where更新
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <param name="update">更新方式</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Update<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression,
+        IMongoUpdate update
+        )
     {
-        return mc.Update(query, Update<TDocument>.Set(memberExpression, value));
+        return mc.Update(Query<TDocument>.Where(expression), update);
     }
 
-    public static WriteConcernResult UpdateSet<TDocument, TMember>(this MongoCollection<TDocument> mc, Expression<Func<TDocument, bool>> expression, Expression<Func<TDocument, TMember>> memberExpression, TMember value)
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where更新
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <param name="update">更新方式</param>
+    /// <param name="options">选项</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Update<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression,
+        IMongoUpdate update,
+        MongoUpdateOptions options
+        )
     {
-        return UpdateSet(mc, Query<TDocument>.Where(expression), memberExpression, value);
+        return mc.Update(Query<TDocument>.Where(expression), update, options);
+    }
+
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where更新
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <param name="update">更新方式</param>
+    /// <param name="flags">更新标记</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Update<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression,
+        IMongoUpdate update,
+         UpdateFlags flags
+        )
+    {
+        return mc.Update(Query<TDocument>.Where(expression), update,flags);
+    }
+
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where更新
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <param name="update">更新方式</param>
+    /// <param name="writeConcern">对于写入时产生的异常关注方式</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Update<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression,
+        IMongoUpdate update,
+        WriteConcern writeConcern
+        )
+    {
+        return mc.Update(Query<TDocument>.Where(expression), update, writeConcern);
+    }
+
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where更新
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <param name="update">更新方式</param>
+    /// <param name="flags">更新标记</param>
+    /// <param name="writeConcern">对于写入时产生的异常关注方式</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Update<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression,
+        IMongoUpdate update,
+        UpdateFlags flags, 
+        WriteConcern writeConcern
+        )
+    {
+        return mc.Update(Query<TDocument>.Where(expression), update, flags, writeConcern);
+    }
+
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where移除
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Remove<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression
+        )
+    {
+        return mc.Remove(Query<TDocument>.Where(expression));
+    }
+
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where移除
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <param name="flags">移除标记</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Remove<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression,
+         RemoveFlags flags
+        )
+    {
+        return mc.Remove(Query<TDocument>.Where(expression), flags);
+    }
+
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where移除
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <param name="writeConcern">对于写入时产生的异常关注方式</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Remove<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression,
+        WriteConcern writeConcern
+        )
+    {
+        return mc.Remove(Query<TDocument>.Where(expression), writeConcern);
+    }
+
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where移除
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="expression">Where表达式</param>
+    /// <param name="flags">移除标记</param>
+    /// <param name="writeConcern">对于写入时产生的异常关注方式</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult Remove<TDocument>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> expression,
+        RemoveFlags flags,
+        WriteConcern writeConcern
+        )
+    {
+        return mc.Remove(Query<TDocument>.Where(expression), flags, writeConcern);
     }
 }

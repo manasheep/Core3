@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Reflection;
 
@@ -8,6 +9,31 @@ namespace Core.Reflection
 {
     public static class Reflection处理函数
     {
+        /// <summary>     
+        /// 获取属性的名称
+        /// </summary>     
+        /// <typeparam name="T">元素类型</typeparam>
+        /// <typeparam name="PT">属性类型</typeparam>
+        /// <param name="表达式">获取属性的表达式</param>     
+        /// <returns>属性的名称</returns>     
+        public static string GetPropertyName<T,PT>(Expression<Func<T, PT>> 表达式)
+        {
+            string rtn = string.Empty;
+            if (表达式.Body is UnaryExpression)
+            {
+                rtn = ((MemberExpression)((UnaryExpression)表达式.Body).Operand).Member.Name;
+            }
+            else if (表达式.Body is MemberExpression)
+            {
+                rtn = ((MemberExpression)表达式.Body).Member.Name;
+            }
+            else if (表达式.Body is ParameterExpression)
+            {
+                rtn = 表达式.Body.Type.Name;
+            }
+            return rtn;
+        }
+
         /// <summary>
         /// 通过反射获取属性值
         /// </summary>

@@ -204,7 +204,7 @@ public static class MongoDb扩展
          UpdateFlags flags
         )
     {
-        return mc.Update(Query<TDocument>.Where(expression), update,flags);
+        return mc.Update(Query<TDocument>.Where(expression), update, flags);
     }
 
     /// <summary>
@@ -240,7 +240,7 @@ public static class MongoDb扩展
         this MongoCollection<TDocument> mc,
         Expression<Func<TDocument, bool>> expression,
         IMongoUpdate update,
-        UpdateFlags flags, 
+        UpdateFlags flags,
         WriteConcern writeConcern
         )
     {
@@ -313,5 +313,39 @@ public static class MongoDb扩展
         )
     {
         return mc.Remove(Query<TDocument>.Where(expression), flags, writeConcern);
+    }
+
+    /// <summary>
+    /// 获取目标属性的所有不同的值集合
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <typeparam name="TValue">值类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="selectPropertyExpression">属性选取表达式</param>
+    /// <returns>值集合</returns>
+    public static IEnumerable<TValue> Distinct<TDocument, TValue>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, TValue>> selectPropertyExpression
+        )
+    {
+        return mc.Distinct<TValue>(selectPropertyExpression.GetPropertyName());
+    }
+
+    /// <summary>
+    /// 以Lambda表达式形式执行的Where过滤后，获取目标属性的所有不同的值集合
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <typeparam name="TValue">值类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="whereExpression">过滤表达式</param>
+    /// <param name="selectPropertyExpression">属性选取表达式</param>
+    /// <returns>值集合</returns>
+    public static IEnumerable<TValue> Distinct<TDocument, TValue>(
+        this MongoCollection<TDocument> mc,
+        Expression<Func<TDocument, bool>> whereExpression,
+        Expression<Func<TDocument, TValue>> selectPropertyExpression
+        )
+    {
+        return mc.Distinct<TValue>(selectPropertyExpression.GetPropertyName(), Query<TDocument>.Where(whereExpression));
     }
 }

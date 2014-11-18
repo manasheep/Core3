@@ -25,6 +25,21 @@ public static class MongoDb扩展
     }
 
     /// <summary>
+    /// 统计以Lambda表达式形式执行的Where查询结果集数据总数
+    /// </summary>
+    /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="predicate">查询条件数组</param>
+    /// <returns>数据总数</returns>
+    public static Int64 Count<TDefaultDocument>(
+        this MongoCollection<TDefaultDocument> mc,
+        Expression<Func<TDefaultDocument, bool>> predicate
+        )
+    {
+        return mc.Count(Query<TDefaultDocument>.Where(predicate));
+    }
+
+    /// <summary>
     /// 多条件查询，条件关系为“And”，返回数据结果集游标
     /// </summary>
     /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>

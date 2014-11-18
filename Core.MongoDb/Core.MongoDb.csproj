@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MongoDbMoneyFieldSerializer.cs" />
     <Compile Include="MongoDb扩展.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

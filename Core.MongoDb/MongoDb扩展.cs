@@ -153,6 +153,18 @@ public static class MongoDb扩展
     }
 
     /// <summary>
+    /// 更新单个数据
+    /// </summary>
+    /// <param name="mc">数据集合</param>
+    /// <param name="id">ID号</param>
+    /// <param name="update">更新方式</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult UpdateOneById(this MongoCollection mc, BsonValue id, IMongoUpdate update)
+    {
+        return mc.Update(Query.EQ("_id", id), update);
+    }
+
+    /// <summary>
     /// 以Lambda表达式形式执行的Where更新
     /// </summary>
     /// <typeparam name="TDocument">数据类型</typeparam>
@@ -245,6 +257,17 @@ public static class MongoDb扩展
         )
     {
         return mc.Update(Query<TDocument>.Where(expression), update, flags, writeConcern);
+    }
+
+    /// <summary>
+    /// 移除单个数据
+    /// </summary>
+    /// <param name="mc">数据集合</param>
+    /// <param name="id">ID号</param>
+    /// <returns>结果</returns>
+    public static WriteConcernResult RemoveOneById(this MongoCollection mc, BsonValue id)
+    {
+        return mc.Remove(Query.EQ("_id", id), RemoveFlags.Single);
     }
 
     /// <summary>

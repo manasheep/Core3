@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
-using MongoDB.Driver.Linq;
 
 // ReSharper disable once CheckNamespace
 public static class MongoDb扩展
@@ -66,6 +62,19 @@ public static class MongoDb扩展
     }
 
     /// <summary>
+    /// 使用Javascript进行查询，详情参考Mongodb的$where查询方法。
+    /// 基础查询代码示例："this.性别==false&amp;&amp;this.身高&gt;=1.89&amp;&amp;this.生日.getFullYear()&gt;=1995"
+    /// 注意：此方法性能很低。
+    /// </summary>
+    /// <param name="mc">数据集合</param>
+    /// <param name="javascriptcode">Javascript编写的$where查询代码</param>
+    /// <returns>数据结果集游标</returns>
+    public static MongoCursor Find(this MongoCollection mc, string javascriptcode)
+    {
+        return mc.FindAs(typeof(object),Query.Where(javascriptcode));
+    }
+
+    /// <summary>
     /// 多条件查询，条件关系为“And”，返回单个数据
     /// </summary>
     /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
@@ -89,6 +98,19 @@ public static class MongoDb扩展
     public static TDefaultDocument FindOne<TDefaultDocument>(this MongoCollection<TDefaultDocument> mc, string javascriptcode)
     {
         return mc.FindOne(Query.Where(javascriptcode));
+    }
+
+    /// <summary>
+    /// 使用Javascript进行查询单个数据，详情参考Mongodb的$where查询方法。
+    /// 基础查询代码示例："this.性别==false&amp;&amp;this.身高&gt;=1.89&amp;&amp;this.生日.getFullYear()&gt;=1995"
+    /// 注意：此方法性能很低。
+    /// </summary>
+    /// <param name="mc">数据集合</param>
+    /// <param name="javascriptcode">Javascript编写的$where查询代码</param>
+    /// <returns>单个数据</returns>
+    public static object FindOne(this MongoCollection mc, string javascriptcode)
+    {
+        return mc.FindOneAs(typeof(object),Query.Where(javascriptcode));
     }
 
     /// <summary>
@@ -448,6 +470,7 @@ public static class MongoDb扩展
     /// <summary>
     /// 以AddToSet方式更新单个数据
     /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
     /// <param name="mc">数据集合</param>
     /// <typeparam name="TValue">TValue类型参数</typeparam>
     /// <param name="id">ID号</param>
@@ -566,6 +589,7 @@ Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value
     /// <summary>
     /// 以AddToSetEach方式更新单个数据
     /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
     /// <param name="mc">数据集合</param>
     /// <typeparam name="TValue">TValue类型参数</typeparam>
     /// <param name="id">ID号</param>

@@ -52,6 +52,20 @@ public static class MongoDb扩展
     }
 
     /// <summary>
+    /// 使用Javascript进行查询，详情参考Mongodb的$where查询方法。
+    /// 基础查询代码示例："this.性别==false&amp;&amp;this.身高&gt;=1.89&amp;&amp;this.生日.getFullYear()&gt;=1995"
+    /// 注意：此方法性能很低。
+    /// </summary>
+    /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="javascriptcode">Javascript编写的$where查询代码</param>
+    /// <returns>数据结果集游标</returns>
+    public static MongoCursor<TDefaultDocument> Find<TDefaultDocument>(this MongoCollection<TDefaultDocument> mc, string javascriptcode)
+    {
+        return mc.Find(Query.Where(javascriptcode));
+    }
+
+    /// <summary>
     /// 多条件查询，条件关系为“And”，返回单个数据
     /// </summary>
     /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
@@ -61,6 +75,20 @@ public static class MongoDb扩展
     public static TDefaultDocument FindOne<TDefaultDocument>(this MongoCollection<TDefaultDocument> mc, params IMongoQuery[] queries)
     {
         return mc.FindOne(Query.And(queries));
+    }
+
+    /// <summary>
+    /// 使用Javascript进行查询单个数据，详情参考Mongodb的$where查询方法。
+    /// 基础查询代码示例："this.性别==false&amp;&amp;this.身高&gt;=1.89&amp;&amp;this.生日.getFullYear()&gt;=1995"
+    /// 注意：此方法性能很低。
+    /// </summary>
+    /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="javascriptcode">Javascript编写的$where查询代码</param>
+    /// <returns>单个数据</returns>
+    public static TDefaultDocument FindOne<TDefaultDocument>(this MongoCollection<TDefaultDocument> mc, string javascriptcode)
+    {
+        return mc.FindOne(Query.Where(javascriptcode));
     }
 
     /// <summary>
@@ -100,6 +128,20 @@ public static class MongoDb扩展
     }
 
     /// <summary>
+    /// 使用Javascript进行查询，详情参考Mongodb的$where查询方法。
+    /// 基础查询代码示例："this.性别==false&amp;&amp;this.身高&gt;=1.89&amp;&amp;this.生日.getFullYear()&gt;=1995"
+    /// 注意：此方法性能很低。
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="javascriptcode">Javascript编写的$where查询代码</param>
+    /// <returns>数据结果集游标</returns>
+    public static MongoCursor<TDocument> FindAs<TDocument>(this MongoCollection mc, string javascriptcode)
+    {
+        return mc.FindAs<TDocument>(Query.Where(javascriptcode));
+    }
+
+    /// <summary>
     /// 多条件查询，条件关系为“And”，返回单个数据
     /// </summary>
     /// <typeparam name="TDocument">数据类型</typeparam>
@@ -109,6 +151,20 @@ public static class MongoDb扩展
     public static TDocument FindOneAs<TDocument>(this MongoCollection mc, params IMongoQuery[] queries)
     {
         return mc.FindOneAs<TDocument>(Query.And(queries));
+    }
+
+    /// <summary>
+    /// 使用Javascript进行查询，返回单个数据，详情参考Mongodb的$where查询方法。
+    /// 基础查询代码示例："this.性别==false&amp;&amp;this.身高&gt;=1.89&amp;&amp;this.生日.getFullYear()&gt;=1995"
+    /// 注意：此方法性能很低。
+    /// </summary>
+    /// <typeparam name="TDocument">数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <param name="javascriptcode">Javascript编写的$where查询代码</param>
+    /// <returns>单个数据</returns>
+    public static TDocument FindOneAs<TDocument>(this MongoCollection mc, string javascriptcode)
+    {
+        return mc.FindOneAs<TDocument>(Query.Where(javascriptcode));
     }
 
     /// <summary>

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
+using MongoDB.Driver.Linq;
 
 // ReSharper disable once CheckNamespace
 public static class MongoDb扩展
@@ -18,6 +20,28 @@ public static class MongoDb扩展
     public static MongoCollection<TDefaultDocument> GetCollection<TDefaultDocument>(this MongoDatabase db)
     {
         return db.GetCollection<TDefaultDocument>(typeof(TDefaultDocument).Name);
+    }
+
+    /// <summary>
+    /// 转换为IQueryable形式，以进行Linq查询。
+    /// </summary>
+    /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <returns>IQueryable形式</returns>
+    public static IQueryable<TDefaultDocument> FindByQueryable<TDefaultDocument>(this MongoCollection<TDefaultDocument> mc)
+    {
+        return mc.AsQueryable();
+    }
+
+    /// <summary>
+    /// 转换为IQueryable形式，以进行Linq查询。
+    /// </summary>
+    /// <typeparam name="TDefaultDocument">默认数据类型</typeparam>
+    /// <param name="mc">数据集合</param>
+    /// <returns>IQueryable形式</returns>
+    public static IQueryable<TDefaultDocument> FindByQueryable<TDefaultDocument>(this MongoCollection mc)
+    {
+        return mc.AsQueryable<TDefaultDocument>();
     }
 
     /// <summary>

@@ -66,6 +66,10 @@
     <Compile Include="WFActivity\从图像中分割图块参数输入.xaml.cs">
       <DependentUpon>从图像中分割图块参数输入.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WFActivity\从图像中查找匹配图像.cs" />
+    <Compile Include="WFActivity\从图像中查找匹配图像参数输入.xaml.cs">
+      <DependentUpon>从图像中查找匹配图像参数输入.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WFActivity\应用滤镜到图像.cs" />
     <Compile Include="WFActivity\构建HSL色彩保留滤镜.cs" />
     <Compile Include="WFActivity\构建二值化滤镜.cs" />
@@ -86,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WFActivity\从图像中分割图块参数输入.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WFActivity\从图像中查找匹配图像参数输入.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

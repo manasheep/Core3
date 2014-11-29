@@ -6,14 +6,56 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:drawing="clr-namespace:System.Drawing;assembly=System.Drawing"
     xmlns:converters="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation">
-    <sap:ActivityDesigner.Resources>        <ResourceDictionary>            <converters:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />        </ResourceDictionary>    </sap:ActivityDesigner.Resources>    <StackPanel MaxWidth="230">
+    <sap:ActivityDesigner.Resources>
+        <ResourceDictionary>
+            <converters:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+        </ResourceDictionary>
+    </sap:ActivityDesigner.Resources>
+    <StackPanel MaxWidth="230">
+
+
         <Label Content="*处理目标："/>
-        <sapv:ExpressionTextBox             OwnerActivity="{Binding Path=ModelItem}"            ExpressionType="drawing:Bitmap"            UseLocationExpression="False">            <sapv:ExpressionTextBox.Expression>                <Binding                     Path="ModelItem.处理目标"                     Mode="TwoWay"                     Converter="{StaticResource ArgumentToExpressionConverter}"                    ConverterParameter="In" />            </sapv:ExpressionTextBox.Expression>        </sapv:ExpressionTextBox>
+        <sapv:ExpressionTextBox 
+            OwnerActivity="{Binding Path=ModelItem}"
+            ExpressionType="drawing:Bitmap"
+            UseLocationExpression="False">
+            <sapv:ExpressionTextBox.Expression>
+                <Binding 
+                    Path="ModelItem.处理目标" 
+                    Mode="TwoWay" 
+                    Converter="{StaticResource ArgumentToExpressionConverter}"
+                    ConverterParameter="In" />
+            </sapv:ExpressionTextBox.Expression>
+        </sapv:ExpressionTextBox>
 
         <Label Content="*最小宽度："/>
-        <sapv:ExpressionTextBox             OwnerActivity="{Binding Path=ModelItem}"            ExpressionType="system:Int32"            UseLocationExpression="False">            <sapv:ExpressionTextBox.Expression>                <Binding                     Path="ModelItem.最小宽度"                     Mode="TwoWay"                     Converter="{StaticResource ArgumentToExpressionConverter}"                    ConverterParameter="In" />            </sapv:ExpressionTextBox.Expression>        </sapv:ExpressionTextBox>
+        <sapv:ExpressionTextBox 
+            OwnerActivity="{Binding Path=ModelItem}"
+            ExpressionType="system:Int32"
+            UseLocationExpression="False">
+            <sapv:ExpressionTextBox.Expression>
+                <Binding 
+                    Path="ModelItem.最小宽度" 
+                    Mode="TwoWay" 
+                    Converter="{StaticResource ArgumentToExpressionConverter}"
+                    ConverterParameter="In" />
+            </sapv:ExpressionTextBox.Expression>
+        </sapv:ExpressionTextBox>
 
         <Label Content="*最小高度："/>
-        <sapv:ExpressionTextBox             OwnerActivity="{Binding Path=ModelItem}"            ExpressionType="system:Int32"            UseLocationExpression="False">            <sapv:ExpressionTextBox.Expression>                <Binding                     Path="ModelItem.最小高度"                     Mode="TwoWay"                     Converter="{StaticResource ArgumentToExpressionConverter}"                    ConverterParameter="In" />            </sapv:ExpressionTextBox.Expression>        </sapv:ExpressionTextBox>
-    </StackPanel>
+        <sapv:ExpressionTextBox 
+            OwnerActivity="{Binding Path=ModelItem}"
+            ExpressionType="system:Int32"
+            UseLocationExpression="False">
+            <sapv:ExpressionTextBox.Expression>
+                <Binding 
+                    Path="ModelItem.最小高度" 
+                    Mode="TwoWay" 
+                    Converter="{StaticResource ArgumentToExpressionConverter}"
+                    ConverterParameter="In" />
+            </sapv:ExpressionTextBox.Expression>
+        </sapv:ExpressionTextBox>
+
+
+    </StackPanel>
 </sap:ActivityDesigner>

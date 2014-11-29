@@ -1,0 +1,46 @@
+﻿<sap:ActivityDesigner x:Class="Core.AForge.WFActivity.从图像中查找匹配图像参数输入"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+    xmlns:converters="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+    xmlns:drawing="clr-namespace:System.Drawing;assembly=System.Drawing"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <sap:ActivityDesigner.Resources>
+        <ResourceDictionary>
+            <converters:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+        </ResourceDictionary>
+    </sap:ActivityDesigner.Resources>
+    <StackPanel MaxWidth="230">
+
+
+        <Label Content="*原图："/>
+        <sapv:ExpressionTextBox 
+            OwnerActivity="{Binding Path=ModelItem}"
+            ExpressionType="drawing:Bitmap"
+            UseLocationExpression="False">
+            <sapv:ExpressionTextBox.Expression>
+                <Binding 
+                    Path="ModelItem.原图" 
+                    Mode="TwoWay" 
+                    Converter="{StaticResource ArgumentToExpressionConverter}"
+                    ConverterParameter="In" />
+            </sapv:ExpressionTextBox.Expression>
+        </sapv:ExpressionTextBox>
+
+        <Label Content="*匹配图："/>
+        <sapv:ExpressionTextBox 
+            OwnerActivity="{Binding Path=ModelItem}"
+            ExpressionType="drawing:Bitmap"
+            UseLocationExpression="False">
+            <sapv:ExpressionTextBox.Expression>
+                <Binding 
+                    Path="ModelItem.匹配图" 
+                    Mode="TwoWay" 
+                    Converter="{StaticResource ArgumentToExpressionConverter}"
+                    ConverterParameter="In" />
+            </sapv:ExpressionTextBox.Expression>
+        </sapv:ExpressionTextBox>
+
+    </StackPanel>
+</sap:ActivityDesigner>

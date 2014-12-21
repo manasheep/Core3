@@ -95,6 +95,7 @@
     <Compile Include="WFActivity\模拟单击按键.cs" />
     <Compile Include="WFActivity\模拟弹起按键.cs" />
     <Compile Include="WFActivity\模拟按下按键.cs" />
+    <Compile Include="WFActivity\模拟键盘输入文字.cs" />
     <Compile Include="WFActivity\模拟键盘输入.cs" />
     <Compile Include="WFActivity\模拟鼠标右键单击.cs" />
     <Compile Include="WFActivity\模拟鼠标右键抬起.cs" />

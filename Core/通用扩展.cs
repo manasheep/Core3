@@ -42,6 +42,31 @@ public static partial class 通用扩展
         return Reflection处理函数.GetPropertyName(表达式);
     }
 
+    /// <summary>     
+    /// 获取表达式选取的目标属性的类型
+    /// </summary>     
+    /// <typeparam name="T">元素类型</typeparam>
+    /// <typeparam name="PT">属性类型</typeparam>
+    /// <param name="o">对象</param>
+    /// <param name="表达式">获取属性的表达式</param>     
+    /// <returns>属性的类型</returns>     
+    public static Type GetPropertyType<T, PT>(this T o, Expression<Func<T, PT>> 表达式)
+    {
+        return Reflection处理函数.GetPropertyType(表达式);
+    }
+
+    /// <summary>     
+    /// 获取表达式选取的目标属性的类型
+    /// </summary>     
+    /// <typeparam name="T">元素类型</typeparam>
+    /// <typeparam name="PT">属性类型</typeparam>
+    /// <param name="表达式">获取属性的表达式</param>     
+    /// <returns>属性的类型</returns>     
+    public static Type GetPropertyType<T, PT>(this Expression<Func<T, PT>> 表达式)
+    {
+        return Reflection处理函数.GetPropertyType(表达式);
+    }
+
     /// <summary>
     /// 获取枚举的注释特性（DescriptionAttribute）值
     /// </summary>

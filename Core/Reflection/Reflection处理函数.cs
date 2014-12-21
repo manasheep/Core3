@@ -34,6 +34,31 @@ namespace Core.Reflection
             return rtn;
         }
 
+        /// <summary>     
+        /// 获取属性的类型
+        /// </summary>     
+        /// <typeparam name="T">元素类型</typeparam>
+        /// <typeparam name="PT">属性类型</typeparam>
+        /// <param name="表达式">获取属性的表达式</param>     
+        /// <returns>属性的类型</returns>     
+        public static Type GetPropertyType<T, PT>(Expression<Func<T, PT>> 表达式)
+        {
+            Type rtn = null;
+            if (表达式.Body is UnaryExpression)
+            {
+                rtn = ((MemberExpression)((UnaryExpression)表达式.Body).Operand).Member.GetPropertyValue("PropertyType") as Type;
+            }
+            else if (表达式.Body is MemberExpression)
+            {
+                rtn = ((MemberExpression)表达式.Body).Member.GetPropertyValue("PropertyType") as Type;
+            }
+            else if (表达式.Body is ParameterExpression)
+            {
+                rtn = 表达式.Body.Type;
+            }
+            return rtn;
+        }
+
         /// <summary>
         /// 通过反射获取属性值
         /// </summary>

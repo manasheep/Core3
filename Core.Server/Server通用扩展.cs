@@ -207,10 +207,11 @@ public static class Server通用扩展
     /// <param name="标签显示内容">标签内容，如果为空则使用名称作为标签。将在结尾处自动添加半角冒号。</param>
     /// <param name="功能提示">显示在输入框内的功能提示</param>
     /// <param name="显示行数">显示行数，这将决定容器的显示高度</param>
+    /// <param name="id">ID，为null则自动生成</param>
     /// <returns></returns>
-    public static MvcHtmlString TextAreaForJqueryMobile(this HtmlHelper o, string 名称, string 值, string 功能提示, string 标签显示内容 = null, int 显示行数 = 5)
+    public static MvcHtmlString TextAreaForJqueryMobile(this HtmlHelper o, string 名称, string 值, string 功能提示, string 标签显示内容 = null, int 显示行数 = 5, string id = null, Action<TagBuilder> 构造器操作表达式 = null)
     {
-        var id = "id" + Guid.NewGuid();
+        if (id == null) id = "id" + Guid.NewGuid();
 
         if (标签显示内容.IsNullOrEmpty()) 标签显示内容 = 名称;
 
@@ -224,6 +225,7 @@ public static class Server通用扩展
         input.GenerateId(id);
         if (!功能提示.IsNullOrEmpty()) input.MergeAttribute("placeholder", 功能提示);
         if (!值.IsNullOrEmpty()) input.SetInnerText(值);
+        if (构造器操作表达式 != null) 构造器操作表达式(input);
 
         var rounddiv = new TagBuilder("div");
         rounddiv.Attributes.Add("data-role", "fieldcontain");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -16,6 +17,25 @@ using Core.Reflection;
 public static partial class 通用扩展
 {
     #region 基本
+
+    /// <summary>
+    /// 获取当前代码所在方法的方法名
+    /// </summary>
+    /// <param name="o">任意对象，仅供调用方便，不作任何处理</param>
+    /// <returns>当前代码所在方法的方法名</returns>
+    public static string GetCurrentMethodName(this object o)
+    {
+        var method = new StackFrame(1).GetMethod(); // 这里忽略1层堆栈，也就忽略了当前方法GetMethodName，这样拿到的就正好是外部调用GetMethodName的方法信息
+        var property = (
+                  from p in method.DeclaringType.GetProperties(
+                           BindingFlags.Instance |
+                           BindingFlags.Static |
+                           BindingFlags.Public |
+                           BindingFlags.NonPublic)
+                  where p.GetGetMethod(true) == method || p.GetSetMethod(true) == method
+                  select p).FirstOrDefault();
+        return property == null ? method.Name : property.Name;
+    }
 
     /// <summary>     
     /// 获取表达式选取的目标属性的名称

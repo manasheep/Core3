@@ -30,6 +30,49 @@ namespace Core.Drawing
     public static class Drawing处理函数
     {
         /// <summary>
+        /// 转换为图像
+        /// </summary>
+        /// <param name="图像数据字节数组">图像数据字节数组</param>
+        /// <returns>图像</returns>
+        public static Image 转换为图像(this byte[] 图像数据字节数组)
+        {
+            var ms = new MemoryStream(图像数据字节数组);
+            var img = Image.FromStream(ms);
+            ms.Close();
+            return img;
+        }
+
+        /// <summary>
+        /// 转换为字节数组
+        /// </summary>
+        /// <param name="图像">图像</param>
+        /// <param name="输出图像类型">输出图像字节数组的数据类型</param>
+        /// <returns>字节数组</returns>
+        public static byte[] 转换为字节数组(this Image 图像,ImageFormat 输出图像类型)
+        {
+            MemoryStream ms = new MemoryStream();
+            byte[] imagedata = null;
+            图像.Save(ms, 输出图像类型);
+            imagedata = ms.GetBuffer();
+            ms.Close();
+            return imagedata;
+        }
+
+        /// <summary>
+        /// 转换图像为24位图像
+        /// </summary>
+        /// <param name="原图">原图</param>
+        /// <returns>新的24位彩色图</returns>
+        public static Bitmap 转换为24位彩色图像文件(this Image 原图)
+        {
+            var bnew = new Bitmap(原图.Width, 原图.Height, PixelFormat.Format24bppRgb);
+            Graphics g = Graphics.FromImage(bnew);
+            g.DrawImage(原图, 0, 0);
+            g.Dispose();
+            return bnew;
+        }
+
+        /// <summary>
         /// 使用文件流的方式读取图像，不会持续占用文件，原文件可被删改
         /// </summary>
         /// <param name="文件路径">图像文件路径</param>

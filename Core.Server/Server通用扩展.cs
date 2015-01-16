@@ -452,6 +452,14 @@ public static class Server通用扩展
     }
 
     /// <summary>
+    /// 将指向当前Web站点下的绝对路径转换为相对于当前页的路径，如“../admin/abc.aspx”
+    /// </summary>
+    public static string ToRelativePathForPage(this string o)
+    {
+        return o.AsPathString().ToRelativePathForPage();
+    }
+
+    /// <summary>
     /// 将指向当前Web站点下的绝对路径转换为虚拟服务器路径，如：“~/admin/abc.aspx”
     /// </summary>
     public static ServerPathString ToServerPath(this 通用扩展.PathString o)
@@ -478,12 +486,28 @@ public static class Server通用扩展
     }
 
     /// <summary>
-    /// 将当前相对于服务器根目录的相对Url（如“/Upload/File”）转换为绝对Url，如：“http://localhost:6068/Upload/File”
+    /// 将指向当前Web站点下的绝对路径转换为虚拟服务器路径，如：“~/admin/abc.aspx”
+    /// </summary>
+    public static ServerPathString ToServerPath(this string o)
+    {
+        return o.AsPathString().ToServerPath();
+    }
+
+    /// <summary>
+    /// 将当前相对于服务器根目录的相对Url（如“/Upload/File”）转换为绝对Url网址，如：“http://localhost:6068/Upload/File”
     /// </summary>
     public static string ToAbsoluteUrl(this 通用扩展.PathString o)
     {
         if (o.Value.ToLower().StartsWith("http://")) return o.Value;
         return "http://" + WebSite变量.Current.Request.ServerVariables["SERVER_NAME"] + ":" + WebSite变量.Current.Request.ServerVariables["Server_Port"] + o;
+    }
+
+    /// <summary>
+    /// 将当前相对于服务器根目录的相对Url（如“/Upload/File”）转换为绝对Url网址，如：“http://localhost:6068/Upload/File”
+    /// </summary>
+    public static string ToAbsoluteUrl(this string o)
+    {
+        return o.AsPathString().ToAbsoluteUrl();
     }
 
     /// <summary>

@@ -133,7 +133,7 @@ public static partial class 通用扩展
     /// <returns>组合的字符串</returns>
     public static string AppendLine(this string s, object 增加的对象)
     {
-        return s + "\n" + 增加的对象;
+        return s + "\r\n" + 增加的对象;
     }
 
     /// <summary>

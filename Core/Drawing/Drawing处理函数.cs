@@ -59,6 +59,26 @@ namespace Core.Drawing
         }
 
         /// <summary>
+        /// 转换为字节数组
+        /// </summary>
+        /// <param name="图像">图像</param>
+        /// <returns>字节数组</returns>
+        public static byte[] 转换为字节数组(this Bitmap 图像)
+        {
+            var data = 图像.LockBits(new Rectangle(0, 0, 图像.Width, 图像.Height), ImageLockMode.ReadOnly,
+                图像.PixelFormat);
+            // Get the address of the first line.
+            IntPtr ptr = data.Scan0;
+            // Declare an array to hold the bytes of the bitmap.
+            int bytes = data.Stride * 图像.Height;
+            byte[] rgbValues = new byte[bytes];
+            // Copy the RGB values into the array.
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+            图像.UnlockBits(data);
+            return rgbValues;
+        }
+
+        /// <summary>
         /// 转换图像为24位图像
         /// </summary>
         /// <param name="原图">原图</param>

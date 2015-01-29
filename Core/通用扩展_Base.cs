@@ -14,6 +14,35 @@ public static partial class 通用扩展
     #region 基本
 
     /// <summary>
+    /// 执行并释放对象，同using(……)关键字
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
+    /// <param name="o">目标对象</param>
+    /// <param name="执行操作">要执行的操作</param>
+    public static void UsingRun<T>(this T o, Action<T> 执行操作) where T : IDisposable
+    {
+        using (o)
+        {
+            执行操作(o);
+        }
+    }
+
+    /// <summary>
+    /// 执行并返回值，然后释放对象，同using(……)关键字
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
+    /// <typeparam name="TR">返回值类型</typeparam>
+    /// <param name="o">目标对象</param>
+    /// <param name="执行操作">要执行的操作</param>
+    public static TR UsingRunAndReturn<T, TR>(this T o, Func<T, TR> 执行操作) where T : IDisposable
+    {
+        using (o)
+        {
+            return 执行操作(o);
+        }
+    }
+
+    /// <summary>
     /// 根据布尔值分别返回不同结果
     /// </summary>
     /// <typeparam name="T">返回结果类型</typeparam>
@@ -21,7 +50,7 @@ public static partial class 通用扩展
     /// <param name="当为真时返回结果">当为真时返回结果</param>
     /// <param name="当为假时返回结果">当为假时返回结果</param>
     /// <returns>返回结果</returns>
-    public static T SwitchReturn<T>(this bool b,T 当为真时返回结果,T 当为假时返回结果)
+    public static T SwitchReturn<T>(this bool b, T 当为真时返回结果, T 当为假时返回结果)
     {
         return b ? 当为真时返回结果 : 当为假时返回结果;
     }
@@ -35,7 +64,7 @@ public static partial class 通用扩展
     /// <param name="当为假时返回结果">当为假时返回结果</param>
     /// <param name="当为空时返回结果">当为空时返回结果</param>
     /// <returns>返回结果</returns>
-    public static T SwitchReturn<T>(this bool? b, T 当为真时返回结果, T 当为假时返回结果,T 当为空时返回结果)
+    public static T SwitchReturn<T>(this bool? b, T 当为真时返回结果, T 当为假时返回结果, T 当为空时返回结果)
     {
         return b == null ? 当为空时返回结果 : b.Value.SwitchReturn(当为真时返回结果, 当为假时返回结果);
     }

@@ -212,6 +212,25 @@ public static partial class 通用扩展
     }
 
     /// <summary>
+    /// 将对象的所有属性及字段的值复制到另一个对象上
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
+    /// <param name="o">对象</param>
+    /// <param name="目标对象">复制到的对象</param>
+    public static void CopyTo<T>(this T o,T 目标对象)
+    {
+        var t = o.GetType();
+        foreach (var p in t.GetProperties())
+        {
+            p.SetValue(目标对象, p.GetValue(o, null), null);
+        }
+        foreach (var f in t.GetFields())
+        {
+            f.SetValue(目标对象, f.GetValue(o));
+        }
+    }
+
+    /// <summary>
     /// 通过反射获得类型名称及全部属性名值的输出
     /// </summary>
     /// <param name="o"></param>

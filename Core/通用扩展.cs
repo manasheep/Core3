@@ -222,7 +222,10 @@ public static partial class 通用扩展
         var t = o.GetType();
         foreach (var p in t.GetProperties())
         {
-            p.SetValue(目标对象, p.GetValue(o, null), null);
+            if (p.CanRead && p.CanWrite)
+            {
+                p.SetValue(目标对象, p.GetValue(o, null), null);
+            }
         }
         foreach (var f in t.GetFields())
         {

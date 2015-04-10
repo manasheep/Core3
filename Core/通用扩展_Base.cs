@@ -14,6 +14,16 @@ public static partial class 通用扩展
     #region 基本
 
     /// <summary>
+    /// 将对象强制转换为布尔类型并返回，如果对象为空则返回false
+    /// </summary>
+    /// <param name="o">目标对象</param>
+    /// <returns>布尔值</returns>
+    public static bool AsBoolean(this object o)
+    {
+        return o != null && (bool) o;
+    }
+
+    /// <summary>
     /// 执行并释放对象，同using(……)关键字
     /// </summary>
     /// <typeparam name="T">类型</typeparam>

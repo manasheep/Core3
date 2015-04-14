@@ -42,6 +42,7 @@
     <Reference Include="System.Activities" />
     <Reference Include="System.Activities.DurableInstancing" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.DurableInstancing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

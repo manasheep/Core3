@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using MongoDB.Bson;
@@ -257,6 +259,59 @@ public static class MongoDb扩展
     public static MongoGridFSFileInfo UploadFile(this MongoDatabase db, string path)
     {
         return db.GridFS.Upload(path);
+    }
+
+    /// <summary>
+    /// 上传图像到数据库的GridFS中
+    /// </summary>
+    /// <param name="db">数据库</param>
+    /// <param name="image">图像对象</param>
+    /// <param name="imageFormat">图像格式</param>
+    /// <param name="fileName">文件名</param>
+    /// <returns>文件信息</returns>
+    public static MongoGridFSFileInfo UploadImage(this MongoDatabase db, System.Drawing.Image image,ImageFormat imageFormat,string fileName)
+    {
+        using (var ms = new MemoryStream())
+        {
+            image.Save(ms, imageFormat);
+            ms.Seek(0, SeekOrigin.Begin);
+            return db.GridFS.Upload(ms, fileName);
+        }
+    }
+
+    /// <summary>
+    /// 上传PNG格式图像到数据库的GridFS中
+    /// </summary>
+    /// <param name="db">数据库</param>
+    /// <param name="image">图像对象</param>
+    /// <param name="fileName">文件名</param>
+    /// <returns>文件信息</returns>
+    public static MongoGridFSFileInfo UploadPngImage(this MongoDatabase db, System.Drawing.Image image, string fileName)
+    {
+        using (var ms = new MemoryStream())
+        {
+            Core.Drawing.Drawing处理函数.保存为PNG文件(image, ms);
+            ms.Seek(0, SeekOrigin.Begin);
+            return db.GridFS.Upload(ms, fileName);
+        }
+    }
+
+    /// <summary>
+    /// 上传JPG格式图像到数据库的GridFS中
+    /// </summary>
+    /// <param name="db">数据库</param>
+    /// <param name="image">图像对象</param>
+    /// <param name="fileName">文件名</param>
+    /// <param name="quality">图像质量，取值范围为1-100</param>
+    /// <returns>文件信息</returns>
+    public static MongoGridFSFileInfo UploadJpgImage(this MongoDatabase db, System.Drawing.Image image, string fileName, byte quality)
+    {
+        using (var ms = new MemoryStream())
+        {
+            Core.Drawing.Drawing处理函数.保存为JPG文件(image, ms, quality);
+            ms.Seek(0, SeekOrigin.Begin);
+            return db.GridFS.Upload(ms, fileName);
+        }
     }
 
     /// <summary>

@@ -97,7 +97,7 @@ public static class MongoDb扩展
     /// <returns>数据结果集游标</returns>
     public static MongoCursor Find(this MongoCollection mc, string javascriptcode)
     {
-        return mc.FindAs(typeof(object),Query.Where(javascriptcode));
+        return mc.FindAs(typeof(object), Query.Where(javascriptcode));
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public static class MongoDb扩展
     /// <returns>单个数据</returns>
     public static object FindOne(this MongoCollection mc, string javascriptcode)
     {
-        return mc.FindOneAs(typeof(object),Query.Where(javascriptcode));
+        return mc.FindOneAs(typeof(object), Query.Where(javascriptcode));
     }
 
     /// <summary>
@@ -240,6 +240,18 @@ public static class MongoDb扩展
     }
 
     /// <summary>
+    /// 在数据库的GridFS中创建文件的副本
+    /// </summary>
+    /// <param name="db">数据库</param>
+    /// <param name="id">要复制的文件编号</param>
+    /// <returns>副本文件信息</returns>
+    public static MongoGridFSFileInfo CreateFileDuplicate(this MongoDatabase db, BsonValue id)
+    {
+        var info = db.GridFS.FindOneById(id);
+        return db.GridFS.Upload(info.OpenRead(), info.Name);
+    }
+
+    /// <summary>
     /// 从数据库的GridFS中获取文件
     /// </summary>
     /// <param name="id">文件编号</param>
@@ -269,7 +281,7 @@ public static class MongoDb扩展
     /// <param name="imageFormat">图像格式</param>
     /// <param name="fileName">文件名</param>
     /// <returns>文件信息</returns>
-    public static MongoGridFSFileInfo UploadImage(this MongoDatabase db, System.Drawing.Image image,ImageFormat imageFormat,string fileName)
+    public static MongoGridFSFileInfo UploadImage(this MongoDatabase db, System.Drawing.Image image, ImageFormat imageFormat, string fileName)
     {
         using (var ms = new MemoryStream())
         {

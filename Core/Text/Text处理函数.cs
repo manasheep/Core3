@@ -11,6 +11,18 @@ namespace Core.Text
 {
     public static partial class Text处理函数
     {
+
+        /// <summary>
+        /// 阿拉伯数字转中文大写数字
+        /// </summary>
+        /// <param name="数字字符串">阿拉伯数字</param>
+        /// <param name="是否为人民币大写形式">是否为人民币大写形式</param>
+        /// <returns>转换结果</returns>
+        public static string 转换为大写数字(this string 数字字符串, bool 是否为人民币大写形式)
+        {
+            var c = new 阿拉伯数字转中文大写数字();
+            return c.Convert(数字字符串, 是否为人民币大写形式);
+        }
         
         /// <summary>
         /// 转换为半角字符串

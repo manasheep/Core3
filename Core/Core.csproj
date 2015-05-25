@@ -98,6 +98,7 @@
     <Compile Include="Text\Text处理函数_Base.cs" />
     <Compile Include="Text\Text处理函数.cs" />
     <Compile Include="Text\Text常量.cs" />
+    <Compile Include="Text\阿拉伯数字转中文大写数字.cs" />
     <Compile Include="Time\Time处理函数.cs" />
     <Compile Include="Time\Time枚举.cs" />
     <Compile Include="Web\UBB.cs" />

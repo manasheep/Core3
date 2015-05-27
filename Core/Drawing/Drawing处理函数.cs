@@ -450,16 +450,31 @@ namespace Core.Drawing
         public static Bitmap 添加水印(this Image 图像, Image 水印图像, 对齐方位 水印方位, int 水平边距, int 垂直边距)
         {
             Bitmap Bmp = 图像.Clone() as Bitmap;
-            Graphics g = Graphics.FromImage(Bmp);
-            var x = Bmp.Width / 2 - 水印图像.Width / 2;
-            var y = Bmp.Height / 2 - 水印图像.Height / 2;
+            原图添加水印(Bmp, 水印图像, 水印方位, 水平边距, 垂直边距);
+            return Bmp;
+        }
+
+        /// <summary>
+        /// 为原图添加水印
+        /// </summary>
+        /// <param name="图像">源图像</param>
+        /// <param name="水印图像">水印图像</param>
+        /// <param name="水印方位">相对于源图像的方位，在不冲突的情况下可复选，比如“水印方位.右|水印方位.下”</param>
+        /// <param name="水平边距">左侧或右侧的边距</param>
+        /// <param name="垂直边距">上方或下方的边距</param>
+        /// <returns>添加了水印的图片</returns>
+        public static void 原图添加水印(this Image 图像, Image 水印图像, 对齐方位 水印方位, int 水平边距, int 垂直边距)
+        {
+            Graphics g = Graphics.FromImage(图像);
+            var x = 图像.Width / 2 - 水印图像.Width / 2;
+            var y = 图像.Height / 2 - 水印图像.Height / 2;
             if ((水印方位 & 对齐方位.上) > 0)
             {
                 y = 0 + 垂直边距;
             }
             if ((水印方位 & 对齐方位.下) > 0)
             {
-                y = Bmp.Height - 水印图像.Height - 垂直边距;
+                y = 图像.Height - 水印图像.Height - 垂直边距;
             }
             if ((水印方位 & 对齐方位.左) > 0)
             {
@@ -467,10 +482,9 @@ namespace Core.Drawing
             }
             if ((水印方位 & 对齐方位.右) > 0)
             {
-                x = Bmp.Width - 水印图像.Width - 水平边距;
+                x = 图像.Width - 水印图像.Width - 水平边距;
             }
             g.DrawImage(水印图像, new Rectangle(x, y, 水印图像.Width, 水印图像.Height), 0, 0, 水印图像.Width, 水印图像.Height, GraphicsUnit.Pixel);
-            return Bmp;
         }
 
         /// <summary>

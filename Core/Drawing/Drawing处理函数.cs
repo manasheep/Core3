@@ -179,6 +179,52 @@ namespace Core.Drawing
             return null;
         }
 
+        private static void 图像旋转(Image 图像, ref int 宽度, ref int 高度, int 方向)
+        {
+            int ow = 宽度;
+            switch (方向)
+            {
+                case 2:
+                    图像.RotateFlip(RotateFlipType.RotateNoneFlipX);//horizontal flip
+                    break;
+                case 3:
+                    图像.RotateFlip(RotateFlipType.Rotate180FlipNone);//right-top
+                    break;
+                case 4:
+                    图像.RotateFlip(RotateFlipType.RotateNoneFlipY);//vertical flip
+                    break;
+                case 5:
+                    图像.RotateFlip(RotateFlipType.Rotate90FlipX);
+                    break;
+                case 6:
+                    图像.RotateFlip(RotateFlipType.Rotate90FlipNone);//right-top
+                    宽度 = 高度;
+                    高度 = ow;
+                    break;
+                case 7:
+                    图像.RotateFlip(RotateFlipType.Rotate270FlipX);
+                    break;
+                case 8:
+                    图像.RotateFlip(RotateFlipType.Rotate270FlipNone);//left-bottom
+                    宽度 = 高度;
+                    高度 = ow;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        public static Image 读取图片并根据Exif信息自动旋转(string 图像路径)
+        {
+            var exif = new Exif(图像路径);
+            var img = 读取图像自文件(图像路径);
+            var w = img.Width;
+            var h = img.Height;
+            图像旋转(img, ref w, ref h, exif.orientationNumber);
+            return img;
+        }
+
         /// <summary>
         /// 将图像放大或缩小，默认采用高质量缩放
         /// </summary>

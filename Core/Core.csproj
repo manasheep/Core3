@@ -73,6 +73,7 @@
     <Compile Include="Database\节点处理器.cs" />
     <Compile Include="Drawing\Drawing处理函数.cs" />
     <Compile Include="Drawing\AdvancedColor.cs" />
+    <Compile Include="Drawing\Exif.cs" />
     <Compile Include="Environment\Environment变量.cs" />
     <Compile Include="IO\GZip.cs" />
     <Compile Include="IO\HashHelper.cs" />

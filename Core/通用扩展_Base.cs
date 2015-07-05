@@ -307,6 +307,14 @@ public static partial class 通用扩展
     }
 
     /// <summary>
+    /// 检测字符串是否为null或空白字符串
+    /// </summary>
+    public static bool IsNullOrEmptyOrWhitespace(this string s)
+    {
+        return string.IsNullOrEmpty(s) || s.Trim().Length == 0;
+    }
+
+    /// <summary>
     /// 当字符串为null或空字符串时执行自定义表达式
     /// </summary>
     public static void IsNullOrEmptyThen(this string s, Action<string> 表达式)

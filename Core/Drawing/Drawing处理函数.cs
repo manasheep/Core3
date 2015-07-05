@@ -217,11 +217,18 @@ namespace Core.Drawing
 
         public static Image 读取图片并根据Exif信息自动旋转(string 图像路径)
         {
-            var exif = new Exif(图像路径);
             var img = 读取图像自文件(图像路径);
-            var w = img.Width;
-            var h = img.Height;
-            图像旋转(img, ref w, ref h, exif.orientationNumber);
+            try
+            {
+                var exif = new Exif(图像路径);
+                var w = img.Width;
+                var h = img.Height;
+                图像旋转(img, ref w, ref h, exif.orientationNumber);
+            }
+            catch(Exception e)
+            {
+                e.Trace();
+            }
             return img;
         }
 

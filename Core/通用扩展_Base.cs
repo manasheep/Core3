@@ -13,6 +13,39 @@ public static partial class 通用扩展
 
     #region 基本
 
+    /// <summary> 
+    /// 将 Stream 转成 byte[] 
+    /// </summary> 
+    public static byte[] ToBytes(this Stream stream)
+    {
+        byte[] bytes = new byte[stream.Length];
+        stream.Read(bytes, 0, bytes.Length);
+
+        // 设置当前流的位置为流的开始 
+        stream.Seek(0, SeekOrigin.Begin);
+        return bytes;
+    }
+
+    /// <summary> 
+    /// 将 Stream 写入文件 
+    /// </summary> 
+    public static void ToFile(this Stream stream, string 文件路径及名称)
+    {
+        FileStream fs = new FileStream(文件路径及名称, FileMode.Create);
+        BinaryWriter bw = new BinaryWriter(fs);
+        bw.Write(stream.ToBytes());
+        bw.Close();
+        fs.Close();
+    }
+
+    /// <summary> 
+    /// 将 byte[] 转成 MemoryStream 
+    /// </summary> 
+    public static MemoryStream ToMemoryStream(this byte[] bytes)
+    {
+        return new MemoryStream(bytes);
+    }
+
     /// <summary>
     /// 将对象强制转换为布尔类型并返回，如果对象为空则返回false
     /// </summary>
@@ -20,7 +53,7 @@ public static partial class 通用扩展
     /// <returns>布尔值</returns>
     public static bool AsBoolean(this object o)
     {
-        return o != null && (bool) o;
+        return o != null && (bool)o;
     }
 
     /// <summary>

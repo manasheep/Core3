@@ -37,6 +37,27 @@ namespace Core.IO
             }
         }
 
+        /// <summary>
+        /// 将输入的数据流进行压缩，然后输出到一个内存流
+        /// </summary>
+        /// <param name="数据流">输入的数据流</param>
+        /// <returns>输出的内存流</returns>
+        public static MemoryStream 压缩(Stream 数据流)
+        {
+            var ms = new MemoryStream();
+            using (GZipStream output = new GZipStream(ms, CompressionMode.Compress, true))
+            {
+                byte[] bytes = new byte[4096];
+                int n;
+                while ((n = 数据流.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    output.Write(bytes, 0, n);
+                }
+            }
+            ms.Seek(0, SeekOrigin.Begin);
+            return ms;
+        }
+
         private static List<TempFileName> 转化文件列表(string[] 文件列表)
         {
             var list = new List<TempFileName>();
@@ -84,6 +105,28 @@ namespace Core.IO
                     DeSerializeFiles(destination, 解压缩目录路径);
                 }
             }
+        }
+
+        /// <summary>
+        /// 将输入的压缩数据进行解压缩，然后输出到一个内存流
+        /// </summary>
+        /// <param name="压缩数据流">输入的压缩数据流</param>
+        /// <returns>输出的内存流</returns>
+        public static MemoryStream 解压缩(Stream 压缩数据流)
+        {
+            var ms = new MemoryStream();
+            using (GZipStream input = new GZipStream(压缩数据流, CompressionMode.Decompress, true))
+            {
+                byte[] bytes = new byte[4096];
+                int n;
+                while ((n = input.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    ms.Write(bytes, 0, n);
+                }
+            }
+            ms.Flush();
+            ms.Position = 0;
+            return ms;
         }
 
         private static void DeSerializeFiles(Stream s, string dirPath)

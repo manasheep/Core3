@@ -541,6 +541,21 @@ namespace Core.IO
         }
 
         /// <summary>
+        /// 将对象序列化到内存流
+        /// </summary>
+        /// <param name="对象">要序列化的对象</param>
+        /// <returns>内存流</returns>
+        public static MemoryStream 序列化对象为XML内存流(this object 对象)
+        {
+            var XS = new XmlSerializer(对象.GetType());
+            var stream = new MemoryStream();
+            var wt = XmlWriter.Create(stream, new XmlWriterSettings() { Encoding = Encoding.UTF8 });
+            XS.Serialize(wt, 对象);
+            stream.Seek(0, SeekOrigin.Begin);
+            return stream;
+        }
+
+        /// <summary>
         /// 将对象序列化并转为字符串
         /// </summary>
         /// <param name="对象">要序列化的对象</param>
@@ -612,6 +627,7 @@ namespace Core.IO
             var MS = new MemoryStream();
             var bf = new BinaryFormatter();
             bf.Serialize(MS, 对象);
+            MS.Seek(0, SeekOrigin.Begin);
             return MS;
         }
 
@@ -679,6 +695,7 @@ namespace Core.IO
             }
             return "{0:0.0}GB".FormatWith(f.Length / (double)存储单位.GB);
         }
+
     }
 
 }

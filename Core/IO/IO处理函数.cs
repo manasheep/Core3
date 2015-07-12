@@ -588,6 +588,22 @@ namespace Core.IO
         }
 
         /// <summary>
+        /// 泛型方法，从序列化XML文件流中读取指定类型的对象
+        /// </summary>
+        /// <typeparam name="类型">反序列化类型</typeparam>
+        /// <param name="数据流">数据输入流</param>
+        /// <returns>反序列化后的对象</returns>
+        public static 类型 反序列化对象自XML数据流<类型>(this Stream 数据流)
+        {
+            var XS = new XmlSerializer(typeof(类型));
+            数据流.Position = 0;
+            var reader = new XmlTextReader(数据流);
+            reader.Normalization = false;
+            var OBJ = (类型)XS.Deserialize(reader);
+            return OBJ;
+        }
+
+        /// <summary>
         /// 泛型方法，从字符串中读取指定类型的对象
         /// </summary>
         /// <typeparam name="类型">反序列化类型</typeparam>
@@ -648,13 +664,13 @@ namespace Core.IO
         /// <summary>
         /// 通过包含序列化的内存流反序列化对象.
         /// </summary>
-        /// <param name="内存流">包含序列化信息的内存流</param>
+        /// <param name="数据流">输入数据流</param>
         /// <returns>反序列化后的对象</returns>
-        public static object 反序列化对象自二进制内存流(this MemoryStream 内存流)
+        public static object 反序列化对象自二进制数据流(this Stream 数据流)
         {
             var bf = new BinaryFormatter();
-            内存流.Position = 0;
-            return bf.Deserialize(内存流);
+            数据流.Position = 0;
+            return bf.Deserialize(数据流);
         }
 
         /// <summary>

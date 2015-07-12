@@ -274,6 +274,18 @@ public static class MongoDb扩展
     }
 
     /// <summary>
+    /// 上传文件到数据库的GridFS中
+    /// </summary>
+    /// <param name="stream">文件数据流</param>
+    /// <param name="db">数据库</param>
+    /// <param name="filename">文件在来源处的名称（可包含完整路径）</param>
+    /// <returns>文件信息</returns>
+    public static MongoGridFSFileInfo UploadFile(this MongoDatabase db, Stream stream,string filename)
+    {
+        return db.GridFS.Upload(stream, filename);
+    }
+
+    /// <summary>
     /// 上传图像到数据库的GridFS中
     /// </summary>
     /// <param name="db">数据库</param>

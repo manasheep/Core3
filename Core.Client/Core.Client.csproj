@@ -134,6 +134,7 @@
     <Compile Include="WFActivity\通过正则表达式获取窗口句柄.cs" />
     <Compile Include="WFActivity\通过类名获取窗口句柄.cs" />
     <Compile Include="WinForm\WinForm处理函数.cs" />
+    <Compile Include="WPF\AsyncObservableCollection.cs" />
     <Compile Include="WPF\WPF处理函数.cs" />
     <Compile Include="Client处理函数.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

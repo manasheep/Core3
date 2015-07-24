@@ -90,9 +90,7 @@
     <Compile Include="Net\Net枚举.cs" />
     <Compile Include="Net\RSS.cs" />
     <Compile Include="Net\电子邮件.cs" />
-    <Compile Include="Net\蜘蛛.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Net\蜘蛛.cs" />
     <Compile Include="Encryption\Classes.cs" />
     <Compile Include="Reflection\Reflection处理函数.cs" />
     <Compile Include="RegularExpressions\RegularExpressions常量.cs" />

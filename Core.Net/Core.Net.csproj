@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D6A04DE3-839C-4260-A805-61BC2134ED9A}</ProjectGuid>
+    <ProjectGuid>{3D5A9DB3-FC82-4189-8F41-8924E69AFFA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core.MongoDb</RootNamespace>
-    <AssemblyName>Core.MongoDb</AssemblyName>
+    <RootNamespace>Core.Net</RootNamespace>
+    <AssemblyName>Core.Net</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,20 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson, Version=1.10.0.62, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <HintPath>..\..\大脑2号\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Bson.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MongoDB.Driver, Version=1.10.0.62, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
-      <HintPath>..\..\大脑2号\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Driver.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Activities" />
-    <Reference Include="System.Activities.DurableInstancing" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.DurableInstancing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,17 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MongoDb扩展.cs" />
+    <Compile Include="HttpProtocol\HttpMap.cs" />
+    <Compile Include="HttpProtocol\HttpHeaderField.cs" />
+    <Compile Include="Net处理函数.cs" />
+    <Compile Include="Net处理函数_Base.cs" />
+    <Compile Include="Net枚举.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RSS.cs" />
+    <Compile Include="电子邮件.cs" />
+    <Compile Include="蜘蛛.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{32440EFF-EE58-41F7-BF4F-FAF5B8D14441}</Project>
+      <Project>{32440eff-ee58-41f7-bf4f-faf5b8d14441}</Project>
       <Name>Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

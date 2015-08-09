@@ -14,6 +14,25 @@ public static partial class 通用扩展
     #region 基本
 
     /// <summary>
+    /// 连接集合中的所有数组，组成一个完整的大数组
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
+    /// <param name="o">数组集合</param>
+    /// <returns>完整的大数组</returns>
+    public static T[] ConnectAllArrays<T>(this IEnumerable<T[]> o)
+    {
+        var enumerable = o as T[][] ?? o.ToArray();
+        var array = new T[enumerable.Sum(q=>q.Length)];
+        var x = 0;
+        foreach (var f in enumerable)
+        {
+            Buffer.BlockCopy(f, 0, array, x, f.Length);
+            x += f.Length;
+        }
+        return array;
+    }
+
+    /// <summary>
     /// 转换匿名类型。这个需求来源于界面中使用BackgroundWorker，为了给DoWork传递多个参数，又不想定义一个类型来完成，于是我会用到TolerantCast方法。
     /// 来源：http://www.cnblogs.com/JamesLi2015/p/4663292.html
     /// </summary>

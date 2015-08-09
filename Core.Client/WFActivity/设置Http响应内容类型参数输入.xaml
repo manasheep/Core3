@@ -3,9 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
     xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
-    xmlns:net="clr-namespace:Core.Net;assembly=Core"
     xmlns:http="clr-namespace:System.Net.Http;assembly=System.Net.Http"
-    xmlns:converters="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation">
+    xmlns:converters="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+    xmlns:net1="clr-namespace:Core.Net;assembly=Core.Net">
     <sap:ActivityDesigner.Resources>
         <ResourceDictionary>
             <converters:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
@@ -31,7 +31,7 @@
         <Label Content="*MIME类型："/>
         <sapv:ExpressionTextBox 
             OwnerActivity="{Binding Path=ModelItem}"
-            ExpressionType="net:文件对应MIME类型"
+            ExpressionType="net1:文件对应MIME类型"
             UseLocationExpression="False">
             <sapv:ExpressionTextBox.Expression>
                 <Binding 

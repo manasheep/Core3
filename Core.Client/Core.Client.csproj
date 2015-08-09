@@ -146,6 +146,10 @@
     <Content Include="Core.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Net\Core.Net.csproj">
+      <Project>{3d5a9db3-fc82-4189-8f41-8924e69affa9}</Project>
+      <Name>Core.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{32440EFF-EE58-41F7-BF4F-FAF5B8D14441}</Project>
       <Name>Core</Name>

@@ -129,6 +129,19 @@ namespace Core.IO
             return ms;
         }
 
+        /// <summary>
+        /// 将输入的压缩数据进行解压缩，输出解压缩后的数据
+        /// </summary>
+        /// <param name="压缩数据">输入的压缩数据流</param>
+        /// <returns>解压缩后的数据</returns>
+        public static byte[] 解压缩(byte[] 压缩数据)
+        {
+            var input = new MemoryStream(压缩数据, false);
+            input.Position = 0;
+            var ms = 解压缩(input);
+            return ms.ToBytes();
+        }
+
         private static void DeSerializeFiles(Stream s, string dirPath)
         {
             BinaryFormatter b = new BinaryFormatter();

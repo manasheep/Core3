@@ -85,12 +85,6 @@
     <Compile Include="Maths\MathEx_Base.cs" />
     <Compile Include="Maths\Maths处理函数_Base.cs" />
     <Compile Include="Maths\Vector2D_Base.cs" />
-    <Compile Include="Net\Net处理函数_Base.cs" />
-    <Compile Include="Net\Net处理函数.cs" />
-    <Compile Include="Net\Net枚举.cs" />
-    <Compile Include="Net\RSS.cs" />
-    <Compile Include="Net\电子邮件.cs" />
-    <Compile Include="Net\蜘蛛.cs" />
     <Compile Include="Encryption\Classes.cs" />
     <Compile Include="Reflection\Reflection处理函数.cs" />
     <Compile Include="RegularExpressions\RegularExpressions常量.cs" />

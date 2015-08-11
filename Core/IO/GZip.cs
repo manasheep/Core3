@@ -115,7 +115,8 @@ namespace Core.IO
         public static MemoryStream 解压缩(Stream 压缩数据流)
         {
             var ms = new MemoryStream();
-            using (GZipStream input = new GZipStream(压缩数据流, CompressionMode.Decompress, true))
+
+            using (var input = new GZipStream(压缩数据流, CompressionMode.Decompress, true))
             {
                 byte[] bytes = new byte[4096];
                 int n;
@@ -124,6 +125,16 @@ namespace Core.IO
                     ms.Write(bytes, 0, n);
                 }
             }
+
+            //using (var input=new DeflateStream(压缩数据流, CompressionMode.Decompress, true))
+            //{
+            //    byte[] bytes = new byte[4096];
+            //    int n;
+            //    while ((n = input.Read(bytes, 0, bytes.Length)) != 0)
+            //    {
+            //        ms.Write(bytes, 0, n);
+            //    }
+            //}
             ms.Flush();
             ms.Position = 0;
             return ms;

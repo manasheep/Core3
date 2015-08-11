@@ -71,7 +71,8 @@ namespace Core.Net.HttpProtocol
         /// <returns>解码后的数据</returns>
         public byte[] DecodeData()
         {
-            if (GetHttpField(HttpHeaderField.Content_Encoding).Trim().ToLower() == "gzip")
+            var encode = GetHttpField(HttpHeaderField.Content_Encoding);
+            if (!encode.IsNullOrEmpty() && encode.Trim().ToLower() == "gzip")
             {
                 return GZip.解压缩(Data);
             }
@@ -86,7 +87,9 @@ namespace Core.Net.HttpProtocol
         public string ConversionDataToString()
         {
             if (Data.IsNullOrEmpty()) return null;
-            return IsTextContent ? CharsetEncoding.GetString(DecodeData()) : null;
+            var d = DecodeData();
+            if (d == null) return null;
+            return IsTextContent ? CharsetEncoding.GetString(d) : null;
         }
 
         #endregion

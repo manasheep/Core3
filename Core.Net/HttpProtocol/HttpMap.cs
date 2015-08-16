@@ -63,7 +63,10 @@ namespace Core.Net.HttpProtocol
         /// <summary>
         /// 获取内容是否为文本类型，通常html或xml或json类型的内容会被视为文本类型
         /// </summary>
-        public bool IsTextContent => _httpResponseTextTypeRegex.IsMatch(GetHttpField(HttpHeaderField.Content_Type));
+        public bool IsTextContent
+        {
+            get { return _httpResponseTextTypeRegex.IsMatch(GetHttpField(HttpHeaderField.Content_Type)); }
+        }
 
         /// <summary>
         /// 解码数据，通常用于解gzip压缩，如果数据未经压缩则直接返回

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using Core.Text;
+using Core.Web;
 
 namespace Core.Net
 {

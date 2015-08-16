@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Collections;
 using System.Reflection;
+using Core.Web;
 
 public static partial class 通用扩展
 {

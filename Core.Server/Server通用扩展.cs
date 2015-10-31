@@ -19,6 +19,70 @@ using Core.Web;
 
 public static class Server通用扩展
 {
+    /// <summary>
+    /// 获取客户端IP地址，如果是通过代理访问的，显示的是最后一级代理的IP地址，并在括号中显示逐级代理IP路径
+    /// </summary>
+    /// <param name="o">控制器</param>
+    /// <returns>IP地址</returns>
+    public static string GetClientIP(this Controller o)
+    {
+        return GetClientIP(o.HttpContext);
+    }
+
+    /// <summary>
+    /// 获取客户端IP地址，如果是通过代理访问的，显示的是最后一级代理的IP地址，并在括号中显示逐级代理IP路径
+    /// </summary>
+    /// <returns>IP地址</returns>
+    public static string GetClientIP(this HttpContextBase o)
+    {
+        if (o.Request.ServerVariables["HTTP_VIA"] != null)
+            return o.Request.ServerVariables["REMOTE_ADDR"] + "(" + o.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] + ")";
+        else
+            return o.Request.ServerVariables["REMOTE_ADDR"];
+    }
+
+    /// <summary>
+    /// 获取客户端IP地址，如果是通过代理访问的，显示的是最后一级代理的IP地址，并在括号中显示逐级代理IP路径
+    /// </summary>
+    /// <returns>IP地址</returns>
+    public static string GetClientIP(this HttpContext o)
+    {
+        if (o.Request.ServerVariables["HTTP_VIA"] != null)
+            return o.Request.ServerVariables["REMOTE_ADDR"] + "(" + o.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] + ")";
+        else
+            return o.Request.ServerVariables["REMOTE_ADDR"];
+    }
+
+    /// <summary>
+    /// 设置Cookies中的值
+    /// </summary>
+    /// <param name="o">控制器</param>
+    /// <param name="key">键</param>
+    /// <param name="value">值</param>
+    /// <param name="expires">有效期，即从当前时刻起持续有效的时间</param>
+    public static void SetCookie(this Controller o, string key, string value, TimeSpan expires)
+    {
+        var c = o.Response.Cookies[key];
+        c.Value = value;
+        c.Expires = DateTime.Now.Add(expires);
+    }
+
+    /// <summary>
+    /// 获取Cookies中的值
+    /// </summary>
+    /// <param name="o">控制器</param>
+    /// <param name="key">键</param>
+    /// <returns>值</returns>
+    public static string GetCookie(this Controller o, string key)
+    {
+        var c = o.Request.Cookies[key];
+        if (c != null)
+        {
+            return c.Value;
+        }
+        return null;
+    }
+
     // copied from HtmlHelper.FindPartialView because it's original is internal
     internal static IView FindPartialView(ViewContext viewContext, string partialViewName, ViewEngineCollection viewEngineCollection)
     {

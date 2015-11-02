@@ -33,87 +33,6 @@ public static partial class 通用扩展
         return array;
     }
 
-    /// <summary>
-    /// 转换匿名类型。这个需求来源于界面中使用BackgroundWorker，为了给DoWork传递多个参数，又不想定义一个类型来完成，于是我会用到TolerantCast方法。
-    /// 来源：http://www.cnblogs.com/JamesLi2015/p/4663292.html
-    /// </summary>
-    /// <typeparam name="T">类型</typeparam>
-    /// <param name="o">待转换对象</param>
-    /// <param name="example">默认值对象</param>
-    /// <returns>转换过后的匿名对象</returns>
-    /* 使用范例
-     * //创建匿名类型
-var parm = new { Bucket = bucket, AuxiliaryAccIsCheck = chbAuxiliaryAcc.Checked, AllAccountIsCheck = chbAllAccount.Checked };
-backgroundWorker.RunWorkerAsync(parm);
-
-
- private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
- {
-//解析转换匿名类型
-  var parm = e.Argument.TolerantCast(new { Bucket = new RelationPredicateBucket(), AuxiliaryAccIsCheck = false, AllAccountIsCheck = false });*/
-    public static T TolerantCast<T>(this object o, T example)
-        where T : class
-    {
-        IComparer<string> comparer = StringComparer.CurrentCultureIgnoreCase;
-        //Get constructor with lowest number of parameters and its parameters
-        var constructor = typeof(T).GetConstructors(
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            ).OrderBy(c => c.GetParameters().Length).First();
-        var parameters = constructor.GetParameters();
-
-        //Get properties of input object
-        var sourceProperties = new List<PropertyInfo>(o.GetType().GetProperties());
-
-        if (parameters.Length > 0)
-        {
-            var values = new object[parameters.Length];
-            for (int i = 0; i < values.Length; i++)
-            {
-                Type t = parameters[i].ParameterType;
-                //See if the current parameter is found as a property in the input object
-                var source = sourceProperties.Find(delegate(PropertyInfo item)
-                {
-                    return comparer.Compare(item.Name, parameters[i].Name) == 0;
-                });
-
-                //See if the property is found, is readable, and is not indexed
-                if (source != null && source.CanRead &&
-                    source.GetIndexParameters().Length == 0)
-                {
-                    //See if the types match.
-                    if (source.PropertyType == t)
-                    {
-                        //Get the value from the property in the input object and save it for use
-                        //in the constructor call.
-                        values[i] = source.GetValue(o, null);
-                        continue;
-                    }
-                    else
-                    {
-                        //See if the property value from the input object can be converted to
-                        //the parameter type
-                        try
-                        {
-                            values[i] = Convert.ChangeType(source.GetValue(o, null), t);
-                            continue;
-                        }
-                        catch
-                        {
-                            //Impossible. Forget it then.
-                        }
-                    }
-                }
-                //If something went wrong (i.e. property not found, or property isn't
-                //converted/copied), get a default value.
-                values[i] = t.IsValueType ? Activator.CreateInstance(t) : null;
-            }
-            //Call the constructor with the collected values and return it.
-            return (T)constructor.Invoke(values);
-        }
-        //Call the constructor without parameters and return the it.
-        return (T)constructor.Invoke(null);
-    }
-
     /// <summary> 
     /// 将 Stream 转成 byte[] 
     /// </summary> 
@@ -125,18 +44,6 @@ backgroundWorker.RunWorkerAsync(parm);
         // 设置当前流的位置为流的开始 
         stream.Seek(0, SeekOrigin.Begin);
         return bytes;
-    }
-
-    /// <summary> 
-    /// 将 Stream 写入文件 
-    /// </summary> 
-    public static void ToFile(this Stream stream, string 文件路径及名称)
-    {
-        FileStream fs = new FileStream(文件路径及名称, FileMode.Create);
-        BinaryWriter bw = new BinaryWriter(fs);
-        bw.Write(stream.ToBytes());
-        bw.Close();
-        fs.Close();
     }
 
     /// <summary> 

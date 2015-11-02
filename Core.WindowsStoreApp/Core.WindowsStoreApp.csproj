@@ -123,15 +123,6 @@
     <Compile Include="..\Core\Maths\Vector2D_Base.cs">
       <Link>Vector2D_Base.cs</Link>
     </Compile>
-    <Compile Include="..\Core\Net\Net处理函数_Base.cs">
-      <Link>Net处理函数_Base.cs</Link>
-    </Compile>
-    <Compile Include="..\Core\Net\Net枚举.cs">
-      <Link>Net枚举.cs</Link>
-    </Compile>
-    <Compile Include="..\Core\Net\RSS.cs">
-      <Link>RSS.cs</Link>
-    </Compile>
     <Compile Include="..\Core\Text\Text处理函数_Base.cs">
       <Link>Text处理函数_Base.cs</Link>
     </Compile>

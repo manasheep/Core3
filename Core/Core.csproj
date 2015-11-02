@@ -83,6 +83,7 @@
     <Compile Include="IO\IO处理函数.cs" />
     <Compile Include="Linq\Linq处理函数.cs" />
     <Compile Include="Maths\MathEx_Base.cs" />
+    <Compile Include="Maths\Maths处理函数.cs" />
     <Compile Include="Maths\Maths处理函数_Base.cs" />
     <Compile Include="Maths\Vector2D_Base.cs" />
     <Compile Include="Encryption\Classes.cs" />

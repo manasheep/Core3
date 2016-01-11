@@ -1084,7 +1084,7 @@ public static partial class 通用扩展
         return NextDateTime(random, DateTime.MinValue, DateTime.MaxValue);
     }
 
-    //TODO:可以再编写生成随机字符串、随机颜色等功能的方法
+    //可以再编写生成随机字符串、随机颜色等功能的方法
 
     /// <summary>
     /// 返回大于或等于该值的最小整数

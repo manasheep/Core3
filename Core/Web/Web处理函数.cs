@@ -74,7 +74,7 @@ namespace Core.Web
             if (是否转换特定标记为换行符)
             {
                 v = v.RegexReplace(@"<\s*/\s*(?:p|br|div|li|h1|h2|h3|h4|h5|h6|hr|tr|dd|table|ul|ol|dl)\s*>", "【【【LineBreak】】】", RegexOptions.IgnoreCase);
-                v = v.RegexReplace(@"<\s*(?:br|hr|p|tr)[^>]*?/>", "【【【LineBreak】】】", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                v = v.RegexReplace(@"<\s*(?:br|hr|p|tr|dd|div)[^>]*?/>", "【【【LineBreak】】】", RegexOptions.IgnoreCase | RegexOptions.Singleline);
             }
             v = v.RegexReplace(@"<[^>]+>", String.Empty).Replace("&nbsp;", " ").RegexReplace(@"\s+", " ");
             if (是否转换特定标记为换行符)

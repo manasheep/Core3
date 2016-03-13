@@ -47,7 +47,7 @@ namespace Core.Web
         }
 
         /// <summary>
-        /// 清除字符串内的HTML标签
+        /// 清除字符串内的HTML标签的方式之一，适合对较为规则的文档进行简单替换。
         /// </summary>
         public static string 清除HTML代码(this string 字符串)
         {
@@ -57,6 +57,31 @@ namespace Core.Web
             while (字符串.RegexIsMatch(ex, op))
                 字符串 = 字符串.RegexReplace(ex, "${text}", op);
             return 字符串.RegexReplace(@"<\s*[\!-\[]*(?<tag>\w+)\s*[^>]+?>", "");
+        }
+
+        /// <summary>
+        /// 清除字符串内的HTML标签的方式之二，可以提供更好的文档代码容错性，并拥有更多选项。
+        /// </summary>
+        /// <param name="是否清除脚本代码">是否清除脚本代码</param>
+        /// <param name="是否转换特定标记为换行符">是否转换特定标记为换行符，包括br、hr及p、div、li、h1、h2……的结尾</param>
+        public static string 清除HTML代码(this string 字符串, bool 是否清除脚本代码, bool 是否转换特定标记为换行符)
+        {
+            string v = 字符串;
+            if (是否清除脚本代码)
+            {
+                v = v.RegexReplace(@"<\s*script.+?>.*?<\s*/script\s*>", String.Empty, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            }
+            if (是否转换特定标记为换行符)
+            {
+                v = v.RegexReplace(@"<\s*/\s*(?:p|br|div|li|h1|h2|h3|h4|h5|h6|hr|tr|dd|table|ul|ol|dl)\s*>", "【【【LineBreak】】】", RegexOptions.IgnoreCase);
+                v = v.RegexReplace(@"<\s*(?:br|hr|p|tr)[^>]*?/>", "【【【LineBreak】】】", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            }
+            v = v.RegexReplace(@"<[^>]+>", String.Empty).Replace("&nbsp;", " ").RegexReplace(@"\s+", " ");
+            if (是否转换特定标记为换行符)
+            {
+                v = v.Replace("【【【LineBreak】】】", "\r\n");
+            }
+            return v;
         }
 
         /// <summary>

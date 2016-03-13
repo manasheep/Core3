@@ -118,7 +118,18 @@ backgroundWorker.RunWorkerAsync(parm);
     /// <returns>当前代码所在方法的方法名</returns>
     public static string GetCurrentMethodName(this object o)
     {
-        var method = new StackFrame(1).GetMethod(); // 这里忽略1层堆栈，也就忽略了当前方法GetMethodName，这样拿到的就正好是外部调用GetMethodName的方法信息
+        return GetStackMethodName(o, 2);
+    }
+
+    /// <summary>
+    /// 获取当前代码所在的指定堆栈层级的方法的方法名
+    /// </summary>
+    /// <param name="o">任意对象，仅供调用方便，不作任何处理</param>
+    /// <param name="忽略堆栈层数">默认忽略1层堆栈，也就忽略了此方法GetMethodName，这样拿到的就正好是外部调用GetStackMethodName的方法信息</param>
+    /// <returns>当前代码所在方法的方法名</returns>
+    public static string GetStackMethodName(this object o, int 忽略堆栈层数 = 1)
+    {
+        var method = new StackFrame(忽略堆栈层数).GetMethod();
         var property = (
                   from p in method.DeclaringType.GetProperties(
                            BindingFlags.Instance |

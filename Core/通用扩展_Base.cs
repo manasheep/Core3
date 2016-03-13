@@ -23,7 +23,7 @@ public static partial class 通用扩展
     public static T[] ConnectAllArrays<T>(this IEnumerable<T[]> o)
     {
         var enumerable = o as T[][] ?? o.ToArray();
-        var array = new T[enumerable.Sum(q=>q.Length)];
+        var array = new T[enumerable.Sum(q => q.Length)];
         var x = 0;
         foreach (var f in enumerable)
         {
@@ -1518,7 +1518,18 @@ public static partial class 通用扩展
         /// <returns>转义后的HTML代码</returns>
         public string Encoding()
         {
-            return Core.Web.Web处理函数.进行HTML转义(Value);
+            return Value.进行HTML转义();
+        }
+
+        /// <summary>
+        /// 清除HTML标记，还原纯文本
+        /// </summary>
+        /// <param name="isClearScript">是否清除脚本代码</param>
+        /// <param name="isTransformLineBreaks">是否转换特定标记为换行符，包括br、hr及p、div、li、h1、h2……的结尾</param>
+        /// <returns>纯文本</returns>
+        public string ClearHtmlMarkup(bool isClearScript, bool isTransformLineBreaks)
+        {
+            return Value.清除HTML代码(isClearScript, isTransformLineBreaks);
         }
     }
 

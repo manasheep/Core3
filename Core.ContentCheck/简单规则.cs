@@ -10,7 +10,7 @@ using Core.Text;
 namespace Core.ContentCheck
 {
     [Serializable]
-    [XmlInclude(typeof(List<char>))]
+    [XmlInclude(typeof(ObservableCollection<char>))]
     public class 简单规则 : 规则
     {
         /// <summary>
@@ -34,6 +34,7 @@ namespace Core.ContentCheck
             set
             {
                 _关键词 = value;
+                OnPropertyChanged("关键词");
             }
         }
         private string _关键词;
@@ -50,6 +51,7 @@ namespace Core.ContentCheck
             set
             {
                 _间隔容差 = value;
+                OnPropertyChanged("间隔容差");
             }
         }
         private int _间隔容差;
@@ -123,14 +125,14 @@ namespace Core.ContentCheck
         /// 首字符列表
         /// </summary>
         [XmlIgnore]
-        public override List<char> 首字符
+        public override ObservableCollection<char> 首字符
         {
             get
             {
-                var g = 取出缓存("首字符") as List<char>;
+                var g = 取出缓存("首字符") as ObservableCollection<char>;
                 if (g == null)
                 {
-                    var t = new List<char> { 关键词.获取首字符() };
+                    var t = new ObservableCollection<char> { 关键词.获取首字符() };
                     存入缓存("首字符", t);
                     return t;
                 }
@@ -142,14 +144,14 @@ namespace Core.ContentCheck
         /// 尾字符列表
         /// </summary>
         [XmlIgnore]
-        public override List<char> 尾字符
+        public override ObservableCollection<char> 尾字符
         {
             get
             {
-                var g = 取出缓存("尾字符") as List<char>;
+                var g = 取出缓存("尾字符") as ObservableCollection<char>;
                 if (g == null)
                 {
-                    var t = new List<char> { 关键词.获取尾字符() };
+                    var t = new ObservableCollection<char> { 关键词.获取尾字符() };
                     存入缓存("尾字符", t);
                     return t;
                 }

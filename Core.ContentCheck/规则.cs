@@ -11,10 +11,10 @@ using System.Xml.Serialization;
 namespace Core.ContentCheck
 {
     [Serializable]
-    [XmlInclude(typeof(List<char>))]
+    [XmlInclude(typeof(ObservableCollection<char>))]
     [XmlInclude(typeof(简单规则))]
     [XmlInclude(typeof(自定义规则))]
-    public abstract class 规则
+    public abstract class 规则 : INotifyPropertyChanged
     {
         /// <summary>
         /// 构造函数
@@ -22,12 +22,38 @@ namespace Core.ContentCheck
         public 规则()
         {
             缓存 = new Hashtable();
+            重置变更状态();
         }
+
+        #region 实现INotifyPropertyChanged
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+            _变更 = true;
+            变更时间 = DateTime.Now;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
 
         /// <summary>
         /// 内部缓存表
         /// </summary>
         private Hashtable 缓存;
+        /// <summary>
+        /// 记录缓存的保存时间
+        /// </summary>
+        private DateTime 缓存时间;
+        /// <summary>
+        /// 记录内容变更的触发时间
+        /// </summary>
+        private DateTime 变更时间;
 
         /// <summary>
         /// 将值存入缓存
@@ -35,6 +61,7 @@ namespace Core.ContentCheck
         protected void 存入缓存(string 键, object 值)
         {
             缓存[键] = 值;
+            缓存时间 = DateTime.Now;
         }
 
         /// <summary>
@@ -42,6 +69,7 @@ namespace Core.ContentCheck
         /// </summary>
         protected object 取出缓存(string 键)
         {
+            if (缓存时间 < 变更时间) return null;
             return 缓存[键];
         }
 
@@ -87,12 +115,12 @@ namespace Core.ContentCheck
         /// 首字符列表
         /// </summary>
         [XmlIgnore]
-        public abstract List<char> 首字符 { get; }
+        public abstract ObservableCollection<char> 首字符 { get; }
         /// <summary>
         /// 尾字符列表
         /// </summary>
         [XmlIgnore]
-        public abstract List<char> 尾字符 { get; }
+        public abstract ObservableCollection<char> 尾字符 { get; }
         /// <summary>
         /// 最大取样长度
         /// </summary>
@@ -121,6 +149,7 @@ namespace Core.ContentCheck
             set
             {
                 _分值 = value;
+                OnPropertyChanged("分值");
             }
         }
         private int _分值;
@@ -150,5 +179,24 @@ namespace Core.ContentCheck
             _类目 = 类目名称;
         }
 
+        /// <summary>
+        /// 指示该项是否已变更
+        /// </summary>
+        public bool 变更
+        {
+            get
+            {
+                return _变更;
+            }
+        }
+        private bool _变更;
+
+        /// <summary>
+        /// 将变更状态设为未变更
+        /// </summary>
+        public void 重置变更状态()
+        {
+            _变更 = false;
+        }
     }
 }

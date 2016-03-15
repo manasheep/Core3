@@ -16,7 +16,7 @@ namespace Core.ContentCheck
         /// <summary>
         /// 输出的审查明细列表。在执行审查时生成。
         /// </summary>
-        public List<匹配明细> 输出明细 { get; set; }
+        public ObservableCollection<匹配明细> 输出明细 { get; set; }
 
         /// <summary>
         /// 对内容中捕获词语的最高评分。在执行审查时生成。

@@ -10,7 +10,7 @@ using Core.Text;
 namespace Core.ContentCheck
 {
     [Serializable]
-    [XmlInclude(typeof(List<char>))]
+    [XmlInclude(typeof(ObservableCollection<char>))]
     public class 自定义规则 : 规则
     {
         /// <summary>
@@ -19,8 +19,30 @@ namespace Core.ContentCheck
         public 自定义规则()
             : base()
         {
-            自定义首字符列表 = new List<char>();
-            自定义尾字符列表 = new List<char>();
+            自定义首字符列表 = new ObservableCollection<char>();
+            自定义尾字符列表 = new ObservableCollection<char>();
+            初始化集合更改事件();
+        }
+
+        /// <summary>
+        /// 应在集合内容初始化或反序列化之后执行，以注册更改通知
+        /// </summary>
+        public void 初始化集合更改事件()
+        {
+            首字符.CollectionChanged -= new System.Collections.Specialized.NotifyCollectionChangedEventHandler(首字符_CollectionChanged);
+            尾字符.CollectionChanged -= new System.Collections.Specialized.NotifyCollectionChangedEventHandler(尾字符_CollectionChanged);
+            首字符.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(首字符_CollectionChanged);
+            尾字符.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(尾字符_CollectionChanged);
+        }
+
+        void 尾字符_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("尾字符");
+        }
+
+        void 首字符_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("首字符");
         }
 
         /// <summary>
@@ -35,6 +57,7 @@ namespace Core.ContentCheck
             set
             {
                 _表达式选项 = value;
+                OnPropertyChanged("表达式选项");
             }
         }
         private RegexOptions _表达式选项;
@@ -51,6 +74,7 @@ namespace Core.ContentCheck
             set
             {
                 _自定义表达式 = value;
+                OnPropertyChanged("自定义表达式");
             }
         }
         private string _自定义表达式;
@@ -84,6 +108,7 @@ namespace Core.ContentCheck
             set
             {
                 _自定义最大长度 = value;
+                OnPropertyChanged("自定义最大长度");
             }
         }
         private int _自定义最大长度;
@@ -106,6 +131,7 @@ namespace Core.ContentCheck
             set
             {
                 _自定义精确长度 = value;
+                OnPropertyChanged("自定义精确长度");
             }
         }
         private int _自定义精确长度;
@@ -113,26 +139,26 @@ namespace Core.ContentCheck
         /// 首字符列表
         /// </summary>
         [XmlIgnore]
-        public override List<char> 首字符
+        public override ObservableCollection<char> 首字符
         {
             get
             {
                 return 自定义首字符列表;
             }
         }
-        public List<char> 自定义首字符列表;
+        public ObservableCollection<char> 自定义首字符列表;
         /// <summary>
         /// 尾字符列表
         /// </summary>
         [XmlIgnore]
-        public override List<char> 尾字符
+        public override ObservableCollection<char> 尾字符
         {
             get
             {
                 return 自定义尾字符列表;
             }
         }
-        public List<char> 自定义尾字符列表;
+        public ObservableCollection<char> 自定义尾字符列表;
         /// <summary>
         /// 生成一个正则表达式对象
         /// </summary>
@@ -150,7 +176,7 @@ namespace Core.ContentCheck
 
         public override 规则 克隆()
         {
-            return new 自定义规则() { 自定义表达式 = this.自定义表达式, 分值 = this.分值, 表达式选项 = this.表达式选项, 自定义最大长度 = this.自定义最大长度, 自定义首字符列表 = new List<char>(this.自定义首字符列表.ToList()), 自定义尾字符列表 = new List<char>(this.自定义尾字符列表.ToList()) };
+            return new 自定义规则() { 自定义表达式 = this.自定义表达式, 分值 = this.分值, 表达式选项 = this.表达式选项, 自定义最大长度 = this.自定义最大长度, 自定义首字符列表 = new ObservableCollection<char>(this.自定义首字符列表.ToList()), 自定义尾字符列表 = new ObservableCollection<char>(this.自定义尾字符列表.ToList()) };
         }
 
         public override 规则 获取繁体版本对象()

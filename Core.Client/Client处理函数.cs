@@ -480,5 +480,49 @@ namespace Core
         {
             Clipboard.SetText(内容, TextDataFormat.UnicodeText);
         }
+
+        /// <summary>
+        /// 对控件进行数据绑定.
+        /// </summary>
+        /// <param name="控件">要绑定的控件</param>
+        /// <param name="控件属性">要绑定的控件属性</param>
+        /// <param name="对象">绑定的目标对象</param>
+        /// <param name="对象属性">要绑定的对象属性</param>
+        public static void 数据绑定(Control 控件, string 控件属性, object 对象, string 对象属性)
+        {
+            控件.DataBindings.Clear();
+            控件.DataBindings.Add(控件属性, 对象, 对象属性);
+        }
+
+        /// <summary>
+        /// 对控件进行数据绑定.
+        /// </summary>
+        /// <param name="控件">要绑定的控件</param>
+        /// <param name="控件属性">要绑定的控件属性</param>
+        /// <param name="对象">绑定的目标对象</param>
+        /// <param name="对象属性">要绑定的对象属性</param>
+        /// <param name="格式化规则">格式化规则,如格式化日期的规则"yyyy年M月d日 HH:mm:ss"</param>
+        /// <param name="数据源更新模式">指示数据源何时进行同步更新</param>
+        public static void 数据绑定(Control 控件, string 控件属性, object 对象, string 对象属性, string 格式化规则, DataSourceUpdateMode 数据源更新模式)
+        {
+            控件.DataBindings.Clear();
+            控件.DataBindings.Add(控件属性, 对象, 对象属性, true, 数据源更新模式);
+            控件.DataBindings[0].FormatString = 格式化规则;
+        }
+
+        /// <summary>
+        /// 对控件进行数据绑定.
+        /// </summary>
+        /// <param name="控件">要绑定的控件</param>
+        /// <param name="控件属性">要绑定的控件属性</param>
+        /// <param name="对象">绑定的目标对象</param>
+        /// <param name="对象属性">要绑定的对象属性</param>
+        /// <param name="格式化规则">格式化规则,如格式化日期的规则"yyyy年M月d日 HH:mm:ss"</param>
+        public static void 数据绑定(Control 控件, string 控件属性, object 对象, string 对象属性, string 格式化规则)
+        {
+            控件.DataBindings.Clear();
+            控件.DataBindings.Add(控件属性, 对象, 对象属性, true);
+            控件.DataBindings[0].FormatString = 格式化规则;
+        }
     }
 }

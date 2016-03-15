@@ -6,7 +6,7 @@ using System.Text;
 namespace Core.ContentCheck
 {
     [Serializable]
-    public struct 内容审查明细
+    public struct 匹配明细
     {
         /// <summary>
         /// 原文匹配内容片段
@@ -71,7 +71,7 @@ namespace Core.ContentCheck
         /// <summary>
         /// 匹配项所应用的规则
         /// </summary>
-        public 内容审查规则 应用规则
+        public 规则 应用规则
         {
             get
             {
@@ -82,7 +82,7 @@ namespace Core.ContentCheck
                 _应用规则 = value;
             }
         }
-        private 内容审查规则 _应用规则;
+        private 规则 _应用规则;
         /// <summary>
         /// 类目所属的索引序号
         /// </summary>

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.ContentCheck
 {
-    public class 内容审查报告
+    public class 报告
     {
         /// <summary>
         /// 用于审查的内容。由构造函数制定。
@@ -16,7 +16,7 @@ namespace Core.ContentCheck
         /// <summary>
         /// 输出的审查明细列表。在执行审查时生成。
         /// </summary>
-        public ObservableCollection<内容审查明细> 输出明细 { get; set; }
+        public ObservableCollection<匹配明细> 输出明细 { get; set; }
 
         /// <summary>
         /// 对内容中捕获词语的最高评分。在执行审查时生成。

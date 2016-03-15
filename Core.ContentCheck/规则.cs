@@ -12,14 +12,14 @@ namespace Core.ContentCheck
 {
     [Serializable]
     [XmlInclude(typeof(ObservableCollection<char>))]
-    [XmlInclude(typeof(简单内容审查规则))]
-    [XmlInclude(typeof(自定义内容审查规则))]
-    public abstract class 内容审查规则 : INotifyPropertyChanged
+    [XmlInclude(typeof(简单规则))]
+    [XmlInclude(typeof(自定义规则))]
+    public abstract class 规则 : INotifyPropertyChanged
     {
         /// <summary>
         /// 构造函数
         /// </summary>
-        public 内容审查规则()
+        public 规则()
         {
             缓存 = new Hashtable();
             重置变更状态();
@@ -132,11 +132,11 @@ namespace Core.ContentCheck
         /// <summary>
         /// 克隆此对象
         /// </summary>
-        public abstract 内容审查规则 克隆();
+        public abstract 规则 克隆();
         /// <summary>
         /// 获取此对象的繁体内容版本
         /// </summary>
-        public abstract 内容审查规则 获取繁体版本对象();
+        public abstract 规则 获取繁体版本对象();
         /// <summary>
         /// 匹配成功后给予的分值
         /// </summary>

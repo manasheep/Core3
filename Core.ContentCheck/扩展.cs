@@ -12,7 +12,7 @@ namespace Core.ContentCheck
         /// 获得列表中最大的匹配文本长度
         /// </summary>
         /// <returns>最大长度</returns>
-        public static int 获取最大长度(this List<内容审查规则> l)
+        public static int 获取最大长度(this List<规则> l)
         {
             return 获取最大长度(l, true);
         }
@@ -22,7 +22,7 @@ namespace Core.ContentCheck
         /// </summary>
         /// <param name="是否使用缓存">指示是否从缓存中检索数据</param>
         /// <returns>最大长度</returns>
-        public static int 获取最大长度(this List<内容审查规则> l, bool 是否使用缓存)
+        public static int 获取最大长度(this List<规则> l, bool 是否使用缓存)
         {
             if (!是否使用缓存 || 缓存[l] == null)
             {

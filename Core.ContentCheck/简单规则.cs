@@ -11,12 +11,12 @@ namespace Core.ContentCheck
 {
     [Serializable]
     [XmlInclude(typeof(ObservableCollection<char>))]
-    public class 简单内容审查规则 : 内容审查规则
+    public class 简单规则 : 规则
     {
         /// <summary>
         /// 构造函数
         /// </summary>
-        public 简单内容审查规则()
+        public 简单规则()
             : base()
         {
 
@@ -159,14 +159,14 @@ namespace Core.ContentCheck
             }
         }
 
-        public override 内容审查规则 克隆()
+        public override 规则 克隆()
         {
-            return new 简单内容审查规则() { 分值 = this.分值, 关键词 = this.关键词, 间隔容差 = this.间隔容差 };
+            return new 简单规则() { 分值 = this.分值, 关键词 = this.关键词, 间隔容差 = this.间隔容差 };
         }
 
-        public override 内容审查规则 获取繁体版本对象()
+        public override 规则 获取繁体版本对象()
         {
-            var s = this.克隆() as 简单内容审查规则;
+            var s = this.克隆() as 简单规则;
             s.关键词 = s.关键词.转换为繁体中文();
             return s;
         }

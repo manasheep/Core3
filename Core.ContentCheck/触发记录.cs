@@ -9,7 +9,7 @@ namespace Core.ContentCheck
     /// 用于记录扫描原文时搜索到的首尾触发字符信息
     /// </summary>
     [Serializable]
-    public struct 内容审查触发记录
+    public struct 触发记录
     {
         /// <summary>
         /// 触发的字符

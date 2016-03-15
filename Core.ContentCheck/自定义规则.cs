@@ -11,12 +11,12 @@ namespace Core.ContentCheck
 {
     [Serializable]
     [XmlInclude(typeof(ObservableCollection<char>))]
-    public class 自定义内容审查规则 : 内容审查规则
+    public class 自定义规则 : 规则
     {
         /// <summary>
         /// 构造函数
         /// </summary>
-        public 自定义内容审查规则()
+        public 自定义规则()
             : base()
         {
             自定义首字符列表 = new ObservableCollection<char>();
@@ -174,14 +174,14 @@ namespace Core.ContentCheck
             else return g as Regex;
         }
 
-        public override 内容审查规则 克隆()
+        public override 规则 克隆()
         {
-            return new 自定义内容审查规则() { 自定义表达式 = this.自定义表达式, 分值 = this.分值, 表达式选项 = this.表达式选项, 自定义最大长度 = this.自定义最大长度, 自定义首字符列表 = new ObservableCollection<char>(this.自定义首字符列表.ToList()), 自定义尾字符列表 = new ObservableCollection<char>(this.自定义尾字符列表.ToList()) };
+            return new 自定义规则() { 自定义表达式 = this.自定义表达式, 分值 = this.分值, 表达式选项 = this.表达式选项, 自定义最大长度 = this.自定义最大长度, 自定义首字符列表 = new ObservableCollection<char>(this.自定义首字符列表.ToList()), 自定义尾字符列表 = new ObservableCollection<char>(this.自定义尾字符列表.ToList()) };
         }
 
-        public override 内容审查规则 获取繁体版本对象()
+        public override 规则 获取繁体版本对象()
         {
-            var s = this.克隆() as 自定义内容审查规则;
+            var s = this.克隆() as 自定义规则;
             s.自定义表达式 = s.自定义表达式.转换为繁体中文();
             for (int i = 0; i < s.自定义首字符列表.Count; i++)
             {

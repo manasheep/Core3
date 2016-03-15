@@ -156,7 +156,7 @@ namespace Core.ContentCheck
             //精确度列表
             List<double> ad = new List<double>();
             //输出明细
-            var outlist = new ObservableCollection<匹配明细>();
+            var outlist = new List<匹配明细>();
 
             //捕获词语累计长度
             var getstr = 0;

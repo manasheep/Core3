@@ -198,5 +198,10 @@ namespace Core.ContentCheck
         {
             _变更 = false;
         }
+
+        public override string ToString()
+        {
+            return String.Format("[{0}] {1} ({2}-{3})", this.分值, this.表达式, this.精确长度, this.最大长度);
+        }
     }
 }

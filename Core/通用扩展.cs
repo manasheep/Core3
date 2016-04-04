@@ -17,6 +17,17 @@ using Core.Reflection;
 public static partial class 通用扩展
 {
     /// <summary>
+    /// 同步执行此异步方法，此执行方式不会造成死锁，参考来源：http://www.cnblogs.com/bnbqian/p/4513192.html
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="tast"></param>
+    /// <returns></returns>
+    public static T RunSync<T>(this Task<T> tast)
+    {
+        return Task.Run<Task<T>>(() => tast).Unwrap().GetAwaiter().GetResult();
+    }
+
+    /// <summary>
     /// 转换匿名类型。这个需求来源于界面中使用BackgroundWorker，为了给DoWork传递多个参数，又不想定义一个类型来完成，于是我会用到TolerantCast方法。
     /// 来源：http://www.cnblogs.com/JamesLi2015/p/4663292.html
     /// </summary>

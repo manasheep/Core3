@@ -14,6 +14,7 @@ using System.Web.Routing;
 using System.Web.UI;
 using Core.WebSite;
 using System.Web.Mvc;
+using System.Web.Mvc.Ajax;
 using System.Web.WebPages;
 using Core.Web;
 
@@ -255,6 +256,25 @@ public static class Server通用扩展
         dic.Add("class", "form-horizontal");
         dic.Add("role", "form");
         return o.BeginForm(行为名称, 控制器名称, new RouteValueDictionary(路由参数对象), 提交方式, dic);
+    }
+
+    /// <summary>
+    ///  将适用于Bootstarp的form元素开始标记写入响应。在用户提交窗体时，将由某个操作方法处理该请求。
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="行为名称">Action名</param>
+    /// <param name="控制器名称">Controller名</param>
+    /// <param name="路由参数对象">构建提交参数的对象</param>
+    /// <param name="选项">Ajax选项，包含提交方式、替代元素Id等</param>
+    /// <param name="Html属性字典操作">可以在此为form元素增加属性</param>
+    /// <returns>form元素开始标记</returns>
+    public static MvcForm BeginAjaxFormForBootstarp(this AjaxHelper o, string 行为名称, string 控制器名称, object 路由参数对象 = null, AjaxOptions 选项=null, Action<Dictionary<string, object>> Html属性字典操作 = null)
+    {
+        var dic = new Dictionary<string, object>();
+        if (Html属性字典操作 != null) Html属性字典操作(dic);
+        dic.Add("class", "form-horizontal");
+        dic.Add("role", "form");
+        return o.BeginForm(行为名称, 控制器名称, new RouteValueDictionary(路由参数对象), 选项, dic);
     }
 
     /// <summary>

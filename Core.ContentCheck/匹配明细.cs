@@ -6,7 +6,7 @@ using System.Text;
 namespace Core.ContentCheck
 {
     [Serializable]
-    public struct 匹配明细
+    public class 匹配明细
     {
         /// <summary>
         /// 原文匹配内容片段

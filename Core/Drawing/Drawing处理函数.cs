@@ -465,7 +465,7 @@ namespace Core.Drawing
         {
             var img = new Bitmap(图像.Width, 图像.Height, 目标像素格式);
             var g = Graphics.FromImage(img);
-            g.DrawImage(图像, 0, 0);
+            g.DrawImage(图像, 0, 0, 图像.Width, 图像.Height);
             g.Dispose();
             return img;
         }

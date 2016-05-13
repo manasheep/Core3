@@ -252,9 +252,9 @@ public static class Server通用扩展
     public static MvcForm BeginFormForBootstarp(this HtmlHelper o, string 行为名称, string 控制器名称, object 路由参数对象 = null, FormMethod 提交方式 = FormMethod.Post, Action<Dictionary<string, object>> Html属性字典操作 = null)
     {
         var dic = new Dictionary<string, object>();
-        if (Html属性字典操作 != null) Html属性字典操作(dic);
         dic.Add("class", "form-horizontal");
         dic.Add("role", "form");
+        if (Html属性字典操作 != null) Html属性字典操作(dic);
         return o.BeginForm(行为名称, 控制器名称, new RouteValueDictionary(路由参数对象), 提交方式, dic);
     }
 
@@ -271,9 +271,9 @@ public static class Server通用扩展
     public static MvcForm BeginAjaxFormForBootstarp(this AjaxHelper o, string 行为名称, string 控制器名称, object 路由参数对象 = null, AjaxOptions 选项=null, Action<Dictionary<string, object>> Html属性字典操作 = null)
     {
         var dic = new Dictionary<string, object>();
-        if (Html属性字典操作 != null) Html属性字典操作(dic);
         dic.Add("class", "form-horizontal");
         dic.Add("role", "form");
+        if (Html属性字典操作 != null) Html属性字典操作(dic);
         return o.BeginForm(行为名称, 控制器名称, new RouteValueDictionary(路由参数对象), 选项, dic);
     }
 

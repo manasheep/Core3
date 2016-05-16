@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using Core.Text;
@@ -17,7 +18,7 @@ namespace Core.Web
         /// <returns>转义结果</returns>
         public static string 进行HTML转义(this string str)
         {
-            return Regex.Replace(str.Replace(" ", "&nbsp;").Replace("\t", "&nbsp;".重复(4)), @"(\r)?\n", "<br />");
+            return Regex.Replace(WebUtility.HtmlEncode(str).Replace(" ", "&nbsp;").Replace("\t", "&nbsp;".重复(4)), @"(\r)?\n", "<br />");
         }
     }
 }

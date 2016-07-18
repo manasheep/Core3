@@ -29,6 +29,28 @@ namespace Core.Drawing
 
     public static class Drawing处理函数
     {
+
+        /// <summary>
+        /// 判断图片的PixelFormat是否为索引格式，因为对索引格式图像直接处理通常会引发异常“无法从带有索引像素格式的图像创建graphics对象”，这种情况应该使用“创建副本”方法为其创建个非索引格式的副本，再进行操作。
+        /// </summary>
+        /// <param name="图像像素格式">原图片的PixelFormat</param>
+        /// <returns>是否为索引格式</returns>
+        public static bool 判断是否为索引格式(this PixelFormat 图像像素格式)
+        {
+            return 图像像素格式.IsIn(PixelFormat.Undefined, PixelFormat.DontCare, PixelFormat.Format16bppArgb1555,
+                PixelFormat.Format1bppIndexed, PixelFormat.Format4bppIndexed, PixelFormat.Format8bppIndexed);
+        }
+
+        /// <summary>
+        /// 判断图片的PixelFormat是否为索引格式，因为对索引格式图像直接处理通常会引发异常“无法从带有索引像素格式的图像创建graphics对象”
+        /// </summary>
+        /// <param name="图像">原图片</param>
+        /// <returns>是否为索引格式</returns>
+        public static bool 判断是否为索引格式(this Image 图像)
+        {
+            return 判断是否为索引格式(图像.PixelFormat);
+        }
+
         /// <summary>
         /// 转换为图像
         /// </summary>
@@ -48,7 +70,7 @@ namespace Core.Drawing
         /// <param name="图像">图像</param>
         /// <param name="输出图像类型">输出图像字节数组的数据类型</param>
         /// <returns>字节数组</returns>
-        public static byte[] 转换为字节数组(this Image 图像,ImageFormat 输出图像类型)
+        public static byte[] 转换为字节数组(this Image 图像, ImageFormat 输出图像类型)
         {
             MemoryStream ms = new MemoryStream();
             byte[] imagedata = null;
@@ -99,10 +121,10 @@ namespace Core.Drawing
         /// <returns>图像</returns>
         public static Image 读取图像自文件(string 文件路径)
         {
-            using (var fs=new FileStream(文件路径, FileMode.Open, FileAccess.Read))
+            using (var fs = new FileStream(文件路径, FileMode.Open, FileAccess.Read))
             {
                 return Image.FromStream(fs);
-            } 
+            }
         }
 
         /// <summary>
@@ -225,7 +247,7 @@ namespace Core.Drawing
                 var h = img.Height;
                 图像旋转(img, ref w, ref h, exif.orientationNumber);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 e.Trace();
             }
@@ -461,6 +483,12 @@ namespace Core.Drawing
             return Bmp;
         }
 
+        /// <summary>
+        /// 创建一个目标像素格式的副本。此方法除了常规用途外，还可以用于将索引图像创建为可以被处理的普通图像。
+        /// </summary>
+        /// <param name="图像">原图像</param>
+        /// <param name="目标像素格式">副本图像的像素格式，默认为Format16bppRgb555，使用Format32bppArgb可以很好的保留图像颜色和透明度</param>
+        /// <returns>原图像的副本</returns>
         public static Bitmap 创建副本(this Image 图像, PixelFormat 目标像素格式 = PixelFormat.Format16bppRgb555)
         {
             var img = new Bitmap(图像.Width, 图像.Height, 目标像素格式);

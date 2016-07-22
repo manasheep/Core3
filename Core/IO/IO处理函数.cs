@@ -364,6 +364,32 @@ namespace Core.IO
         }
 
         /// <summary>
+        /// 将指定目录下的所有符合条件的文件及子目录复制到目标目录中
+        /// </summary>
+        /// <param name="操作目录">要操作的目录</param>
+        /// <param name="目标目录">目标目录</param>
+        /// <param name="目录筛选">判断目录是否应当被复制的方法</param>
+        /// <param name="文件筛选">判断文件是否应当被复制的方法</param>
+        public static void 复制目录文件(this DirectoryInfo 操作目录, DirectoryInfo 目标目录, Predicate<FileInfo> 文件筛选, Predicate<DirectoryInfo> 目录筛选)
+        {
+            if (!目标目录.Exists) 目标目录.Create();
+            foreach (var f in 操作目录.GetFiles())
+            {
+                if (文件筛选(f))
+                {
+                    f.CopyTo(目标目录.FullName.AsPathString().Combine(f.Name), true);
+                }
+            }
+            foreach (var d in 操作目录.GetDirectories())
+            {
+                if (目录筛选(d))
+                {
+                    复制目录文件(d, new DirectoryInfo(目标目录.FullName.AsPathString().Combine(d.Name)), 文件筛选, 目录筛选);
+                }
+            }
+        }
+
+        /// <summary>
         /// 删除目录中的所有文件
         /// </summary>
         /// <param name="操作目录">要操作的目录</param>

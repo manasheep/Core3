@@ -22,6 +22,7 @@ namespace Core.Web
         /// <summary>
         /// 将UBB代码转换为HTML代码
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         public static string 转换UBB内容(this string s)
         {
             return UBB.转换为Html代码(s);
@@ -31,6 +32,7 @@ namespace Core.Web
         /// 将UBB代码转换为HTML代码
         /// </summary>
         /// <param name="新窗口打开链接">设置超链接是否由新窗口打开</param>
+        // ReSharper disable once InconsistentNaming
         public static string 转换UBB内容(this string s, bool 新窗口打开链接)
         {
             return UBB.转换为Html代码(s, 新窗口打开链接);
@@ -39,6 +41,7 @@ namespace Core.Web
         /// <summary>
         /// 清除字符串内的UBB标签
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         public static string 清除UBB格式(this string 字符串)
         {
             while (Regex.IsMatch(字符串, @"\[(\w+)=?[^\]]*\]([\s\S]*?)\[/\1\]"))
@@ -49,6 +52,7 @@ namespace Core.Web
         /// <summary>
         /// 清除字符串内的HTML标签的方式之一，适合对较为规则的文档进行简单替换。
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         public static string 清除HTML代码(this string 字符串)
         {
             var ex = @"<\s*(?<tag>\w+)\s*.*?>(?<text>.*?)</\k<tag>\s*>";
@@ -64,6 +68,7 @@ namespace Core.Web
         /// </summary>
         /// <param name="是否清除脚本代码">是否清除脚本代码</param>
         /// <param name="是否转换特定标记为换行符">是否转换特定标记为换行符，包括br、hr及p、div、li、h1、h2……的结尾</param>
+        // ReSharper disable once InconsistentNaming
         public static string 清除HTML代码(this string 字符串, bool 是否清除脚本代码, bool 是否转换特定标记为换行符)
         {
             string v = 字符串;
@@ -85,10 +90,37 @@ namespace Core.Web
         }
 
         /// <summary>
+        /// 检查目标字符串中是否有危险的HTML代码
+        /// </summary>
+        /// <param name="字符串"></param>
+        /// <returns>目标字符串中是否有危险的HTML代码</returns>
+        // ReSharper disable once InconsistentNaming
+        public static bool 检测是否有危险HTML代码(this string 字符串)
+        {
+            foreach (Match f in 字符串.RegexMatches(@"<[^>]+?>"))
+            {
+                if (f.Value.RegexIsMatch(@"^<\s*(script|iframe|frameset|frame|form|link)", RegexOptions.IgnoreCase))
+                {
+                    return true;
+                }
+                if (f.Value.RegexIsMatch(@"\son\w+\s*=\s*(['""]?).+?\1(?=[\s >])", RegexOptions.IgnoreCase | RegexOptions.Singleline))
+                {
+                    return true;
+                }
+                if (f.Value.RegexIsMatch(@"\s\w+\s*=\s*(['""]?)\s * (javascript | vbscript)\s *:.+?\1(?=[\s >])", RegexOptions.IgnoreCase | RegexOptions.Singleline))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// 将字符串内的HTML标记符(不包括换行、空格等字符)转换为在HTML页面中可呈现的形式
         /// </summary>
         /// <param name="str">字符串</param>
         /// <returns>编码结果</returns>
+        // ReSharper disable once InconsistentNaming
         public static string 进行HTML编码(this string str)
         {
             return HttpUtility.HtmlEncode(str);
@@ -99,6 +131,7 @@ namespace Core.Web
         /// </summary>
         /// <param name="str">字符串</param>
         /// <returns>解码结果</returns>
+        // ReSharper disable once InconsistentNaming
         public static string 进行HTML解码(this string str)
         {
             return HttpUtility.HtmlDecode(str);
@@ -109,6 +142,7 @@ namespace Core.Web
         /// </summary>
         /// <param name="str">字符串</param>
         /// <returns>转义结果</returns>
+        // ReSharper disable once InconsistentNaming
         public static string 进行HTML转义(this string str)
         {
             return Regex.Replace(进行HTML编码(str).Replace(" ", "&nbsp;").Replace("\t", "&nbsp;".重复(4)), @"(\r)?\n", "<br />");
@@ -119,6 +153,7 @@ namespace Core.Web
         /// </summary>
         /// <param name="str">字符串</param>
         /// <returns>编码结果</returns>
+        // ReSharper disable once InconsistentNaming
         public static string 进行URL编码(this string str)
         {
             return HttpUtility.UrlEncode(str);
@@ -129,6 +164,7 @@ namespace Core.Web
         /// </summary>
         /// <param name="str">字符串</param>
         /// <returns>编码结果</returns>
+        // ReSharper disable once InconsistentNaming
         public static string 进行URL编码(this string str, Encoding 字符编码)
         {
             return HttpUtility.UrlEncode(str, 字符编码);
@@ -139,6 +175,7 @@ namespace Core.Web
         /// </summary>
         /// <param name="str">字符串</param>
         /// <returns>解码结果</returns>
+        // ReSharper disable once InconsistentNaming
         public static string 进行URL解码(this string str)
         {
             return HttpUtility.UrlDecode(str);
@@ -149,6 +186,7 @@ namespace Core.Web
         /// </summary>
         /// <param name="str">字符串</param>
         /// <returns>解码结果</returns>
+        // ReSharper disable once InconsistentNaming
         public static string 进行URL解码(this string str, Encoding 字符编码)
         {
             return HttpUtility.UrlDecode(str, 字符编码);
@@ -159,6 +197,7 @@ namespace Core.Web
         /// </summary>
         /// <param name="URL地址">URL路径字符串</param>
         /// <returns>编码结果</returns>
+        // ReSharper disable once InconsistentNaming
         public static string 进行URL路径编码(this string URL地址)
         {
             return HttpUtility.UrlPathEncode(URL地址);

@@ -50,12 +50,13 @@ namespace Core.BaiduMap
         /// <param name="labelStyles">标签样式 content, fontWeight,fontSize,fontColor,bgColor, border。与labels一一对应。</param>
         /// <param name="path">折线，可通过经纬度或地址/地名描述；多个折线用竖线"|"分隔；每条折线的点用分号";"分隔；点坐标用逗号","分隔。坐标格式：lng&lt;经度&gt;，lat&lt;纬度&gt;，例如116.43213,38.76623。</param>
         /// <param name="pathStyles">折线样式 color,weight,opacity[,fillColor]。</param>
+        /// <param name="mcode">安全码。若为Android/IOS SDK的ak, 该参数必需。</param>
         /// <returns>静态地图图像的网址</returns>
         public string CreateStaticImageUrl(
             int? width = null, int? height = null, string center = null, byte? zoom = null,
             byte? copyright = null, byte? scale = null, string bbox = null,
             string markers = null, string markerStyles = null, string labels = null, string labelStyles = null,
-            string path = null, string pathStyles = null
+            string path = null, string pathStyles = null, string mcode = null
             )
         {
             var str = new StringBuilder("http://api.map.baidu.com/staticimage/v2?ak=");
@@ -126,6 +127,11 @@ namespace Core.BaiduMap
                 str.Append("&pathStyles=");
                 str.Append(pathStyles);
             }
+            if (mcode != null)
+            {
+                str.Append("&mcode=");
+                str.Append(mcode);
+            }
 
             return str.ToString();
         }
@@ -143,7 +149,7 @@ namespace Core.BaiduMap
         /// <param name="from">源坐标类型。取值为如下：1：GPS设备获取的角度坐标，wgs84坐标;2：GPS获取的米制坐标、sogou地图所用坐标;3：google地图、soso地图、aliyun地图、mapabc地图和amap地图所用坐标，国测局坐标;4：3中列表地图坐标对应的米制坐标;5：百度地图采用的经纬度坐标;6：百度地图采用的米制坐标;7：mapbar地图坐标;8：51地图坐标。默认值为1</param>
         /// <param name="to">目的坐标类型。有两种可供选择：5、6。5：bd09ll(百度经纬度坐标),6：bd09mc(百度米制经纬度坐标);默认值为5</param>
         /// <returns>百度地图坐标</returns>
-        public IEnumerable<string> ConvertGeo(string coords, string sn = null, byte? from = null, byte? to = null)
+        public IEnumerable<string[]> ConvertGeo(string coords, string sn = null, byte? from = null, byte? to = null)
         {
             var str = new StringBuilder("http://api.map.baidu.com/geoconv/v1/?output=xml&ak=");
 
@@ -185,10 +191,135 @@ namespace Core.BaiduMap
                     var root = XElement.Parse(result);
                     foreach (var f in root.Element("result").Elements())
                     {
-                        yield return f.Element("x").Value + "," + f.Element("y").Value;
+                        yield return new[] { f.Element("x").Value, f.Element("y").Value };
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 创建导航网址。
+        /// </summary>
+        /// <param name="src">appName。</param>
+        /// <param name="origin">起点名称或经纬度，注意这和其他接口的经纬度顺序是相反的，或者可同时提供名称和经纬度，此时经纬度优先级高，将作为导航依据，名称只负责展示。范例：1、名称：天安门 2、经纬度：39.98871&lt;纬度&gt;,116.43234&lt;经度&gt;。 3、名称和经纬度：name:天安门|latlng:39.98871,116.43234</param>
+        /// <param name="destination">终点名称或经纬度，或者可同时提供名称和经纬度，此时经纬度优先级高，将作为导航依据，名称只负责展示。格式同上。</param>
+        /// <param name="mode">导航模式，固定为transit、driving、walking，分别表示公交、驾车和步行。</param>
+        /// <param name="origin_region">起点所在城市或县。</param>
+        /// <param name="destination_region">终点所在城市或县。</param>
+        /// <param name="output">表示输出类型，web上必须指定为html才能展现地图产品结果。手机客户端忽略此参数。</param>
+        /// <param name="coord_type">坐标类型，可选参数。默认为bd09经纬度坐标。允许的值为bd09ll、bd09mc、gcj02、wgs84。bd09ll表示百度经纬度坐标，bd09mc表示百度墨卡托坐标，gcj02表示经过国测局加密的坐标，wgs84表示gps获取的坐标。</param>
+        /// <param name="zoom">展现地图的级别，默认为视觉最优级别。</param>
+        /// <returns>导航网址</returns>
+        public static string CreateDirectionUrl(
+            string src, string origin, string destination, string mode,
+            string origin_region, string destination_region, string output = "html",
+            string coord_type = null, byte? zoom = null
+            )
+        {
+            var str = new StringBuilder("http://api.map.baidu.com/direction?src=");
+
+            str.Append(src);
+            if (origin != null)
+            {
+                str.Append("&origin=");
+                str.Append(origin);
+            }
+            if (destination != null)
+            {
+                str.Append("&destination=");
+                str.Append(destination);
+            }
+            if (mode != null)
+            {
+                str.Append("&mode=");
+                str.Append(mode);
+            }
+            if (origin_region != null)
+            {
+                str.Append("&origin_region=");
+                str.Append(origin_region);
+            }
+            if (destination_region != null)
+            {
+                str.Append("&destination_region=");
+                str.Append(destination_region);
+            }
+            if (output != null)
+            {
+                str.Append("&output=");
+                str.Append(output);
+            }
+            if (coord_type != null)
+            {
+                str.Append("&coord_type=");
+                str.Append(coord_type);
+            }
+            if (zoom != null)
+            {
+                str.Append("&zoom=");
+                str.Append(zoom);
+            }
+
+            return str.ToString();
+        }
+
+        /// <summary>
+        /// 创建导航网址。
+        /// </summary>
+        /// <param name="src">appName。</param>
+        /// <param name="origin">起点名称或经纬度，注意这和其他接口的经纬度顺序是相反的，或者可同时提供名称和经纬度，此时经纬度优先级高，将作为导航依据，名称只负责展示。范例：1、名称：天安门 2、经纬度：39.98871&lt;纬度&gt;,116.43234&lt;经度&gt;。 3、名称和经纬度：name:天安门|latlng:39.98871,116.43234</param>
+        /// <param name="destination">终点名称或经纬度，或者可同时提供名称和经纬度，此时经纬度优先级高，将作为导航依据，名称只负责展示。格式同上。</param>
+        /// <param name="mode">导航模式，固定为transit、driving、walking，分别表示公交、驾车和步行。</param>
+        /// <param name="region">城市名或县名。当给定region时，认为起点和终点都在同一城市，除非单独给定起点或终点的城市。</param>
+        /// <param name="output">表示输出类型，web上必须指定为html才能展现地图产品结果。手机客户端忽略此参数。</param>
+        /// <param name="coord_type">坐标类型，可选参数。默认为bd09经纬度坐标。允许的值为bd09ll、bd09mc、gcj02、wgs84。bd09ll表示百度经纬度坐标，bd09mc表示百度墨卡托坐标，gcj02表示经过国测局加密的坐标，wgs84表示gps获取的坐标。</param>
+        /// <param name="zoom">展现地图的级别，默认为视觉最优级别。</param>
+        /// <returns>导航网址</returns>
+        public static string CreateDirectionUrl(
+            string src, string origin, string destination, string mode, string region,
+            string output = "html", string coord_type = null, byte? zoom = null
+            )
+        {
+            var str = new StringBuilder("http://api.map.baidu.com/direction?src=");
+
+            str.Append(src);
+            if (origin != null)
+            {
+                str.Append("&origin=");
+                str.Append(origin);
+            }
+            if (destination != null)
+            {
+                str.Append("&destination=");
+                str.Append(destination);
+            }
+            if (mode != null)
+            {
+                str.Append("&mode=");
+                str.Append(mode);
+            }
+            if (region != null)
+            {
+                str.Append("&region=");
+                str.Append(region);
+            }
+            if (output != null)
+            {
+                str.Append("&output=");
+                str.Append(output);
+            }
+            if (coord_type != null)
+            {
+                str.Append("&coord_type=");
+                str.Append(coord_type);
+            }
+            if (zoom != null)
+            {
+                str.Append("&zoom=");
+                str.Append(zoom);
+            }
+
+            return str.ToString();
         }
     }
 }

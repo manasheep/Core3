@@ -543,18 +543,19 @@ public static partial class 通用扩展
     /// </summary>
     public static IEnumerable<T> Random<T>(this IEnumerable<T> o)
     {
-        var c = o.Count();
-        var l = new List<int>();
-        for (int i = 0; i < c; i++)
-        {
-            l.Add(i);
-        }
-        while (l.Count > 0)
-        {
-            var i = l[R.Next(l.Count)];
-            l.Remove(i);
-            yield return o.ElementAt(i);
-        }
+        //var c = o.Count();
+        //var l = new List<int>();
+        //for (int i = 0; i < c; i++)
+        //{
+        //    l.Add(i);
+        //}
+        //while (l.Count > 0)
+        //{
+        //    var i = l[R.Next(l.Count)];
+        //    l.Remove(i);
+        //    yield return o.ElementAt(i);
+        //}
+        return o.OrderBy(q => R.Next());
     }
 
     /// <summary>

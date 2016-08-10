@@ -321,5 +321,57 @@ namespace Core.BaiduMap
 
             return str.ToString();
         }
+
+        /// <summary>
+        /// 创建地图标点网址。地图标点功能，调用该接口可调起PC或web地图，且在指定坐标点上显示点的名称和内容信息。
+        /// </summary>
+        /// <param name="src">appName。此参数不传值，不保证服务。</param>
+        /// <param name="location">lat&lt;纬度&gt;,lng&lt;经度&gt;</param>
+        /// <param name="title">标注点显示标题</param>
+        /// <param name="content">标注点显示内容</param>
+        /// <param name="output">表示输出类型，web上必须指定为html才能展现地图产品结果。</param>
+        /// <param name="coord_type">坐标类型，可选参数。默认为bd09经纬度坐标。允许的值为bd09ll、bd09mc、gcj02、wgs84。bd09ll表示百度经纬度坐标，bd09mc表示百度墨卡托坐标，gcj02表示经过国测局加密的坐标，wgs84表示gps获取的坐标。</param>
+        /// <param name="zoom">展现地图的级别，默认为视觉最优级别。</param>
+        /// <returns>地图标点网址</returns>
+        public static string CreateMarkerUrl(string src, string location, string title, string content,
+            string output = "html", string coord_type = null, byte? zoom = null)
+        {
+
+            var str = new StringBuilder("http://api.map.baidu.com/marker?src=");
+
+            str.Append(src);
+            if (location != null)
+            {
+                str.Append("&location=");
+                str.Append(location);
+            }
+            if (title != null)
+            {
+                str.Append("&title=");
+                str.Append(title);
+            }
+            if (content != null)
+            {
+                str.Append("&content=");
+                str.Append(content);
+            }
+            if (output != null)
+            {
+                str.Append("&output=");
+                str.Append(output);
+            }
+            if (coord_type != null)
+            {
+                str.Append("&coord_type=");
+                str.Append(coord_type);
+            }
+            if (zoom != null)
+            {
+                str.Append("&zoom=");
+                str.Append(zoom);
+            }
+
+            return str.ToString();
+        }
     }
 }

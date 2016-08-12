@@ -291,6 +291,16 @@ public static class Server通用扩展
     }
 
     /// <summary>
+    /// 转换为JavaScript对象（Json）的MvcHtml字符串，可以在页面的JavaScript代码中直接引用，比如JavaScript代码：var myarray=@Model.MyArray.ToJavaScriptObject();
+    /// </summary>
+    /// <param name="o">要转换的对象，需支持Json序列化</param>
+    /// <returns>JavaScript对象的MvcHtml字符串</returns>
+    public static MvcHtmlString ToJavaScriptObject(this object o)
+    {
+        return Core.IO.IO处理函数.序列化对象为Json字符串(o).ToMvcHtmlString();
+    }
+
+    /// <summary>
     /// 转换为MvcHtml字符串
     /// </summary>
     /// <param name="html">当前字符串</param>

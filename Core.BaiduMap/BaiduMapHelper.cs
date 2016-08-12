@@ -10,7 +10,8 @@ using System.Xml.Linq;
 namespace Core.BaiduMap
 {
     /// <summary>
-    /// 百度地图助手
+    /// 百度地图助手。
+    /// 拾取坐标系统：http://api.map.baidu.com/lbsapi/getpoint/index.html
     /// </summary>
     public class BaiduMapHelper
     {

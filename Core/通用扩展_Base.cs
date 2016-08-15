@@ -539,6 +539,31 @@ public static partial class 通用扩展
     }
 
     /// <summary>
+    /// 依据权重值调整概率，从集合中随机抽取一个项
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
+    /// <param name="o">集合</param>
+    /// <param name="getWeightedFunc">获取权重值的方法</param>
+    /// <returns>随机抽取到的一个项</returns>
+    public static T RandomExtractOneByWeighted<T>(this IEnumerable<T> o, Func<T, int> getWeightedFunc)
+    {
+        var enumerable = o.ToArray();
+        var total = enumerable.Sum(getWeightedFunc);
+        var r = R.Next(total);
+        var v = 0;
+        foreach (var f in enumerable)
+        {
+            var fw = getWeightedFunc(f);
+            if (v <= r && v + fw > r)
+            {
+                return f;
+            }
+            v += fw;
+        }
+        return enumerable.FirstOrDefault();
+    }
+
+    /// <summary>
     /// 返回经随机排序后的集合
     /// </summary>
     public static IEnumerable<T> Random<T>(this IEnumerable<T> o)

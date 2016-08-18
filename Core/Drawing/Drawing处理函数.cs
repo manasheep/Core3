@@ -84,6 +84,27 @@ namespace Core.Drawing
         /// 转换为字节数组
         /// </summary>
         /// <param name="图像">图像</param>
+        /// <param name="图像质量">100以内，数值越高质量越高</param>
+        /// <returns>字节数组</returns>
+        public static byte[] 转换为字节数组(this Image 图像, long 图像质量)
+        {
+            var ecd = GetEncoder(ImageFormat.Jpeg);
+            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 图像质量);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            MemoryStream ms = new MemoryStream();
+            byte[] imagedata = null;
+            图像.Save(ms, ecd, myEncoderParameters);
+            imagedata = ms.GetBuffer();
+            ms.Close();
+            return imagedata;
+        }
+
+        /// <summary>
+        /// 转换为字节数组
+        /// </summary>
+        /// <param name="图像">图像</param>
         /// <returns>字节数组</returns>
         public static byte[] 转换为字节数组(this Bitmap 图像)
         {

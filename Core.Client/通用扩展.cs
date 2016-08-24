@@ -43,6 +43,21 @@ public static partial class 通用扩展
     }
 
     /// <summary>
+    /// 延迟指定时间，但不会卡主界面
+    /// </summary>
+    /// <param name="form">窗体</param>
+    /// <param name="延迟毫秒数">延迟毫秒数</param>
+    public static void Delay(this Form form, int 延迟毫秒数)
+    {
+        Thread t = new Thread(o => Thread.Sleep(延迟毫秒数));
+        t.Start(form);
+        while (t.IsAlive)
+        {
+            Application.DoEvents();
+        }
+    }
+
+    /// <summary>
     /// 延迟执行操作
     /// </summary>
     /// <typeparam name="T">类型</typeparam>

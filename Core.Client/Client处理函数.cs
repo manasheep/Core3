@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Windows.Forms;
+using mshtml;
 
 namespace Core
 {
@@ -71,7 +72,7 @@ namespace Core
 
         public static IntPtr 获取目标窗口线程ID(IntPtr 窗口句柄)
         {
-            return GetWindowThreadProcessId(窗口句柄,IntPtr.Zero);
+            return GetWindowThreadProcessId(窗口句柄, IntPtr.Zero);
         }
 
         public static void 设置线程联接状态(IntPtr 目标线程ID, IntPtr 联接到线程ID, bool 联接状态)
@@ -194,7 +195,7 @@ namespace Core
 
         public static void 模拟弹起按键(VirtualKeyCode 虚拟按键代码)
         {
-            var code = (byte) 虚拟按键代码;
+            var code = (byte)虚拟按键代码;
             keybd_event(code, 0, KEYEVENTF_KEYUP, 0);
         }
 
@@ -523,6 +524,55 @@ namespace Core
             控件.DataBindings.Clear();
             控件.DataBindings.Add(控件属性, 对象, 对象属性, true);
             控件.DataBindings[0].FormatString = 格式化规则;
+        }
+
+        [ComImport, InterfaceType((short)1), Guid("3050F669-98B5-11CF-BB82-00AA00BDCE0B")]
+        private interface IHTMLElementRenderFixed
+        {
+            void DrawToDC(IntPtr hdc);
+            void SetDocumentPrinter(string bstrPrinterName, IntPtr hdc);
+        }
+
+        /// <summary>
+        /// 使用该方法获取图片时，可能无法获取到图片的原始尺寸，只能获取其在网页中所显示的尺寸，因此可能会被缩小或放大过了。
+        /// </summary>
+        /// <param name="imgTag">img元素</param>
+        /// <returns>图片</returns>
+        public static Bitmap 通过区域截屏技术获取图片(this HtmlElement imgTag)
+        {
+            IHTMLImgElement img = (IHTMLImgElement)imgTag.DomElement;
+            IHTMLElementRenderFixed render = (IHTMLElementRenderFixed)img;
+
+            Bitmap bmp = new Bitmap(imgTag.OffsetRectangle.Width, imgTag.OffsetRectangle.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            IntPtr hdc = g.GetHdc();
+            render.DrawToDC(hdc);
+            g.ReleaseHdc(hdc);
+
+            return bmp;
+        }
+
+        /// <summary>
+        /// 使用该方法获取图片时，会通过剪贴板转储，因此会覆盖剪贴板内容。
+        /// </summary>
+        /// <param name="imgTag">img元素</param>
+        /// <returns>图片</returns>
+        public static Image 通过选取复制技术获取图片(this HtmlElement imgTag)
+        {
+            var imageElement = imgTag.DomElement as IHTMLControlElement;
+            var doc = (HTMLDocument)imgTag.Document.DomDocument;
+            var body = (HTMLBody)doc.body;
+            var rang = (IHTMLControlRange)body.createControlRange();
+            var img = imageElement;
+            rang.add(img);
+            //var tdata = Serialize(Clipboard.GetDataObject());
+            //if (Main.Default.是否尝试不破坏剪贴板数据) Center.保存剪贴板数据();
+            rang.execCommand("Copy", false, null);
+            Image regImg = Clipboard.GetImage();
+            //Clipboard.SetDataObject(Deserialize(tdata), true);
+            //if (Main.Default.是否尝试不破坏剪贴板数据) Center.恢复剪贴板数据();
+            //if (!Main.Default.是否尝试不破坏剪贴板数据) Clipboard.Clear();
+            return regImg;
         }
     }
 }

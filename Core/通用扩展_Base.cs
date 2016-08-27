@@ -15,6 +15,24 @@ public static partial class 通用扩展
     #region 基本
 
     /// <summary>
+    /// 追加集合到末尾，并返回自身
+    /// </summary>
+    public static List<T> AddRangeByLink<T>(this List<T> o, IEnumerable<T> items)
+    {
+        o.AddRange(items);
+        return o;
+    }
+
+    /// <summary>
+    /// 追加项到末尾，并返回自身
+    /// </summary>
+    public static List<T> AddByLink<T>(this List<T> o, T item)
+    {
+        o.Add(item);
+        return o;
+    }
+
+    /// <summary>
     /// 连接集合中的所有数组，组成一个完整的大数组
     /// </summary>
     /// <typeparam name="T">类型</typeparam>

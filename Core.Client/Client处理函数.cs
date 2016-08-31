@@ -574,5 +574,77 @@ namespace Core
             //if (!Main.Default.是否尝试不破坏剪贴板数据) Clipboard.Clear();
             return regImg;
         }
+
+
+        public static void 移除指定标记元素(this HtmlDocument doc, params string[] tagNameArray)
+        {
+            foreach (var t in tagNameArray)
+            {
+                var hc = doc.GetElementsByTagName(t).Cast<HtmlElement>();
+                foreach (var f in hc)
+                {
+                    mshtml.IHTMLDOMNode node = f.DomElement as mshtml.IHTMLDOMNode;
+                    if (node != null)
+                    {
+                        node.parentNode.removeChild(node);
+                    }
+                }
+            }
+        }
+
+        public static void 移除指定标记元素的样式属性(this HtmlDocument doc, params string[] tagNameArray)
+        {
+            foreach (var t in tagNameArray)
+            {
+                var hc = doc.GetElementsByTagName(t).Cast<HtmlElement>();
+                foreach (var f in hc)
+                {
+                    var element = f.DomElement as mshtml.IHTMLElement;
+                    if (element != null)
+                    {
+                        element.removeAttribute("width");
+                        element.removeAttribute("height");
+                        element.removeAttribute("class");
+                        element.removeAttribute("style");
+                        element.removeAttribute("size");
+                        element.removeAttribute("face");
+                        element.removeAttribute("color");
+                        element.removeAttribute("border");
+                    }
+                }
+            }
+        }
+
+        public static void 移除全部标记元素的样式属性(this HtmlDocument doc)
+        {
+            var hc = doc.All.Cast<HtmlElement>();
+            foreach (var f in hc)
+            {
+                var element = f.DomElement as mshtml.IHTMLElement;
+                if (element != null)
+                {
+                    element.removeAttribute("width");
+                    element.removeAttribute("height");
+                    element.removeAttribute("class");
+                    element.removeAttribute("style");
+                    element.removeAttribute("size");
+                    element.removeAttribute("face");
+                    element.removeAttribute("color");
+                    element.removeAttribute("border");
+                }
+            }
+        }
+
+        public static void 遍历指定标记元素(this HtmlDocument doc, Action<HtmlElement> action, params string[] tagNameArray)
+        {
+            foreach (var t in tagNameArray)
+            {
+                var hc = doc.GetElementsByTagName(t).Cast<HtmlElement>();
+                foreach (var f in hc)
+                {
+                    action(f);
+                }
+            }
+        }
     }
 }

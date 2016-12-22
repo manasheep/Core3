@@ -366,7 +366,7 @@ public static partial class 通用扩展
     }
 
     /// <summary>
-    /// 检测字符串是否为null或空白字符串
+    /// 检测字符串是否为null或空白字符串（Trim()之后长度为0）
     /// </summary>
     public static bool IsNullOrEmptyOrWhitespace(this string s)
     {

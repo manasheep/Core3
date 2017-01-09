@@ -297,6 +297,12 @@ public static class Server通用扩展
     /// <returns>JavaScript对象的MvcHtml字符串</returns>
     public static MvcHtmlString ToJavaScriptObject(this object o)
     {
+        if (o.GetType().FullName.Contains("<>f__AnonymousType"))
+        {
+            //匿名类型
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return serializer.Serialize(o).ToMvcHtmlString();
+        }
         return Core.IO.IO处理函数.序列化对象为Json字符串(o).ToMvcHtmlString();
     }
 

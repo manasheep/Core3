@@ -358,6 +358,14 @@ public static partial class 通用扩展
     }
 
     /// <summary>
+    /// 反转逻辑值
+    /// </summary>
+    public static bool Reverse(this bool b)
+    {
+        return !b;
+    }
+
+    /// <summary>
     /// 检测字符串是否为null或空字符串
     /// </summary>
     public static bool IsNullOrEmpty(this string s)

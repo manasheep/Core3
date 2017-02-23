@@ -125,12 +125,14 @@ namespace Core.Drawing
         /// 转换图像为24位图像
         /// </summary>
         /// <param name="原图">原图</param>
+        /// <param name="背景颜色">使用背景颜色</param>
         /// <returns>新的24位彩色图</returns>
-        public static Bitmap 转换为24位彩色图像文件(this Image 原图)
+        public static Bitmap 转换为24位彩色图像文件(this Image 原图, Color 背景颜色 = default(Color))
         {
             var bnew = new Bitmap(原图.Width, 原图.Height, PixelFormat.Format24bppRgb);
             Graphics g = Graphics.FromImage(bnew);
-            g.DrawImage(原图, 0, 0);
+            g.Clear(背景颜色);
+            g.DrawImage(原图, 0, 0, 原图.Width, 原图.Height);
             g.Dispose();
             return bnew;
         }
@@ -664,12 +666,12 @@ namespace Core.Drawing
             }
 
             float[][] colorMatrixElements = {
-												new float[] {1.0f,  0.0f,  0.0f,  0.0f, 0.0f},
-												new float[] {0.0f,  1.0f,  0.0f,  0.0f, 0.0f},
-												new float[] {0.0f,  0.0f,  1.0f,  0.0f, 0.0f},
-												new float[] {0.0f,  0.0f,  0.0f,  transparency, 0.0f},
-												new float[] {0.0f,  0.0f,  0.0f,  0.0f, 1.0f}
-											};
+                                                new float[] {1.0f,  0.0f,  0.0f,  0.0f, 0.0f},
+                                                new float[] {0.0f,  1.0f,  0.0f,  0.0f, 0.0f},
+                                                new float[] {0.0f,  0.0f,  1.0f,  0.0f, 0.0f},
+                                                new float[] {0.0f,  0.0f,  0.0f,  transparency, 0.0f},
+                                                new float[] {0.0f,  0.0f,  0.0f,  0.0f, 1.0f}
+                                            };
 
             ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
 

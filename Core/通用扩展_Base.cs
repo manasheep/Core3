@@ -60,7 +60,7 @@ public static partial class 通用扩展
         stream.Read(bytes, 0, bytes.Length);
 
         // 设置当前流的位置为流的开始 
-        stream.Seek(0, SeekOrigin.Begin);
+        if (stream.CanSeek) stream.Seek(0, SeekOrigin.Begin);
         return bytes;
     }
 

@@ -14,9 +14,30 @@ using System.Threading.Tasks;
 using Core.Encryption;
 using Core.Reflection;
 using Core.Web;
+using System.ComponentModel.DataAnnotations;
 
 public static partial class 通用扩展
 {
+    /// <summary>
+    /// 尝试验证数据是否符合表单验证特性规则（常见于System.ComponentModel.DataAnnotations命名空间下的各种特性，比如必填项、字符串长度等），如果不合规则，会在返回的列表中详细指出错误信息。参考自：http://www.cnblogs.com/TianFang/p/3606285.html
+    /// </summary>
+    /// <param name="o">待验证的对象</param>
+    /// <returns>错误信息列表</returns>
+    public static List<ValidationResult> TryValidate(this object o)
+    {
+        var context = new ValidationContext(o, null, null);
+
+        var results = new List<ValidationResult>();
+        Validator.TryValidateObject(o, context, results, true);
+
+        //foreach (var validationResult in results)
+        //{
+        //    Console.WriteLine(validationResult.ErrorMessage);
+        //}
+
+        return results;
+    }
+
     //实测无法在Asp.net MVC中正常运行
     ///// <summary>
     ///// 同步执行此异步方法，此执行方式不会造成死锁，参考来源：http://www.cnblogs.com/bnbqian/p/4513192.html

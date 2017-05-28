@@ -32,13 +32,21 @@ namespace Core.WPF
         }
 
         /// <summary>
+        /// 将可视对象转换为32位带透明格式的图片源，转换非界面显示的元素时建议使用DrawingVisual绘制好内部后保存，转换界面显示的元素时注意其边距属性可能会导致其超出画布，而显示空图像。
+        /// </summary>
+        public static RenderTargetBitmap 转换为图像(this Visual v, int 宽度, int 高度)
+        {
+            RenderTargetBitmap bmp = new RenderTargetBitmap(宽度, 高度, 96, 96, PixelFormats.Pbgra32);
+            bmp.Render(v);
+            return bmp;
+        }
+
+        /// <summary>
         /// 将可视对象保存为PNG格式图片，保存非界面显示的元素时建议使用DrawingVisual绘制好内部后保存，保存界面显示的元素时注意其边距属性可能会导致其超出画布，而显示空图像。
         /// </summary>
         public static void 保存为图像文件(this Visual v, int 宽度, int 高度, string 存储路径)
         {
-            RenderTargetBitmap bmp = new RenderTargetBitmap(宽度, 高度, 96, 96, PixelFormats.Pbgra32);
-            bmp.Render(v);
-            保存为图像文件(bmp, 存储路径);
+            保存为图像文件(转换为图像(v,宽度,高度), 存储路径);
         }
 
         /// <summary>

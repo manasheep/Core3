@@ -1061,6 +1061,41 @@ namespace Core.Drawing
         }
 
         /// <summary>
+        /// 求最大公约数
+        /// </summary>
+        /// <returns>最大公约数</returns>
+        private static int CalculateGCD(int a, int b)
+        {
+            if (a % b == 0)
+            {
+                return b;
+            }
+            return CalculateGCD(b, a % b);
+        }
+
+        /// <summary>
+        /// 求宽高比例
+        /// </summary>
+        /// <param name="宽度">宽度</param>
+        /// <param name="高度">高度</param>
+        /// <returns>宽高比例</returns>
+        public static Size 计算比例(int 宽度, int 高度)
+        {
+            var n = CalculateGCD(宽度, 高度);
+            return new Size(宽度 / n, 高度 / n);
+        }
+
+        /// <summary>
+        /// 求宽高比例
+        /// </summary>
+        /// <param name="图像">源图像</param>
+        /// <returns>宽高比例</returns>
+        public static Size 计算比例(this Image 图像)
+        {
+            return 计算比例(图像.Width, 图像.Height);
+        }
+
+        /// <summary>
         /// 计算指定尺寸的比例，如果不合比例（超出最大比值）则返回null
         /// </summary>
         /// <param name="宽度">指定宽度</param>

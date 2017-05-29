@@ -34,6 +34,16 @@ namespace Core.WPF
         /// <summary>
         /// 将可视对象转换为32位带透明格式的图片源，转换非界面显示的元素时建议使用DrawingVisual绘制好内部后保存，转换界面显示的元素时注意其边距属性可能会导致其超出画布，而显示空图像。
         /// </summary>
+        public static RenderTargetBitmap 转换为图像(this DrawingVisual v)
+        {
+            RenderTargetBitmap bmp = new RenderTargetBitmap((int)v.ContentBounds.Width, (int)v.ContentBounds.Height, 96, 96, PixelFormats.Pbgra32);
+            bmp.Render(v);
+            return bmp;
+        }
+
+        /// <summary>
+        /// 将可视对象转换为32位带透明格式的图片源，转换非界面显示的元素时建议使用DrawingVisual绘制好内部后保存，转换界面显示的元素时注意其边距属性可能会导致其超出画布，而显示空图像。
+        /// </summary>
         public static RenderTargetBitmap 转换为图像(this Visual v, int 宽度, int 高度)
         {
             RenderTargetBitmap bmp = new RenderTargetBitmap(宽度, 高度, 96, 96, PixelFormats.Pbgra32);
@@ -46,7 +56,7 @@ namespace Core.WPF
         /// </summary>
         public static void 保存为图像文件(this Visual v, int 宽度, int 高度, string 存储路径)
         {
-            保存为图像文件(转换为图像(v,宽度,高度), 存储路径);
+            保存为图像文件(转换为图像(v, 宽度, 高度), 存储路径);
         }
 
         /// <summary>
@@ -384,7 +394,7 @@ namespace Core.WPF
         /// <param name="宽度">覆盖图目标宽度</param>
         /// <param name="高度">覆盖图目标高度</param>
         /// <returns>覆盖了指定图像的图像</returns>
-        public static RenderTargetBitmap 添加覆盖图像(this BitmapSource 原图像, BitmapSource 覆盖图像, double 起始X坐标, double 起始Y坐标, double 宽度, double 高度,double 不透明度)
+        public static RenderTargetBitmap 添加覆盖图像(this BitmapSource 原图像, BitmapSource 覆盖图像, double 起始X坐标, double 起始Y坐标, double 宽度, double 高度, double 不透明度)
         {
             if (覆盖图像.Format != PixelFormats.Pbgra32) throw new Exception("覆盖的图像像素格式为{0}，而此方法仅支持PixelFormats.Pbgra32像素格式".FormatWith(覆盖图像.Format));
             DrawingVisual dv = new DrawingVisual();
@@ -456,11 +466,11 @@ namespace Core.WPF
             DrawingVisual dv = new DrawingVisual();
             using (var dc = dv.RenderOpen())
             {
-                
+
             }
             RenderTargetBitmap rtb = new RenderTargetBitmap(新画布宽度, 新画布高度, 96, 96, PixelFormats.Pbgra32);
             rtb.Render(dv);
-            return rtb.添加水印(图像, 对齐方位, 0, 0,1);
+            return rtb.添加水印(图像, 对齐方位, 0, 0, 1);
         }
     }
 }

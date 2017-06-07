@@ -52,7 +52,7 @@ namespace Core.WPF
         }
 
         /// <summary>
-        /// 将可视对象保存为PNG格式图片，保存非界面显示的元素时建议使用DrawingVisual绘制好内部后保存，保存界面显示的元素时注意其边距属性可能会导致其超出画布，而显示空图像。
+        /// 将可视对象保存为无损的PNG格式图片，保存非界面显示的元素时建议使用DrawingVisual绘制好内部后保存，保存界面显示的元素时注意其边距属性可能会导致其超出画布，而显示空图像。
         /// </summary>
         public static void 保存为图像文件(this Visual v, int 宽度, int 高度, string 存储路径)
         {
@@ -60,12 +60,37 @@ namespace Core.WPF
         }
 
         /// <summary>
-        /// 将图像保存为PNG格式图片。
+        /// 将可视对象保存为JPG格式图片，保存非界面显示的元素时建议使用DrawingVisual绘制好内部后保存，保存界面显示的元素时注意其边距属性可能会导致其超出画布，而显示空图像。
+        /// </summary>
+        /// <param name="质量">JPGE格式质量。其值的范围是 1 （最低质量） 到 100 （最高质量） （含)</param>
+        public static void 保存为JPG图像文件(this Visual v, int 宽度, int 高度, string 存储路径, int 质量)
+        {
+            保存为JPG图像文件(转换为图像(v, 宽度, 高度), 存储路径, 质量);
+        }
+
+        /// <summary>
+        /// 将图像保存为无损的PNG格式图片。
         /// </summary>
         public static void 保存为图像文件(this BitmapSource b, string 存储路径)
         {
             System.IO.FileStream fs = new System.IO.FileStream(存储路径, System.IO.FileMode.Create);
             BitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(b));
+            encoder.Save(fs);
+            fs.Close();
+        }
+
+        /// <summary>
+        /// 将图像保存为JPG格式图片。
+        /// </summary>
+        /// <param name="质量">JPGE格式质量。其值的范围是 1 （最低质量） 到 100 （最高质量） （含)</param>
+        public static void 保存为JPG图像文件(this BitmapSource b, string 存储路径, int 质量)
+        {
+            System.IO.FileStream fs = new System.IO.FileStream(存储路径, System.IO.FileMode.Create);
+            BitmapEncoder encoder = new JpegBitmapEncoder()
+            {
+                QualityLevel = 质量
+            };
             encoder.Frames.Add(BitmapFrame.Create(b));
             encoder.Save(fs);
             fs.Close();

@@ -97,6 +97,7 @@ namespace Core.Web
         // ReSharper disable once InconsistentNaming
         public static bool 检测是否有危险HTML代码(this string 字符串)
         {
+            if (字符串.IsNullOrEmptyOrWhitespace()) return false;
             foreach (Match f in 字符串.RegexMatches(@"<[^>]+?>"))
             {
                 if (f.Value.RegexIsMatch(@"^<\s*(script|iframe|frameset|frame|form|link)", RegexOptions.IgnoreCase))

@@ -15,6 +15,26 @@ public static partial class 通用扩展
     #region 基本
 
     /// <summary>
+    /// 转换Base64字符串为字节数组
+    /// </summary>
+    /// <param name="base64String">Base64字符串</param>
+    /// <returns>字节数组</returns>
+    public static byte[] ConvertBase64StringToByteArray(this string base64String)
+    {
+        return Convert.FromBase64String(base64String);
+    }
+
+    /// <summary>
+    /// 转换字节数组为Base64字符串
+    /// </summary>
+    /// <param name="byteArray">字节数组</param>
+    /// <returns>Base64字符串</returns>
+    public static string ConvertToBase64String(this byte[] byteArray)
+    {
+        return Convert.ToBase64String(byteArray);
+    }
+
+    /// <summary>
     /// 追加集合到末尾，并返回自身
     /// </summary>
     public static List<T> AddRangeByLink<T>(this List<T> o, IEnumerable<T> items)

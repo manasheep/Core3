@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using Core.Text;
+using System.Text.RegularExpressions;
 
 namespace Core.Net
 {
@@ -46,6 +47,26 @@ namespace Core.Net
         public static IPAddress[] 获取IP地址(string 主机域名)
         {
             return Dns.GetHostAddresses(主机域名);
+        }
+
+        /// <summary>
+        /// 验证字符串是否符合IP地址规则，如：192.168.0.1
+        /// </summary>
+        /// <param name="s">字符串</param>
+        /// <returns>是否符合IP地址规则</returns>
+        public static bool 验证是否为IP地址(this string s)
+        {
+            return s.RegexIsMatch(@"^(((25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))$");
+        }
+
+        /// <summary>
+        /// 获取字符串的IP地址及端口号匹配项，如：192.168.0.1:8080，如果匹配成功的话，组$1代表IP地址部分，组$11代表端口部分
+        /// </summary>
+        /// <param name="s">字符串</param>
+        /// <returns>IP地址及端口号匹配项</returns>
+        public static Match 获取IP地址及端口匹配项(this string s)
+        {
+            return s.RegexMatch(@"^(((25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))):([0-9]|[1-9]\d{1}|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$");
         }
    }
 }

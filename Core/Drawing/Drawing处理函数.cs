@@ -65,6 +65,16 @@ namespace Core.Drawing
         }
 
         /// <summary>
+        /// base64编码的文本 转为   图片
+        /// </summary>
+        /// <param name="basestr">base64字符串</param>
+        /// <returns>转换后的Bitmap对象</returns>
+        public static Image 转换Base64字符串为图像(string Base64字符串)
+        {
+            return Base64字符串.ConvertBase64StringToByteArray().转换为图像();
+        }
+
+        /// <summary>
         /// 转换为字节数组
         /// </summary>
         /// <param name="图像">图像</param>

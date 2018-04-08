@@ -212,6 +212,25 @@ namespace Core.IO
             }
         }
 
+        /// <summary>
+        /// 在指定的文件列表中删除多余指定数量的旧文件
+        /// </summary>
+        /// <param name="文件列表">要处理的文件列表</param>
+        /// <param name="保留数量">要保留的新文件数量</param>
+        public static void 删除额外的旧文件(FileInfo[] 文件列表, int 保留数量)
+        {
+            for (var i = 保留数量; i < 文件列表.Length; i++)
+            {
+                var MinDateFile = 文件列表[0];
+                foreach (var f in 文件列表)
+                {
+                    var F = f;
+                    if (F.LastWriteTime < MinDateFile.LastWriteTime) MinDateFile = F;
+                }
+                MinDateFile.Delete();
+            }
+        }
+
         #region  删除文件到回收站代码
 
         private const int FO_DELETE = 0x3;

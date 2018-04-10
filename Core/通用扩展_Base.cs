@@ -15,13 +15,20 @@ public static partial class 通用扩展
     #region 基本
 
     /// <summary>
-    /// 转换Base64字符串为字节数组
+    /// 转换Base64字符串为字节数组，如果格式有误则输出null
     /// </summary>
     /// <param name="base64String">Base64字符串</param>
     /// <returns>字节数组</returns>
     public static byte[] ConvertBase64StringToByteArray(this string base64String)
     {
-        return Convert.FromBase64String(base64String);
+        try
+        {
+            return Convert.FromBase64String(base64String);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 
     /// <summary>

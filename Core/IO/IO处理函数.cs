@@ -572,6 +572,15 @@ namespace Core.IO
         }
 
         /// <summary>
+        /// 通过XML序列化和反序列化实现对象的克隆
+        /// </summary>
+        /// <returns>克隆后的对象</returns>
+        public static T 序列化克隆<T>(this T 对象)
+        {
+            return 反序列化对象自XML字符串<T>(序列化对象为XML字符串(对象));
+        }
+
+        /// <summary>
         /// 将对象序列化并保存到文件
         /// </summary>
         /// <param name="对象">要序列化的对象</param>

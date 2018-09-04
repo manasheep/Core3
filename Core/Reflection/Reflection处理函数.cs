@@ -9,6 +9,48 @@ namespace Core.Reflection
 {
     public static class Reflection处理函数
     {
+        /// <summary>
+        /// 获取嵌套调用方法堆栈集合
+        /// </summary>
+        /// <returns>嵌套调用方法堆栈集合</returns>
+        public static IEnumerable<string> GetMethodStackCollection()
+        {
+            return new System.Diagnostics.StackTrace(true).GetFrames().Skip(1).Select(q => q.GetMethod().DeclaringType.FullName + "." + q.GetMethod().Name);
+        }
+
+        /// <summary>
+        /// 获取当前方法信息
+        /// </summary>
+        /// <returns>当前方法信息</returns>
+        public static MethodBase GetMethodInfo()
+        {
+            System.Diagnostics.StackTrace ss = new System.Diagnostics.StackTrace(true);
+            System.Reflection.MethodBase mb = ss.GetFrame(1).GetMethod();
+            return mb;
+        }
+
+        /// <summary>
+        /// 获取当前方法全名
+        /// </summary>
+        /// <returns>当前方法全名</returns>
+        public static string GetMethodFullName()
+        {
+            System.Diagnostics.StackTrace ss = new System.Diagnostics.StackTrace(true);
+            System.Reflection.MethodBase mb = ss.GetFrame(1).GetMethod();
+            return mb.DeclaringType.FullName + "." + mb.Name;
+        }
+
+        /// <summary>
+        /// 获取当前方法名称
+        /// </summary>
+        /// <returns>当前方法名称</returns>
+        public static string GetMethodName()
+        {
+            System.Diagnostics.StackTrace ss = new System.Diagnostics.StackTrace(true);
+            System.Reflection.MethodBase mb = ss.GetFrame(1).GetMethod();
+            return mb.Name;
+        }
+
         /// <summary>     
         /// 获取属性的名称
         /// </summary>     
@@ -16,7 +58,7 @@ namespace Core.Reflection
         /// <typeparam name="PT">属性类型</typeparam>
         /// <param name="表达式">获取属性的表达式</param>     
         /// <returns>属性的名称</returns>     
-        public static string GetPropertyName<T,PT>(Expression<Func<T, PT>> 表达式)
+        public static string GetPropertyName<T, PT>(Expression<Func<T, PT>> 表达式)
         {
             string rtn = string.Empty;
             if (表达式.Body is UnaryExpression)
@@ -80,7 +122,7 @@ namespace Core.Reflection
         }
 
         private static BindingFlags flags = BindingFlags.Static | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.IgnoreCase;
-    
+
         /// <summary>
         /// 获取指定类的特定类型属性的映射索引，可以通过调用获取到的实例的GetValue及SetValue方法操作属性值
         /// </summary>

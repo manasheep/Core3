@@ -2069,7 +2069,8 @@ public partial class Case<T, R> : SwitchCaseBase<T>
 }
 
 /// <summary>
-/// 枚举注释特性
+/// 枚举注释特性。
+/// 2018年12月5日：弃用，改为使用DescriptionAttribute特性和GetDescription扩展方法
 /// </summary>
 public partial class RemarkAttribute : Attribute
 {
@@ -2081,7 +2082,7 @@ public partial class RemarkAttribute : Attribute
     public string Remark
     {
         get { return _remark; }
-        set { _remark = value; }
+        private set { _remark = value; }
     }
 
     ///// <summary>

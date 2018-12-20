@@ -42,20 +42,35 @@ public static partial class 通用扩展
     }
 
     /// <summary>
-    /// 追加集合到末尾，并返回自身
+    /// 追加项到末尾，并返回自身
     /// </summary>
-    public static List<T> AddRangeByLink<T>(this List<T> o, IEnumerable<T> items)
+    public static IList<T> AddByLink<T>(this IList<T> o, T item)
     {
-        o.AddRange(items);
+        o.Add(item);
         return o;
     }
 
     /// <summary>
     /// 追加项到末尾，并返回自身
     /// </summary>
-    public static List<T> AddByLink<T>(this List<T> o, T item)
+    public static IList<T> AddByLink<T>(this IList<T> o, params T[] items)
     {
-        o.Add(item);
+        foreach (var f in items)
+        {
+            o.Add(f);
+        }
+        return o;
+    }
+
+    /// <summary>
+    /// 追加集合到末尾，并返回自身
+    /// </summary>
+    public static IList<T> AddRangeByLink<T>(this IList<T> o, IEnumerable<T> items)
+    {
+        foreach (var f in items)
+        {
+            o.Add(f);
+        }
         return o;
     }
 
